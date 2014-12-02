@@ -1,0 +1,5 @@
+-R spec
+--require test/test-setup.js
+--require test/es6_mocha.js
+--require test/compiler.js
+--require test/store-helper.js

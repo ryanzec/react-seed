@@ -1,0 +1,52 @@
+{
+  "name": "react-koa-seed",
+  "private": true,
+  "version": "0.1.0",
+  "dependencies": {
+    "bluebird": "2.3.11",
+    "browserify": "6.3.2",
+    "co-sleep": "0.0.1",
+    "koa": "0.13.0",
+    "koa-bodyparser": "1.3.0",
+    "koa-send": "1.3.1",
+    "routes": "2.0.0",
+    "superagent": "0.21.0",
+    "fluxe": "0.1.0"
+  },
+  "devDependencies": {
+    "async": "0.9.0",
+    "browserify": "^6.3.3",
+    "build-meta-data": "0.1.2",
+    "chai": "1.10.0",
+    "chai-as-promised": "4.1.1",
+    "co": "4.0.1",
+    "del": "1.0.0",
+    "glob": "4.3.1",
+    "glob-array": "0.1.2",
+    "gulp": "3.8.10",
+    "gulp-complexity": "0.3.0",
+    "gulp-help": "1.3.1",
+    "gulp-htmlmin": "0.2.0",
+    "gulp-jshint": "1.9.0",
+    "gulp-streamify": "0.0.5",
+    "gulp-uglifyjs": "0.5.0",
+    "gulp-util": "3.0.1",
+    "jsdom": "1.3.1",
+    "jshint-stylish": "1.0.0",
+    "lodash": "2.4.1",
+    "mocha": "2.0.1",
+    "mochify": "2.1.0",
+    "react": "0.12.1",
+    "react-tools": "0.12.1",
+    "reactify": "0.17.1",
+    "run-sequence": "1.0.2",
+    "sinon": "1.12.1",
+    "sinon-chai": "2.6.0",
+    "string-format": "0.2.1",
+    "through2": "0.6.3",
+    "vinyl-source-stream": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=0.11.9"
+  }
+}

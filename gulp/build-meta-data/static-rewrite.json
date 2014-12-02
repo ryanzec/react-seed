@@ -1,0 +1,32 @@
+{
+  "workingFiles": {
+    "web/index.html": {
+      "fileHash": "3bfa2d3f1357f3627e9429f6d76a504f5b5c698f"
+    },
+    "web/app/components/core/application.store.js": {
+      "fileHash": "7b4988f8afd617c455134578046a647e050f2b9b"
+    },
+    "web/app/components/core/router.js": {
+      "fileHash": "48c30a9b5d10c17afc2cbee47eb001bcea7f3bd3"
+    },
+    "web/app/components/menu/menu.store.js": {
+      "fileHash": "9d11b228a4522bd204a9db0677c275c356852873"
+    },
+    "web/app/fluxe-loader.js": {
+      "fileHash": "c9a9b798d236c0c5ae4996e0be63f62c43d5bf12"
+    },
+    "web/build/application.js": {
+      "fileHash": "1bb7df149af98361105c85b92b52bf79b289ed2e"
+    },
+    "web/build/index.html": {
+      "fileHash": "b0dd7ef715c0ffd595a69bb39a78f49b84b4ab63"
+    },
+    "web/build/libraries.js": {
+      "fileHash": "8668e85270d2d8c15e822fcd7d23da969e25be38"
+    },
+    "web/build/main.css": {
+      "fileHash": "b78a63cb73d634843b2e7272bdfd2b65a0033936"
+    }
+  },
+  "buildFiles": {}
+}

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#this is used in order to be able to support generators which I can't find a simple way to do with a globally installed version
+./node_modules/mocha/bin/mocha --harmony $(find test -name '*.spec.js') $(find test -name '*.spec.jsx')
