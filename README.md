@@ -1,4 +1,4 @@
-# ReactJS/KoaJS Seed
+# ReactJS Seed
 
 This is a seed for a ReactJS based application.  It does also include KoaJS if you are inclined however it should be relatively easy to remove it and replace with whatever backend server you wish to use.
 
