@@ -68,8 +68,7 @@ var mocker = {
 };
 
 var dataFilesToLoad = [
-  'core',
-  'issues'
+  'core'
 ];
 
 dataFilesToLoad.forEach(function(file) {
