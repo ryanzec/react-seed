@@ -1,7 +1,7 @@
 {
   "name": "react-koa-seed",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "dependencies": {
     "bluebird": "2.3.11",
     "browserify": "6.3.2",
