@@ -1,16 +1,15 @@
 var React = require('react/addons');
 var reactTestUtils = React.addons.TestUtils;
 var PreventDoubleClick = require('../../../../web/app/components/desktop/prevent-double-click.component.jsx');
-var storeHelper = require('../../../store-helper');
+var testHelper = require('../../../test-helper');
 var _ = require('lodash');
 
 describe('prevent double click page', function() {
   beforeEach(function() {
-    storeHelper.resetStores('Menu', 'Application');
+    testHelper.resetStores('Menu', 'Application');
+    var div = document.createElement('div');
 
-    this.component = reactTestUtils.renderIntoDocument(
-      <PreventDoubleClick />
-    );
+    this.component = React.render(<PreventDoubleClick />, div);
   });
 
   it('should have h1', function() {

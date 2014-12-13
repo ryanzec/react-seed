@@ -1,12 +1,13 @@
 var React = require('react/addons');
 var Header = require('./header.component.jsx');
+var RouteHandler = require('react-router').RouteHandler;
 
 var Application = React.createClass({
   render: function() {
     return (
       <div className="application">
         <Header />
-        <div className="main-content"></div>
+        <RouteHandler />
       </div>
     );
   }

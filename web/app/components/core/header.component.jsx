@@ -1,5 +1,6 @@
 var React = require('react/addons');
 var menuStore = require('fluxe').getStore(require('../menu/menu.store').storeName);
+var Link = require('react-router').Link;
 
 var Header = React.createClass({
   getInitialState: function() {
@@ -28,7 +29,7 @@ var Header = React.createClass({
         <ul>
           {this.state.menu.map(function(menuItem) {
             return (<li key={menuItem.href}>
-              <a href={menuItem.href}>{menuItem.display}</a>
+              <Link to={menuItem.href}>{menuItem.display}</Link>
             </li>);
           })}
         </ul>

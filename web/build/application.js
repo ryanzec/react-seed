@@ -9,66 +9,67 @@ var router = require('./components/core/router.js');
 var bluebird = require('bluebird');
 
 //add the main application component
-React.render(React.createElement(Application, null), document.body);
+// React.render(<Application />, document.body);
 
 //set default route
-router.setDefaultRoute('/desktop');
+// router.setDefaultRoute('/desktop');
 
 //add routes
-router.addRoute({
-  route: '/desktop',
-  callback: function() {
-    React.render(React.createElement(Desktop, null), document.querySelector('.main-content'));
-  }
-});
+// router.addRoute({
+//   route: '/desktop',
+//   callback: function() {
+//     React.render(<Desktop />, document.querySelector('.main-content'));
+//   }
+// });
 
-router.addRoute({
-  route: '/prevent-double-click',
-  callback: function() {
-    React.render(React.createElement(PreventDoubleClick, null), document.querySelector('.main-content'));
-  }
-});
+// router.addRoute({
+//   route: '/prevent-double-click',
+//   callback: function() {
+//     React.render(<PreventDoubleClick />, document.querySelector('.main-content'));
+//   }
+// });
 
-router.addRoute({
-  route: '/with-resolves',
-  resolves: {
-    data: function(parameters) {
-      var defer = bluebird.defer();
+// router.addRoute({
+//   route: '/with-resolves',
+//   resolves: {
+//     data: function(parameters) {
+//       var defer = bluebird.defer();
 
-      setTimeout(function() {
-        defer.resolve(true);
-      }, 1000);
+//       setTimeout(function() {
+//         defer.resolve(true);
+//       }, 1000);
 
-      return defer.promise;
-    },
-    data2: function(parameters) {
-      var defer = bluebird.defer();
+//       return defer.promise;
+//     },
+//     data2: function(parameters) {
+//       var defer = bluebird.defer();
 
-      setTimeout(function() {
-        defer.resolve(true);
-      }, 2000);
+//       setTimeout(function() {
+//         defer.resolve(true);
+//       }, 2000);
 
-      return defer.promise;
-    }
-  },
-  callback: function() {
-    React.render(React.createElement(WithResolves, null), document.querySelector('.main-content'));
-  }
-})
+//       return defer.promise;
+//     }
+//   },
+//   callback: function() {
+//     React.render(<WithResolves />, document.querySelector('.main-content'));
+//   }
+// });
 
 //start the router
-router.start();
+// router.start();
 
-},{"./components/core/application.component.jsx":2,"./components/core/router.js":5,"./components/desktop/desktop.component.jsx":6,"./components/desktop/prevent-double-click.component.jsx":7,"./components/desktop/with-resolves.component.jsx":8,"./fluxe-loader":10,"bluebird":"bluebird","react/addons":"react/addons"}],2:[function(require,module,exports){
+},{"./components/core/application.component.jsx":2,"./components/core/router.js":5,"./components/desktop/desktop.component.jsx":7,"./components/desktop/prevent-double-click.component.jsx":8,"./components/desktop/with-resolves.component.jsx":9,"./fluxe-loader":11,"bluebird":"bluebird","react/addons":"react/addons"}],2:[function(require,module,exports){
 var React = require('react/addons');
 var Header = require('./header.component.jsx');
+var RouteHandler = require('react-router').RouteHandler;
 
 var Application = React.createClass({displayName: 'Application',
   render: function() {
     return (
       React.createElement("div", {className: "application"}, 
         React.createElement(Header, null), 
-        React.createElement("div", {className: "main-content"})
+        React.createElement(RouteHandler, null)
       )
     );
   }
@@ -76,7 +77,7 @@ var Application = React.createClass({displayName: 'Application',
 
 module.exports = Application;
 
-},{"./header.component.jsx":4,"react/addons":"react/addons"}],3:[function(require,module,exports){
+},{"./header.component.jsx":4,"react-router":"react-router","react/addons":"react/addons"}],3:[function(require,module,exports){
 module.exports = {
   getPreventDoubleClick: function() {
     return this._internalData.preventDoubleClick;
@@ -107,6 +108,7 @@ module.exports = {
 },{}],4:[function(require,module,exports){
 var React = require('react/addons');
 var menuStore = require('fluxe').getStore(require('../menu/menu.store').storeName);
+var Link = require('react-router').Link;
 
 var Header = React.createClass({displayName: 'Header',
   getInitialState: function() {
@@ -135,7 +137,7 @@ var Header = React.createClass({displayName: 'Header',
         React.createElement("ul", null, 
           this.state.menu.map(function(menuItem) {
             return (React.createElement("li", {key: menuItem.href}, 
-              React.createElement("a", {href: menuItem.href}, menuItem.display)
+              React.createElement(Link, {to: menuItem.href}, menuItem.display)
             ));
           })
         )
@@ -146,150 +148,42 @@ var Header = React.createClass({displayName: 'Header',
 
 module.exports = Header;
 
-},{"../menu/menu.store":9,"fluxe":"fluxe","react/addons":"react/addons"}],5:[function(require,module,exports){
-var routes = require('routes');
-var myRoutes = routes();
-var blurbird = require('bluebird');
-var _ = require('lodash');
-var resolves = {};
-var defaultRoute;
-var routeInProgress = false;
+},{"../menu/menu.store":10,"fluxe":"fluxe","react-router":"react-router","react/addons":"react/addons"}],5:[function(require,module,exports){
+var React = require('react/addons');
+var Router = require('react-router');
 
-function showPage(path) {
-  var result = myRoutes.match(path);
-  var resolvePromises = [];
-  routeInProgress = true;
+Router.run(require('./routes.jsx'), Router.HistoryLocation, function (Handler) {
+  React.render(React.createElement(Handler, null), document.body);
+});
 
-  if(resolves[result.route]) {
-    _.forEach(resolves[result.route], function(resolve) {
-      resolvePromises.push(resolve(result.params));
-    });
+},{"./routes.jsx":6,"react-router":"react-router","react/addons":"react/addons"}],6:[function(require,module,exports){
+var React = require('react/addons');
+var Application = require('./application.component.jsx');
+var Desktop = require('../desktop/desktop.component.jsx');
+var PreventDoubleClick = require('../desktop/prevent-double-click.component.jsx');
+var WithResolves = require('../desktop/with-resolves.component.jsx');
+var Router = require('react-router');
+var Route = Router.Route;
+var DefaultRoute = Router.DefaultRoute;
+var NotFoundRoute = Router.NotFoundRoute;
+
+var NotFound = React.createClass({displayName: 'NotFound',
+  render: function () {
+    return React.createElement("h2", null, "Not Found");
   }
+});
 
-  blurbird.all(resolvePromises).then(function() {
-    //prevent a resolvable route from being applied if we have already change the route since the promise were executed
-    if(routeInProgress === true) {
-      result.fn();
-      history.pushState({}, document.title, path);
-      routeInProgress = false;
-    }
-  });
-}
+module.exports = (
+  React.createElement(Route, {handler: Application}, 
+    React.createElement(DefaultRoute, {handler: Desktop}), 
+    React.createElement(Route, {path: "/desktop", handler: Desktop}), 
+    React.createElement(Route, {path: "/prevent-double-click", handler: PreventDoubleClick}), 
+    React.createElement(Route, {path: "/with-resolves", handler: WithResolves}), 
+    React.createElement(NotFoundRoute, {handler: NotFound})
+  )
+);
 
-function onPopStateEvent(e) {
-  if(e.state) {
-    var path = e.state.path;
-    showPage(path);
-  }
-}
-
-function onClickEvent(e) {
-  function which(e) {
-    e = e || window.event;
-
-    return null === e.which
-    ? e.button
-    : e.which;
-  }
-
-  function sameOrigin(href) {
-    var origin = location.protocol + '//' + location.hostname;
-    if(location.port) {
-      origin += ':' + location.port;
-    }
-
-    return (href && (0 === href.indexOf(origin)));
-  }
-
-  if(
-    (1 !== which(e))
-    || (e.metaKey || e.ctrlKey || e.shiftKey)
-    || (e.defaultPrevented)
-  ) {
-    return;
-  }
-
-  //ensure link
-  var el = e.target;
-
-  while(el && 'A' !== el.nodeName) {
-    el = el.parentNode;
-  }
-
-  if(!el || 'A' !== el.nodeName) {
-    return;
-  }
-
-  //Ignore if tag has a "download" attribute
-  if(el.getAttribute("download")) {
-    return;
-  }
-
-  //ensure non-hash for the same path
-  var link = el.getAttribute('href');
-
-  if(el.pathname === location.pathname && (el.hash || '#' === link)) {
-    return;
-  }
-
-  //Check for mailto: in the href
-  if(link && link.indexOf("mailto:") > -1) {
-    return;
-  }
-
-  //check target
-  if(el.target) {
-    return;
-  }
-
-  //x-origin
-  if(!sameOrigin(el.href)) {
-    return;
-  }
-
-  //rebuild path
-  var path = el.pathname + el.search + (el.hash || '');
-
-  //ensure not same page
-  if(path === location.pathname) {
-    e.preventDefault();
-    return;
-  }
-
-  e.preventDefault();
-  showPage(path);
-}
-
-var router = {
-  setDefaultRoute: function(route) {
-    defaultRoute = route;
-  },
-
-  addRoute: function(options) {
-    myRoutes.addRoute(options.route, options.callback);
-    resolves[options.route] = options.resolves;
-  },
-
-  start: function(options) {
-    window.addEventListener('popstate', onPopStateEvent, false);
-    window.addEventListener('click', onClickEvent, false);
-
-    if(location.pathname === '/' && defaultRoute) {
-      showPage(defaultRoute);
-    } else if(location.pathname !== '/') {
-      showPage(location.pathname);
-    }
-  },
-
-  stop: function() {
-    window.removeEventListener('click', onClickEvent, false);
-    window.removeEventListener('popstate', onPopStateEvent, false);
-  }
-};
-
-module.exports = router;
-
-},{"bluebird":"bluebird","lodash":"lodash","routes":"routes"}],6:[function(require,module,exports){
+},{"../desktop/desktop.component.jsx":7,"../desktop/prevent-double-click.component.jsx":8,"../desktop/with-resolves.component.jsx":9,"./application.component.jsx":2,"react-router":"react-router","react/addons":"react/addons"}],7:[function(require,module,exports){
 var React = require('react/addons');
 var menuActions = require('fluxe').getActions(require('../menu/menu.store').storeName);
 
@@ -308,7 +202,7 @@ var Desktop = React.createClass({displayName: 'Desktop',
 
 module.exports = Desktop;
 
-},{"../menu/menu.store":9,"fluxe":"fluxe","react/addons":"react/addons"}],7:[function(require,module,exports){
+},{"../menu/menu.store":10,"fluxe":"fluxe","react/addons":"react/addons"}],8:[function(require,module,exports){
 var React = require('react/addons');
 var applicationStore = require('fluxe').getStore(require('../core/application.store').storeName);
 var applicationActions = require('fluxe').getActions(require('../core/application.store').storeName);
@@ -361,11 +255,26 @@ var PreventDoubleClick = React.createClass({displayName: 'PreventDoubleClick',
 
 module.exports = PreventDoubleClick;
 
-},{"../core/application.store":3,"../menu/menu.store":9,"fluxe":"fluxe","react/addons":"react/addons"}],8:[function(require,module,exports){
+},{"../core/application.store":3,"../menu/menu.store":10,"fluxe":"fluxe","react/addons":"react/addons"}],9:[function(require,module,exports){
 var React = require('react/addons');
 var menuActions = require('fluxe').getActions(require('../menu/menu.store').storeName);
+var bluebird = require('bluebird');
 
 var WithResolves = React.createClass({displayName: 'WithResolves',
+  statics: {
+    willTransitionTo: function (transition, params) {
+      var defer = bluebird.defer();
+      var defer2 = bluebird.defer();
+      setTimeout(function() {
+        defer.resolve('test');
+      }, 1000);
+      setTimeout(function() {
+        defer2.resolve('test');
+      }, 3000);
+      transition.wait(bluebird.all([defer.promise, defer2.promise]));
+    }
+  },
+
   componentDidMount: function() {
     menuActions.update({
       menuName: 'desktop'
@@ -380,7 +289,7 @@ var WithResolves = React.createClass({displayName: 'WithResolves',
 
 module.exports = WithResolves;
 
-},{"../menu/menu.store":9,"fluxe":"fluxe","react/addons":"react/addons"}],9:[function(require,module,exports){
+},{"../menu/menu.store":10,"bluebird":"bluebird","fluxe":"fluxe","react/addons":"react/addons"}],10:[function(require,module,exports){
 module.exports = {
   getMenu: function() {
     return this._internalData.menus[this._internalData.activeMenu];
@@ -421,10 +330,10 @@ module.exports = {
   }
 };
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 var fluxe = require('fluxe');
 
 fluxe.addStore(require('./components/core/application.store'));
 fluxe.addStore(require('./components/menu/menu.store'));
 
-},{"./components/core/application.store":3,"./components/menu/menu.store":9,"fluxe":"fluxe"}]},{},[1]);
+},{"./components/core/application.store":3,"./components/menu/menu.store":10,"fluxe":"fluxe"}]},{},[1]);

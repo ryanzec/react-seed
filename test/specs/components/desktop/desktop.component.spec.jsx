@@ -1,15 +1,14 @@
 var React = require('react/addons');
 var reactTestUtils = React.addons.TestUtils;
 var Desktop = require('../../../../web/app/components/desktop/desktop.component.jsx');
-var storeHelper = require('../../../store-helper');
+var testHelper = require('../../../test-helper');
 
 describe('desktop component', function() {
   beforeEach(function() {
-    storeHelper.resetStores('Menu');
+    testHelper.resetStores('Menu');
+    var div = document.createElement('div');
 
-    this.component = reactTestUtils.renderIntoDocument(
-      <Desktop />
-    );
+    this.component = React.render(<Desktop />, div);
   });
 
   it('should have h1', function() {

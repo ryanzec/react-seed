@@ -1,15 +1,13 @@
 var React = require('react/addons');
 var reactTestUtils = React.addons.TestUtils;
 var Application = require('../../../../web/app/components/core/application.component.jsx');
-var storeHelper = require('../../../store-helper');
+var testHelper = require('../../../test-helper');
 
 describe('application component', function() {
   beforeEach(function() {
-    storeHelper.resetStores('Menu');
+    testHelper.resetStores('Menu');
 
-    this.component = reactTestUtils.renderIntoDocument(
-      <Application />
-    );
+    this.component = testHelper.getRouterComponent(Application);
   });
 
   it('should have header', function() {
@@ -18,8 +16,8 @@ describe('application component', function() {
     expect(header).to.be.defined;
   });
 
-  it('should have main-content', function() {
-    var mainContent = reactTestUtils.findRenderedDOMComponentWithClass(this.component, 'main-content');
+  it('should have application element', function() {
+    var mainContent = reactTestUtils.findRenderedDOMComponentWithClass(this.component, 'application');
 
     expect(mainContent).to.be.defined;
   });

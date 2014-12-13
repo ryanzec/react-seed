@@ -2,11 +2,11 @@ var gulp = require('gulp');
 var uglify = require('gulp-uglifyjs');
 var gulpConfig = require('../config.js');
 var through = require('through2');
-var streamify = require('gulp-streamify');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
+var runSequence = require('run-sequence');
 
-var runGulpTask = function(options, done) {
+gulp.task('browserify', function(done) {
   var count = 2;
 
   var libraries = browserify();
@@ -34,10 +34,6 @@ var runGulpTask = function(options, done) {
   var libraryStream = libraries.bundle()
   .pipe(source('libraries.js'));
 
-  if(options.mode === 'production') {
-    libraryStream.pipe(streamify(uglify()));
-  }
-
   libraryStream.pipe(gulp.dest(gulpConfig.buildPath))
   .pipe(through.obj(function(file, encoding, cb) {
     count -= 1;
@@ -52,10 +48,6 @@ var runGulpTask = function(options, done) {
   var applicationStream = application.bundle()
   .pipe(source('application.js'));
 
-  if(options.mode === 'production') {
-    applicationStream.pipe(streamify(uglify()));
-  }
-
   applicationStream.pipe(gulp.dest(gulpConfig.buildPath))
   .pipe(through.obj(function(file, encoding, cb) {
     count -= 1;
@@ -66,16 +58,42 @@ var runGulpTask = function(options, done) {
 
     cb(null, file);
   }));
-}
-
-gulp.task('browserify', function(done) {
-  runGulpTask({
-    mode: 'development'
-  }, done);
 });
 
 gulp.task('browserify-production', function(done) {
-  runGulpTask({
-    mode: 'production'
-  }, done);
+  runSequence(
+    'browserify',
+    'browserify-uglify',
+    done
+  );
+});
+
+gulp.task('browserify-uglify', function(done) {
+  var count = 2;
+
+  gulp.src(['web/build/application.js'])
+  .pipe(uglify())
+  .pipe(gulp.dest(gulpConfig.buildPath))
+  .pipe(through.obj(function(file, encoding, cb) {
+    count -= 1;
+
+    if(count == 0) {
+      done();
+    }
+
+    cb(null, file);
+  }));
+
+  gulp.src(['web/build/libraries.js'])
+  .pipe(uglify())
+  .pipe(gulp.dest(gulpConfig.buildPath))
+  .pipe(through.obj(function(file, encoding, cb) {
+    count -= 1;
+
+    if(count == 0) {
+      done();
+    }
+
+    cb(null, file);
+  }));
 });
