@@ -7,7 +7,7 @@
       "fileHash": "7b4988f8afd617c455134578046a647e050f2b9b"
     },
     "web/app/components/core/router.js": {
-      "fileHash": "48c30a9b5d10c17afc2cbee47eb001bcea7f3bd3"
+      "fileHash": "ed2c02f0af22d6f322d6a3bafb0cc8997f4e8615"
     },
     "web/app/components/menu/menu.store.js": {
       "fileHash": "9d11b228a4522bd204a9db0677c275c356852873"
@@ -16,13 +16,13 @@
       "fileHash": "c9a9b798d236c0c5ae4996e0be63f62c43d5bf12"
     },
     "web/build/application.js": {
-      "fileHash": "1bb7df149af98361105c85b92b52bf79b289ed2e"
+      "fileHash": "b542dc2ad2c0cc33639244be8d590ab12aadc8f0"
     },
     "web/build/index.html": {
-      "fileHash": "b0dd7ef715c0ffd595a69bb39a78f49b84b4ab63"
+      "fileHash": "d9acda7580a79af97fa10049664002ab618e6fbf"
     },
     "web/build/libraries.js": {
-      "fileHash": "8668e85270d2d8c15e822fcd7d23da969e25be38"
+      "fileHash": "a9f699e7f9d9b1682c72975901d145dd1e2748a2"
     },
     "web/build/main.css": {
       "fileHash": "b78a63cb73d634843b2e7272bdfd2b65a0033936"

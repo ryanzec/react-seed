@@ -1,10 +1,10 @@
 var store = require('fluxe').getStore(require('../../../../web/app/components/menu/menu.store').storeName);
 var actions = require('fluxe').getActions(require('../../../../web/app/components/menu/menu.store').storeName);
-var storeHelper = require('../../../store-helper');
+var testHelper = require('../../../test-helper');
 
 describe('menu data', function() {
   beforeEach(function() {
-    storeHelper.resetStores('Menu');
+    testHelper.resetStores('Menu');
   });
 
   describe('store', function() {

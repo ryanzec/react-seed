@@ -69,11 +69,11 @@ var gulpConfig = {
       }, {
         name: 'fluxe'
       }, {
-        name: 'routes'
-      }, {
         name: 'superagent'
       }, {
         name: 'bluebird'
+      }, {
+        name: 'react-router'
       }]
     },
     bowerClean: []

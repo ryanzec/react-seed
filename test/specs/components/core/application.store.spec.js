@@ -1,10 +1,10 @@
 var store = require('fluxe').getStore(require('../../../../web/app/components/core/application.store').storeName);
 var actions = require('fluxe').getActions(require('../../../../web/app/components/core/application.store').storeName);
-var storeHelper = require('../../../store-helper');
+var testHelper = require('../../../test-helper');
 
 describe('application data', function() {
   beforeEach(function() {
-    storeHelper.resetStores('Application');
+    testHelper.resetStores('Application');
   });
 
   describe('store', function() {

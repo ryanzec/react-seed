@@ -1,15 +1,14 @@
 var React = require('react/addons');
 var reactTestUtils = React.addons.TestUtils;
 var WithResolves = require('../../../../web/app/components/desktop/with-resolves.component.jsx');
-var storeHelper = require('../../../store-helper');
+var testHelper = require('../../../test-helper');
 
 describe('with resolves component', function() {
   beforeEach(function() {
-    storeHelper.resetStores('Menu');
+    testHelper.resetStores('Menu');
+    var div = document.createElement('div');
 
-    this.component = reactTestUtils.renderIntoDocument(
-      <WithResolves />
-    );
+    this.component = React.render(<WithResolves />, div);
   });
 
   it('should have h1', function() {
