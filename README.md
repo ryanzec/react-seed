@@ -14,9 +14,7 @@ Download the repository and it includes everything you need.  It includes the NP
 
 ### Routing
 
-It has a built front-end router the utilizes [router.js](https://github.com/aaronblohowiak/routes.js) to do route matching and then uses a modifyied version of [page.js](http://visionmedia.github.io/page.js/)'s onclick and onpopstate events to trigger route changes.
-
-This solution includes the ability to define functions that must be resolved in order for the route to change.
+This seed project using the [react-router](https://github.com/rackt/react-router) project for routing.
 
 ### Fluxe
 
