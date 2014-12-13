@@ -26,8 +26,6 @@ var mocker = {
       }
     }
 
-    //console.log(string);
-
     shasum.update(string);
 
     return shasum.digest('hex');
@@ -45,7 +43,15 @@ var mocker = {
     //console.log('checking for mock: ' + key);
     //console.log(mocks[key]);
 
-    _.extend(response, mocks[this.buildMockKey(requestData)]);
+    var mockData;
+
+    if(_.isFunction(mocks[this.buildMockKey(requestData)])) {
+      mockData = mocks[this.buildMockKey(requestData)]();
+    } else {
+      mockData = mocks[this.buildMockKey(requestData)];
+    }
+
+    _.extend(response, mockData);
 
     return options || false;
   },
