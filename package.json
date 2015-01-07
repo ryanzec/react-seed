@@ -1,7 +1,7 @@
 {
   "name": "react-koa-seed",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.3.0",
   "dependencies": {
     "bluebird": "2.3.11",
     "browserify": "6.3.2",
@@ -31,11 +31,12 @@
     "gulp-streamify": "0.0.5",
     "gulp-uglifyjs": "0.5.0",
     "gulp-util": "3.0.1",
-    "jsdom": "1.3.1",
+    "jsdom": "1.5.0",
     "jshint-stylish": "1.0.0",
     "lodash": "2.4.1",
     "mocha": "2.0.1",
     "mochify": "2.1.0",
+    "nock": "0.52.4",
     "react": "0.12.1",
     "react-tools": "0.12.1",
     "reactify": "0.17.1",

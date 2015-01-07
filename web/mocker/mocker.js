@@ -18,6 +18,10 @@ var mocker = {
     var shasum = crypto.createHash('sha1');
     var string = requestData.method + requestData.path;
 
+    if(requestData.queryString) {
+      string += '?' + requestData.queryString;
+    }
+
     if(requestData.body) {
       if(requestData.contentType === 'application/json') {
         string += JSON.stringify(requestData.body);

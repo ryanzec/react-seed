@@ -14,6 +14,10 @@ gulp.task('copy-static-assets', 'Copy static assets to the build folder', functi
     });
   });
 
+  config.manualAssets.forEach(function(asset) {
+    assets.push(asset);
+  });
+
   var changedFiles = buildMetaData.getChangedFiles(assets);
 
   if(changedFiles.length > 0) {

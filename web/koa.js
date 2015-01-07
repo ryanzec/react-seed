@@ -41,6 +41,7 @@ app.use(function *() {
   var loadIndex = true;
   var requestData = {
     path: this.path,
+    queryString: this.querystring,
     method: this.request.method,
     contentType: this.request.header['content-type'],
     body: this.request.body

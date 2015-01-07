@@ -13,6 +13,7 @@ global.expect = chai.expect;
 global.sinonChai = require('sinon-chai');
 
 chai.use(sinonChai);
+chai.config.includeStack = true;
 
 //setup fluxe
 require('../web/app/fluxe-loader');

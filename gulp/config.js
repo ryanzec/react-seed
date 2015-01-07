@@ -54,7 +54,8 @@ var gulpConfig = {
       staticAssetFolders: [
         'web/components',
         'web/app/components'
-      ]
+      ],
+      manualAssets: []
     },
     browserify: {
       transformers: [

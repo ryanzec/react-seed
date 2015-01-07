@@ -5,6 +5,7 @@ var through = require('through2');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var runSequence = require('run-sequence');
+var gutil = require('gulp-util');
 
 gulp.task('browserify', function(done) {
   var count = 2;
@@ -46,6 +47,19 @@ gulp.task('browserify', function(done) {
   }));
 
   var applicationStream = application.bundle()
+  .on('error', function(err){
+    var message;
+
+    if(err.description)
+      message = 'browserify error: ' + err.description + ' when parsing ' + err.fileName + ' | Line ' + err.lineNumber + ', Column ' + err.column;
+    else {
+      message = err.message;
+    }
+
+    gutil.log(gutil.colors.red(message));
+
+    this.emit('end');
+  })
   .pipe(source('application.js'));
 
   applicationStream.pipe(gulp.dest(gulpConfig.buildPath))
