@@ -55,7 +55,7 @@ var gulpConfig = {
         'web/components',
         'web/app/components'
       ],
-      manualAssets: []
+      manualAssets: {}
     },
     browserify: {
       transformers: [

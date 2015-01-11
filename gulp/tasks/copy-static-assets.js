@@ -3,6 +3,10 @@ var gulpConfig = require('../config.js');
 var buildMetaDataFactory = require('build-meta-data');
 var gutil = require('gulp-util');
 var config = gulpConfig.tasks.copyStaticAssets;
+var fs = require('fs');
+var _ = require('lodash');
+var path = require('path');
+var mkdirp = require('mkdirp');
 
 gulp.task('copy-static-assets', 'Copy static assets to the build folder', function(done) {
   var buildMetaData = buildMetaDataFactory.create(process.cwd() + '/gulp/build-meta-data/static-assets.json');
@@ -14,8 +18,14 @@ gulp.task('copy-static-assets', 'Copy static assets to the build folder', functi
     });
   });
 
-  config.manualAssets.forEach(function(asset) {
-    assets.push(asset);
+  _.forEach(config.manualAssets, function(to, from) {
+    var toDirectory = path.dirname(process.cwd() + '/' + to);
+
+    if(!fs.existsSync(toDirectory)) {
+      mkdirp.sync(toDirectory);
+    }
+
+    fs.writeFileSync(process.cwd() + '/' + to, fs.readFileSync(process.cwd() + '/' + from));
   });
 
   var changedFiles = buildMetaData.getChangedFiles(assets);

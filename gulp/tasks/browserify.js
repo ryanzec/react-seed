@@ -33,6 +33,19 @@ gulp.task('browserify', function(done) {
   application.add(process.cwd() + '/web/app/application.jsx');
 
   var libraryStream = libraries.bundle()
+  .on('error', function(err){
+    var message;
+
+    if(err.description)
+      message = 'browserify error: ' + err.description + ' when parsing ' + err.fileName + ' | Line ' + err.lineNumber + ', Column ' + err.column;
+    else {
+      message = err.message;
+    }
+
+    gutil.log(gutil.colors.red(message));
+
+    this.emit('end');
+  })
   .pipe(source('libraries.js'));
 
   libraryStream.pipe(gulp.dest(gulpConfig.buildPath))

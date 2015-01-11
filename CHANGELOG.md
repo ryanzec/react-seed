@@ -1,5 +1,10 @@
 # Change Log
 
+## master
+
+- updated manual copying of assets to be more flexible
+- added better error reporting for libraries browserify process
+
 ## 0.3.0
 
 - updated testing system
