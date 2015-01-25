@@ -24,6 +24,7 @@ var Header = React.createClass({
   },
 
   render: function() {
+    /* jshint ignore:start */
     return (
       <header>
         <ul>
@@ -35,6 +36,7 @@ var Header = React.createClass({
         </ul>
       </header>
     );
+    /* jshint ignore:end */
   }
 });
 

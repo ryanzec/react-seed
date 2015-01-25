@@ -10,10 +10,13 @@ var NotFoundRoute = Router.NotFoundRoute;
 
 var NotFound = React.createClass({
   render: function () {
+    /* jshint ignore:start */
     return <h2>Not Found</h2>;
+    /* jshint ignore:end */
   }
 });
 
+/* jshint ignore:start */
 module.exports = (
   <Route handler={Application}>
     <DefaultRoute handler={Desktop} />
@@ -23,3 +26,4 @@ module.exports = (
     <NotFoundRoute handler={NotFound} />
   </Route>
 );
+/* jshint ignore:end */

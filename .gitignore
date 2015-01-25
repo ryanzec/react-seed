@@ -1,5 +1,6 @@
 .DS_Store
 .idea
-bower_components/*
+/bower_components/*
 .sass-cache/*
-web/.sass-cache/*
+/web/.sass-cache/*
+/coverage/*

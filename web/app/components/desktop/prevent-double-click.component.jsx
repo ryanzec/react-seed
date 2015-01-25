@@ -30,6 +30,7 @@ var PreventDoubleClick = React.createClass({
   },
 
   render: function() {
+    /* jshint ignore:start */
     return (
       <div>
         <h1 id="test" className="test">Prevent Double Click</h1>
@@ -39,6 +40,7 @@ var PreventDoubleClick = React.createClass({
         </div>
       </div>
     );
+    /* jshint ignore:end */
   },
 
   _callback: function() {

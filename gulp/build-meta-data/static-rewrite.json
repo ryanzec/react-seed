@@ -6,9 +6,6 @@
     "web/app/components/core/application.store.js": {
       "fileHash": "7b4988f8afd617c455134578046a647e050f2b9b"
     },
-    "web/app/components/core/router.js": {
-      "fileHash": "ed2c02f0af22d6f322d6a3bafb0cc8997f4e8615"
-    },
     "web/app/components/menu/menu.store.js": {
       "fileHash": "9d11b228a4522bd204a9db0677c275c356852873"
     },
@@ -16,13 +13,13 @@
       "fileHash": "c9a9b798d236c0c5ae4996e0be63f62c43d5bf12"
     },
     "web/build/application.js": {
-      "fileHash": "b542dc2ad2c0cc33639244be8d590ab12aadc8f0"
+      "fileHash": "bccd3b1bbd603499a9c62ac47ae08bccf1eb0476"
     },
     "web/build/index.html": {
-      "fileHash": "d9acda7580a79af97fa10049664002ab618e6fbf"
+      "fileHash": "3ecab759647ba03beb6a4a8e48c486d3e53ffc1e"
     },
     "web/build/libraries.js": {
-      "fileHash": "a9f699e7f9d9b1682c72975901d145dd1e2748a2"
+      "fileHash": "7d013d4700c4f7e22850b04eb690e9f8da77e8c0"
     },
     "web/build/main.css": {
       "fileHash": "b78a63cb73d634843b2e7272bdfd2b65a0033936"

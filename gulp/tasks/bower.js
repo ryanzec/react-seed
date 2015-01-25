@@ -38,7 +38,6 @@ gulp.task('bower', 'Download bower packages and clean the directories', function
     });
 
     globArray.sync(fullPatterns).forEach(function(path) {
-      //console.log(path);
       del.sync(path);
     });
 

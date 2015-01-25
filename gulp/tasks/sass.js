@@ -3,16 +3,11 @@ var buildMetaDataFactory = require('build-meta-data');
 var gulpConfig = require('../config.js');
 var gutil = require('gulp-util');
 var _ = require('lodash');
-var exec = require('child_process').exec;
-
-var childProcess = function(command, arguments, cb) {
-  gutil.log(gutil.colors.cyan('running command: '), command + ' ' + arguments.join(' '));
-  var childProcess = exec(command + ' ' + arguments.join(' '), cb);
-};
+var helpers = require('../helpers');
 
 gulp.task('sass', 'Compile SASS into CSS', function(done) {
   var buildMetaData = buildMetaDataFactory.create(process.cwd() + '/gulp/build-meta-data/sass.json');
-  var sassFiles = buildMetaData.getChangedFiles(gulpConfig.sourceFiles.sass);
+  var sassFiles = buildMetaData.getChangedFiles(gulpConfig.sassFiles);
   var commandError = false;
 
   if(sassFiles.length > 0) {
@@ -20,7 +15,7 @@ gulp.task('sass', 'Compile SASS into CSS', function(done) {
     var count = Object.keys(files).length;
 
     _.forEach(files, function(destination, source) {
-      childProcess('sass', [
+      helpers.childProcess('sass', [
         '--scss',
         '-t',
         'compressed',

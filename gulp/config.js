@@ -9,27 +9,19 @@ var gulpConfig = {
       'web/app/styles/main.scss': 'web/build/main.css'
     }
   },
-  sourceFiles: {
-    javascript: [
-      'web/app/application.js',
-      'web/app/**/*.js',
-      //TODO: need to add support for JSX here
-      //'web/app/**/*.jsx'
-    ],
-    html: [
-      'web/*.html',
-      'web/components/**/*.html',
-      'web/app/components/**/*.html'
-    ],
-    sass: [
-      'web/app/**/*.scss',
-      'web/components/**/*.scss'
-    ],
-    jade: [
-      'web/app/components/**/*.jade',
-      'web/*.jade'
-    ]
-  },
+  jsHintFiles: [
+    'web/app/**/*.js',
+    'web/app/**/*.jsx',
+  ],
+  sassFiles: [
+    'web/app/**/*.scss',
+    'web/components/**/*.scss'
+  ],
+  htmlFiles: [
+    'web/*.html',
+    'web/components/**/*.html',
+    'web/app/components/**/*.html'
+  ],
   tasks: {
     staticRewrite: {
       fileTypesToRewrite: ['svg', 'eot', 'ttf', 'woff', 'png', 'gif', 'jpeg', 'jpg', 'js', 'css', 'map', 'html'],

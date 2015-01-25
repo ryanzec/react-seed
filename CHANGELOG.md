@@ -1,9 +1,12 @@
 # Change Log
 
-## master
+## 0.4.0
 
 - updated manual copying of assets to be more flexible
 - added better error reporting for libraries browserify process
+- added code complexity to build process
+- added code coverage to build process
+- general build process code refactoring
 
 ## 0.3.0
 

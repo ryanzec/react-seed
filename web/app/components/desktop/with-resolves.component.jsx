@@ -23,9 +23,11 @@ var WithResolves = React.createClass({
     });
   },
   render: function() {
+    /* jshint ignore:start */
     return (
       <h1 id="test" className="test">With Resolves</h1>
     );
+    /* jshint ignore:end */
   }
 });
 
