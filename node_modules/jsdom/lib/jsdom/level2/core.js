@@ -430,7 +430,10 @@ core.Element.prototype.hasAttribute = function(/* string */name)
     return false;
   }
 
-  return !!this._attributes.$getNoNS(name);
+  // Note: you might think you only need the latter condition. However, it makes a test case fail.
+  // HOWEVER, that test case is for a XML DTD feature called "default attributes" that never was implemented by
+  // browsers, so when we remove default attributes, we should be able to fix this code too.
+  return !!this._attributes.$getNoNS(name) || !!this._attributes.$getNoNS(name.toLowerCase());
 };
 
 core.Element.prototype.hasAttributeNS = function(/* string */namespaceURI,
