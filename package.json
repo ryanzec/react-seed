@@ -4,7 +4,6 @@
   "version": "0.4.0",
   "dependencies": {
     "bluebird": "2.3.11",
-    "browserify": "6.3.2",
     "superagent": "0.21.0",
     "fluxe": "0.1.0",
     "lodash": "2.4.1",
