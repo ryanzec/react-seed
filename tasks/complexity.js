@@ -3,6 +3,7 @@ var options = {
     process.cwd() + '/web/app/**/*.js',
     process.cwd() + '/web/app/**/*.jsx'
   ],
+  excludeFileGlobs: [],
   maintainabilityWarningThreshold: 50,
   maintainabilityDangerThreshold: 20
 };
@@ -57,7 +58,9 @@ var getNormalizedReportData = function(filename, reportData) {
   }
 };
 
-var files = globArray.sync(options.fileGlobs);
+var files = globArray.sync(options.fileGlobs.concat(options.excludeFileGlobs.map(function(glob) {
+    return '!' + glob;
+})));
 
 files.forEach(function(filePath) {
   var src = fs.readFileSync(filePath, 'utf8');
@@ -88,3 +91,8 @@ files.forEach(function(filePath) {
 });
 
 console.log(table.toString());
+
+if(options.excludeFileGlobs.length > 0) {
+    console.log('Skipped the following files, generally because they are 3rd party:');
+    console.log(globArray.sync(options.excludeFileGlobs).join('\n').replace(new RegExp('!' + process.cwd() + '/', 'g'), ''));
+}

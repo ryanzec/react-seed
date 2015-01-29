@@ -4,7 +4,6 @@ var helpers = require('../helpers');
 
 gulp.task('mocha', 'Run mocha tests', function(done) {
   helpers.childProcess('node', [
-    '--harmony',
     'tasks/mocha-runner.js'
   ], function(error, stdout, stderr) {
     if(stderr) {

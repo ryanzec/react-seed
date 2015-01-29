@@ -4,7 +4,6 @@ var helpers = require('../helpers');
 
 gulp.task('code-coverage', 'Run mocha tests with coverage reporting turned on', function(done) {
   helpers.childProcess('node', [
-    '--harmony',
     'tasks/mocha-runner.js',
     '--coverage'
   ], function(error, stdout, stderr) {

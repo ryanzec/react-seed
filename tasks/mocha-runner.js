@@ -4,6 +4,7 @@ var options = {
     process.cwd() + '/web/app/**/*.js',
     process.cwd() + '/web/app/**/*.jsx'
   ],
+  excludeFileForCoverageReportsGlobs: [],
   htmlDirectory: process.cwd() + '/coverage',
   testFileGlobs: [
     process.cwd() + '/test/**/*.spec.*'
@@ -12,7 +13,14 @@ var options = {
 
 require('../test/test-setup.js');
 
-var runCoverageReports = process.argv.indexOf('--coverage') !== -1;
+var commandArguments = process.argv.slice(2);
+var runCoverageReports = commandArguments.indexOf('--coverage') !== -1;
+var mochaReporter = 'spec';
+
+if(commandArguments.indexOf('-R') !== -1) {
+   mochaReporter = commandArguments[commandArguments.indexOf('-R') + 1];
+}
+
 var Mocha = require('mocha');
 var module = require('module');
 var fs = require('fs');
@@ -26,7 +34,9 @@ if(runCoverageReports) {
   global['__coverage__'] = {};
   sourceStore.dispose();
 
-  var filesForCoverageReports = globArray.sync(options.filesForCoverageReportsGlobs);
+  var filesForCoverageReports = globArray.sync(options.filesForCoverageReportsGlobs.concat(options.excludeFileForCoverageReportsGlobs.map(function(glob) {
+    return '!' + glob;
+  })));
 }
 
 if(runCoverageReports) {
@@ -59,7 +69,9 @@ require.extensions['.jsx'] = function(module, filePath) {
 if(runCoverageReports) {
   var collector = new istanbul.Collector();
 }
-var mocha = new Mocha({});
+var mocha = new Mocha({
+  reporter: mochaReporter
+});
 
 globArray.sync(options.testFileGlobs).forEach(function(filePath) {
   mocha.addFile(filePath);
@@ -87,6 +99,11 @@ mocha.run(function(failures){
             sourceStore: sourceStore,
             dir: options.htmlDirectory
         }).writeReport(collector, true);
+
+        if(options.excludeFileForCoverageReportsGlobs.length > 0) {
+            console.log('Skipped the following files because they are either 3rd party files or are not testable:');
+            console.log(globArray.sync(options.excludeFileForCoverageReportsGlobs).join('\n').replace(new RegExp('!' + process.cwd() + '/', 'g'), ''));
+        }
       }
       process.exit(failures);
     });

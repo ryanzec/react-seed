@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.5.0
+
+- removed koa (should be able to use simple python server for initial testing/demoing)
+- now works work node v0.10.x (using fibers to replace generator functionality from v0.11.x)
+- general build process code refactoring
+
 ## 0.4.0
 
 - updated manual copying of assets to be more flexible

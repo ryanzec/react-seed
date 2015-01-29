@@ -1,10 +1,16 @@
 # ReactJS Seed
 
-This is a seed for a ReactJS based application.  It does also include KoaJS if you are inclined however it should be relatively easy to remove it and replace with whatever backend server you wish to use.
+This is a seed for a ReactJS based application.
 
 ## Setup ##
 
-Download the repository and it includes everything you need.  It includes the NPM packages as this is designed as a base repository for an application and not a library and I feel it is better to store packages for applications (just incase npm in down for whatever reason, you still download the codebase and work with it).
+Download the repository and it includes everything you need.  It includes the NPM packages however you will need to run:
+
+```
+npm rebuild
+```
+
+For some of the gulp tasks to run properly.
 
 ## What Does It Have
 
@@ -19,10 +25,6 @@ This seed project using the [react-router](https://github.com/rackt/react-router
 ### Fluxe
 
 It using a thin wrapper on top of [Facebook's flux dispatcher](http://facebook.github.io/flux/) call [fluxe](https://github.com/ryanzec/fluxe).
-
-### KoaJS
-
-[KoaJS](http://koajs.com/) is setup as the server for the application.  It also has a very lightweight mocks solution setup to be able to easily mock api requests.
 
 ### Gulp
 

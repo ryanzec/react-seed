@@ -29,10 +29,6 @@ var gulpConfig = {
       assetPaths: ['app', 'components', 'build'],
       prependSlash: true,
       domains: [],
-      //any resources that ends in .html that can't be found will search for a file of the same name that ends in .jade for meta data (to determine hash)
-      preprocessors: {
-        '.html': '.jade'
-      },
       assetPatterns: [
         'web/*.html',
         'web/app/**/*.*',
