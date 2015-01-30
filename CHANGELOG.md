@@ -1,5 +1,9 @@
 # Change Log
 
+## master
+
+- disabled static rewrite as no longer providing default solution to handle it.
+
 ## 0.5.0
 
 - removed koa (should be able to use simple python server for initial testing/demoing)

@@ -6,7 +6,7 @@ gulp.task('build', 'Builds the code along with running quality checks (tests, hi
     'jshint',
     'code-coverage',
     ['sass', 'html-minify', 'browserify-production', 'copy-static-assets'],
-    'static-rewrite',
+    //'static-rewrite',
     'complexity',
     done
   );
@@ -15,7 +15,7 @@ gulp.task('build', 'Builds the code along with running quality checks (tests, hi
 gulp.task('build-quick', 'Builds the code without running quality checks', function(done) {
   runSequence(
     ['sass', 'html-minify', 'browserify', 'copy-static-assets'],
-    'static-rewrite',
+    //'static-rewrite',
     done
   );
 });
