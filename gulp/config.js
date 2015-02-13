@@ -43,6 +43,7 @@ var gulpConfig = {
         'web/components',
         'web/app/components'
       ],
+      manualGlobs: [],
       manualAssets: {}
     },
     browserify: {
