@@ -8,29 +8,31 @@ var runSequence = require('run-sequence');
 var gutil = require('gulp-util');
 
 gulp.task('browserify', function(done) {
-  var count = 2;
+  runSequence(
+    'browserify-libraries',
+    'browserify-application',
+    done
+  );
+});
+
+gulp.task('browserify-libraries', function(done) {
+  var count = 1;
 
   var libraries = browserify();
-  var application = browserify();
 
   gulpConfig.tasks.browserify.transformers.forEach(function(transform) {
     libraries.transform(transform);
-    application.transform(transform);
   });
 
   gulpConfig.tasks.browserify.libraries.forEach(function(metaData) {
     if(metaData.path) {
-      libraries.require(metaData.path, {
+      libraries.require(process.cwd() + '/' + metaData.path, {
         expose: metaData.name
       });
     } else {
       libraries.require(metaData.name);
     }
-
-    application.external(metaData.name);
   });
-
-  application.add(process.cwd() + '/web/app/application.jsx');
 
   var libraryStream = libraries.bundle()
   .on('error', function(err){
@@ -58,6 +60,22 @@ gulp.task('browserify', function(done) {
 
     cb(null, file);
   }));
+});
+
+gulp.task('browserify-application', function(done) {
+  var count = 1;
+
+  var application = browserify();
+
+  gulpConfig.tasks.browserify.transformers.forEach(function(transform) {
+    application.transform(transform);
+  });
+
+  gulpConfig.tasks.browserify.libraries.forEach(function(metaData) {
+    application.external(metaData.name);
+  });
+
+  application.add(process.cwd() + '/web/app/application.jsx');
 
   var applicationStream = application.bundle()
   .on('error', function(err){
