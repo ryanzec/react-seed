@@ -22,7 +22,7 @@ describe('prevent double click page', function() {
   it('should rendered the 2 buttons', function() {
     expectedData = [{
       disabled: false,
-      children: 'Test'
+      children: 'test'
     }, {
       onClick: function(){},
       children: 'Prevent Double Click Other Buttons'

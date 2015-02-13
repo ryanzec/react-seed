@@ -5,3 +5,5 @@
 /web/.sass-cache/*
 /coverage/*
 /node_modules/*
+/gulp/build-meta-data/*
+/web/build/*

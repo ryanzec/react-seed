@@ -43,7 +43,9 @@ var gulpConfig = {
         'web/components',
         'web/app/components'
       ],
-      manualGlobs: [],
+      manualGlobs: [
+        'web/locale/**/*.js'
+      ],
       manualAssets: {}
     },
     browserify: {
@@ -66,7 +68,11 @@ var gulpConfig = {
         name: 'react-router'
       }]
     },
-    bowerClean: []
+    bowerClean: [],
+    i18n: {
+      languages: ['en'],
+      nodeLanguage: 'en'
+    }
   }
 };
 

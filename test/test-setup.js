@@ -15,5 +15,8 @@ global.sinonChai = require('sinon-chai');
 chai.use(sinonChai);
 chai.config.includeStack = true;
 
+//need the i18n object when testing
+global.window.i18n = require('./i18n-node.js');
+
 //setup fluxe
 require('../web/app/fluxe-loader');

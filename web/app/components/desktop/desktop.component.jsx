@@ -10,7 +10,7 @@ var Desktop = React.createClass({
   render: function() {
     /* jshint ignore:start */
     return (
-      <h1 id="test" className="test">Desktop</h1>
+      <h1 id="test" className="test">{window.i18n['desktop/desktop'].header()}</h1>
     );
     /* jshint ignore:end */
   }

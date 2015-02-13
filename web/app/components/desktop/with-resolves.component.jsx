@@ -25,7 +25,7 @@ var WithResolves = React.createClass({
   render: function() {
     /* jshint ignore:start */
     return (
-      <h1 id="test" className="test">With Resolves</h1>
+      <h1 id="test" className="test">{window.i18n['desktop/with-resolves'].header()}</h1>
     );
     /* jshint ignore:end */
   }

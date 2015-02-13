@@ -33,10 +33,10 @@ var PreventDoubleClick = React.createClass({
     /* jshint ignore:start */
     return (
       <div>
-        <h1 id="test" className="test">Prevent Double Click</h1>
+        <h1 id="test" className="test">{window.i18n['desktop/prevent-double-click'].header()}</h1>
         <div>
-          <button disabled={this.state.preventDoubleClick}>Test</button>
-          <button onClick={this.preventDoubleClickClick}>Prevent Double Click Other Buttons</button>
+          <button disabled={this.state.preventDoubleClick}>{window.i18n['desktop/prevent-double-click'].button1()}</button>
+          <button onClick={this.preventDoubleClickClick}>{window.i18n['desktop/prevent-double-click'].button2()}</button>
         </div>
       </div>
     );
