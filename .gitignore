@@ -4,7 +4,4 @@
 .sass-cache/*
 /web/.sass-cache/*
 /coverage/*
-
-#node module build files should not be stored as they are built specific for the system they are built on
-/node_modules/jsdom/node_modules/contextify/build/*
-/node_modules/mochify/node_modules/watchify/node_modules/chokidar/node_modules/fsevents/build/*
+/node_modules/*
