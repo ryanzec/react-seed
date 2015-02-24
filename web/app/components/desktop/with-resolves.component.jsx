@@ -1,5 +1,5 @@
 var React = require('react/addons');
-var menuActions = require('fluxe').getActions(require('../menu/menu.store').storeName);
+var menuStore = require('../menu/menu.store');
 var bluebird = require('bluebird');
 
 var WithResolves = React.createClass({
@@ -18,7 +18,7 @@ var WithResolves = React.createClass({
   },
 
   componentDidMount: function() {
-    menuActions.update({
+    menuStore.update({
       menuName: 'desktop'
     });
   },

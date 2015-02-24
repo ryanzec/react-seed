@@ -7,7 +7,7 @@ gulp.task('i18n', 'Build i18n files', function(done) {
   var languages = gulpConfig.tasks.i18n.languages;
   var count = languages.length + 1;
 
-  helpers.childProcess('messageformat', [
+  helpers.childProcess('./node_modules/.bin/messageformat', [
     '--locale',
     gulpConfig.tasks.i18n.nodeLanguage,
     '--module',
@@ -27,7 +27,7 @@ gulp.task('i18n', 'Build i18n files', function(done) {
   });
 
   languages.forEach(function(language) {
-    helpers.childProcess('messageformat', [
+    helpers.childProcess('./node_modules/.bin/messageformat', [
       '--locale',
       language,
       'web/locale/' + language,

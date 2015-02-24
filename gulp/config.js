@@ -59,13 +59,15 @@ var gulpConfig = {
       }, {
         name: 'lodash'
       }, {
-        name: 'fluxe'
-      }, {
         name: 'superagent'
       }, {
         name: 'bluebird'
       }, {
         name: 'react-router'
+      }, {
+        name: 'eventemitter3'
+      }, {
+        name: 'object-assign'
       }]
     },
     bowerClean: [],

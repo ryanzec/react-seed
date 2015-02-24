@@ -1,7 +1,7 @@
 var React = require('react/addons');
 var reactTestUtils = React.addons.TestUtils;
 var Header = require('../../../../web/app/components/core/header.component.jsx');
-var menuActions = require('fluxe').getActions(require('../../../../web/app/components/menu/menu.store').storeName);
+var menuStore = require('../../../../web/app/components/menu/menu.store');
 var testHelper = require('../../../test-helper');
 var _ = require('lodash');
 var Link = require('react-router').Link;
@@ -24,7 +24,7 @@ describe('header component', function() {
   });
 
   it('should update menu when menu store changes', function() {
-    menuActions.update({
+    menuStore.update({
       menuName: 'preventDoubleClick'
     });
 

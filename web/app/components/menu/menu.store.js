@@ -1,12 +1,13 @@
-module.exports = {
+var storeGenerator = require('../core/store-generator');
+
+module.exports = storeGenerator({
   getMenu: function() {
     return this._internalData.menus[this._internalData.activeMenu];
   },
 
-  storeName: 'Menu',
-
-  _dispatcherEvents: {
-    'update': '_onUpdateMenu'
+  update: function(options) {
+    this._internalData.activeMenu = options.menuName;
+    this.emit('activeMenuUpdated');
   },
 
   _internalData: {
@@ -30,10 +31,5 @@ module.exports = {
       }]
     },
     activeMenu: 'desktop'
-  },
-
-  _onUpdateMenu: function(options) {
-    this._internalData.activeMenu = options.menuName;
-    this.emit('activeMenuUpdated');
   }
-};
+});

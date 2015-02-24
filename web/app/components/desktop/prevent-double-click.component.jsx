@@ -1,7 +1,6 @@
 var React = require('react/addons');
-var applicationStore = require('fluxe').getStore(require('../core/application.store').storeName);
-var applicationActions = require('fluxe').getActions(require('../core/application.store').storeName);
-var menuActions = require('fluxe').getActions(require('../menu/menu.store').storeName);
+var applicationStore = require('../core/application.store');
+var menuStore = require('../menu/menu.store');
 
 var PreventDoubleClick = React.createClass({
   getInitialState: function() {
@@ -12,14 +11,14 @@ var PreventDoubleClick = React.createClass({
 
   preventDoubleClickClick: function() {
     if(applicationStore.getPreventDoubleClick() === false) {
-      applicationActions.enablePreventDoubleClick();
+      applicationStore.enablePreventDoubleClick();
     } else {
-      applicationActions.disablePreventDoubleClick();
+      applicationStore.disablePreventDoubleClick();
     }
   },
 
   componentDidMount: function() {
-    menuActions.update({
+    menuStore.update({
       menuName: 'preventDoubleClick'
     });
     applicationStore.on('preventDoubleClickChanged', this._callback);

@@ -1,5 +1,5 @@
 var React = require('react/addons');
-var menuStore = require('fluxe').getStore(require('../menu/menu.store').storeName);
+var menuStore = require('../menu/menu.store');
 var Link = require('react-router').Link;
 
 var Header = React.createClass({
