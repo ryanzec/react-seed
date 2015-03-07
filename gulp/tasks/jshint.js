@@ -1,10 +1,17 @@
 var gulp = require('gulp');
-var jshint = require('gulp-jshint');
-var gulpConfig = require('../config.js');
+var gutil = require('gulp-util');
+var helpers = require('../helpers');
 
-gulp.task('jshint', 'Run JSHint against the JavaScript code', function() {
-  //TODO: need to add support for JSX here
-  return gulp.src(gulpConfig.jsHintFiles)
-  .pipe(jshint())
-  .pipe(jshint.reporter('jshint-stylish'));
+gulp.task('jshint', 'Run JSHint on code', function(done) {
+  helpers.childProcess('node', [
+    'tasks/jshint.js'
+  ], function(error, stdout, stderr) {
+    if(stderr) {
+      gutil.log(gutil.colors.red(stderr));
+    } else {
+      console.log(stdout);
+    }
+
+    done();
+  });
 });

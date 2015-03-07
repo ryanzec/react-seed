@@ -6,7 +6,7 @@ var Desktop = React.createClass({
   getInitialState: function() {
     return {
       user: null
-    }
+    };
   },
 
   componentDidMount: function() {
@@ -41,7 +41,6 @@ var Desktop = React.createClass({
   },
 
   render: function() {
-    /* jshint ignore:start */
     return (
       <div className="p-desktop">
         <h1 id="test" className="test">{window.i18n['desktop/desktop'].header()}</h1>
@@ -51,7 +50,6 @@ var Desktop = React.createClass({
         </div>
       </div>
     );
-    /* jshint ignore:end */
   }
 });
 

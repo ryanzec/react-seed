@@ -2,7 +2,8 @@
 var options = {
   filesForCoverageReportsGlobs: [
     process.cwd() + '/web/app/**/*.js',
-    process.cwd() + '/web/app/**/*.jsx'
+    process.cwd() + '/web/app/**/*.jsx',
+    '!' + process.cwd() + '/web/app/mocked-api.js'
   ],
   excludeFileForCoverageReportsGlobs: [],
   htmlDirectory: process.cwd() + '/coverage',

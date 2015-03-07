@@ -1,7 +1,8 @@
 var options = {
   fileGlobs: [
     process.cwd() + '/web/app/**/*.js',
-    process.cwd() + '/web/app/**/*.jsx'
+    process.cwd() + '/web/app/**/*.jsx',
+    '!' + process.cwd() + '/web/app/mocked-api.js'
   ],
   excludeFileGlobs: [],
   maintainabilityWarningThreshold: 50,

@@ -2,6 +2,7 @@
 
 ## master
 
+- made jshint work without needing the jshint ignore comments
 - added messageformat to devDependencies
 - added api mocking solution (#4)
 - disabled static rewrite as no longer providing default solution to handle it.
