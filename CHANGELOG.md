@@ -2,6 +2,7 @@
 
 ## master
 
+- added jscs support
 - made jshint work without needing the jshint ignore comments
 - added messageformat to devDependencies
 - added api mocking solution (#4)

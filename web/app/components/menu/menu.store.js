@@ -1,11 +1,11 @@
 var storeGenerator = require('../core/store-generator');
 
 module.exports = storeGenerator({
-  getMenu: function() {
+  getMenu: function menuStoreGetMenu() {
     return this._internalData.menus[this._internalData.activeMenu];
   },
 
-  update: function(options) {
+  update: function menuStoreUpdate(options) {
     this._internalData.activeMenu = options.menuName;
     this.emit('activeMenuUpdated');
   },

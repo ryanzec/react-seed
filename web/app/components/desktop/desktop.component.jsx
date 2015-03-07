@@ -3,27 +3,27 @@ var menuStore = require('../menu/menu.store');
 var request = require('superagent');
 
 var Desktop = React.createClass({
-  getInitialState: function() {
+  getInitialState: function desktopComponentGetInitialState() {
     return {
       user: null
     };
   },
 
-  componentDidMount: function() {
+  componentDidMount: function desktopComponentComponentDidMount() {
     menuStore.update({
       menuName: 'desktop'
     });
   },
 
-  onGetUser: function() {
-    request.get('/api/users/1', function(response) {
+  onGetUser: function desktopComponentOnGetUser() {
+    request.get('/api/users/1', function desktopComponentOnGetUserRequest(response) {
       this.setState({
         user: response.body
       });
     }.bind(this));
   },
 
-  renderUserData: function() {
+  renderUserData: function desktopComponentRenderUserData() {
     var userData = null;
 
     if(this.state.user) {
@@ -40,7 +40,7 @@ var Desktop = React.createClass({
     return userData;
   },
 
-  render: function() {
+  render: function desktopComponentRender() {
     return (
       <div className="p-desktop">
         <h1 id="test" className="test">{window.i18n['desktop/desktop'].header()}</h1>

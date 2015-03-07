@@ -3,13 +3,13 @@ var applicationStore = require('../core/application.store');
 var menuStore = require('../menu/menu.store');
 
 var PreventDoubleClick = React.createClass({
-  getInitialState: function() {
+  getInitialState: function preventDoubleClickComponentGetInitialState() {
     return {
       preventDoubleClick: applicationStore.getPreventDoubleClick()
     };
   },
 
-  preventDoubleClickClick: function() {
+  onClickPreventDoubleClick: function preventDoubleClickComponentOnClickPreventDoubleClick() {
     if(applicationStore.getPreventDoubleClick() === false) {
       applicationStore.enablePreventDoubleClick();
     } else {
@@ -17,30 +17,30 @@ var PreventDoubleClick = React.createClass({
     }
   },
 
-  componentDidMount: function() {
+  componentDidMount: function preventDoubleClickComponentComponentDidMount() {
     menuStore.update({
       menuName: 'preventDoubleClick'
     });
-    applicationStore.on('preventDoubleClickChanged', this._callback);
+    applicationStore.on('preventDoubleClickChanged', this.onPreventDoubleClickChanged);
   },
 
-  componentWillUnmount: function() {
-    applicationStore.removeListener('preventDoubleClickChanged', this._callback);
+  componentWillUnmount: function preventDoubleClickComponentComponentWillUnmount() {
+    applicationStore.removeListener('preventDoubleClickChanged', this.onPreventDoubleClickChanged);
   },
 
-  render: function() {
+  render: function preventDoubleClickComponentRender() {
     return (
       <div>
         <h1 id="test" className="test">{window.i18n['desktop/prevent-double-click'].header()}</h1>
         <div>
           <button disabled={this.state.preventDoubleClick}>{window.i18n['desktop/prevent-double-click'].button1()}</button>
-          <button onClick={this.preventDoubleClickClick}>{window.i18n['desktop/prevent-double-click'].button2()}</button>
+          <button onClick={this.onClickPreventDoubleClick}>{window.i18n['desktop/prevent-double-click'].button2()}</button>
         </div>
       </div>
     );
   },
 
-  _callback: function() {
+  onPreventDoubleClickChanged: function preventDoubleClickComponentOnPreventDoubleClickChanged() {
     this.setState({
       preventDoubleClick: applicationStore.getPreventDoubleClick()
     });

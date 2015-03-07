@@ -3,31 +3,31 @@ var menuStore = require('../menu/menu.store');
 var Link = require('react-router').Link;
 
 var Header = React.createClass({
-  getInitialState: function() {
+  getInitialState: function headerComponentGetInitialState() {
     return {
       menu: menuStore.getMenu()
     };
   },
 
-  onChange: function(menu) {
+  onChange: function headerComponentOnChange(menu) {
     this.setState({
       menu: menuStore.getMenu()
     });
   },
 
-  componentDidMount: function() {
+  componentDidMount: function headerComponentComponentDidMount() {
     menuStore.on('activeMenuUpdated', this.onChange);
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount: function headerComponentComponentWillUnmount() {
     menuStore.removeListener('activeMenuUpdated', this.onChange);
   },
 
-  render: function() {
+  render: function headerComponentRender() {
     return (
       <header>
         <ul>
-          {this.state.menu.map(function(menuItem) {
+          {this.state.menu.map(function headerComponentMapMenu(menuItem) {
             return (<li key={menuItem.href}>
               <Link to={menuItem.href}>{menuItem.display}</Link>
             </li>);

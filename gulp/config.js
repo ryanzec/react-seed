@@ -9,10 +9,6 @@ var gulpConfig = {
       'web/app/styles/main.scss': 'web/build/main.css'
     }
   },
-  jsHintFiles: [
-    'web/app/**/*.js',
-    'web/app/**/*.jsx',
-  ],
   sassFiles: [
     'web/app/**/*.scss',
     'web/components/**/*.scss'

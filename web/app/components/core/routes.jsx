@@ -9,7 +9,7 @@ var DefaultRoute = Router.DefaultRoute;
 var NotFoundRoute = Router.NotFoundRoute;
 
 var NotFound = React.createClass({
-  render: function () {
+  render: function notFoundComponentRender() {
     return <h2>Not Found</h2>;
   }
 });
