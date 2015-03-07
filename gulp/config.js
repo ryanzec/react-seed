@@ -70,7 +70,13 @@ var gulpConfig = {
         name: 'object-assign'
       }]
     },
-    bowerClean: [],
+    bowerClean: [
+      'backend/lib',
+      'backend/test',
+      'backend/*.*',
+      'backend/.*',
+      '!backend/backend.js',
+    ],
     i18n: {
       languages: ['en'],
       nodeLanguage: 'en'

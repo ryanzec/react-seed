@@ -2,6 +2,8 @@
 
 ## master
 
+- added messageformat to devDependencies
+- added api mocking solution (#4)
 - disabled static rewrite as no longer providing default solution to handle it.
 
 ## 0.5.0
