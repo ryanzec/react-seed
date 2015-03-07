@@ -1,7 +1,7 @@
 {
   "name": "react-seed",
   "private": true,
-  "version": "0.6.0",
+  "version": "0.7.0",
   "dependencies": {
     "bluebird": "2.3.11",
     "eventemitter3": "0.1.6",

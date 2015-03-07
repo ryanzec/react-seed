@@ -1,6 +1,6 @@
 # Change Log
 
-## master
+## 0.7.0
 
 - added jscs support
 - made jshint work without needing the jshint ignore comments
