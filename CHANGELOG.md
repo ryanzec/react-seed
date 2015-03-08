@@ -1,6 +1,6 @@
 # Change Log
 
-## master
+## 0.8.0
 
 - removed jscs and jshint in favor of just using eslint
 
