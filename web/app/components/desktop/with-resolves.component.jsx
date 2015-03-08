@@ -4,7 +4,7 @@ var bluebird = require('bluebird');
 
 var WithResolves = React.createClass({
   statics: {
-    willTransitionTo: function withResolvesComponentWillTransitionTo(transition, params) {
+    willTransitionTo: function withResolvesComponentWillTransitionTo(transition) {
       var defer = bluebird.defer();
       var defer2 = bluebird.defer();
       setTimeout(function timeout1() {

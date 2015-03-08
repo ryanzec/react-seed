@@ -9,7 +9,7 @@ var Header = React.createClass({
     };
   },
 
-  onChange: function headerComponentOnChange(menu) {
+  onChange: function headerComponentOnChange() {
     this.setState({
       menu: menuStore.getMenu()
     });

@@ -26,7 +26,7 @@ var Desktop = React.createClass({
   renderUserData: function desktopComponentRenderUserData() {
     var userData = null;
 
-    if(this.state.user) {
+    if (this.state.user) {
       userData = (
         <ul>
           <li>{this.state.user.id}</li>

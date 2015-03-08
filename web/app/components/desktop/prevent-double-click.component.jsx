@@ -10,7 +10,7 @@ var PreventDoubleClick = React.createClass({
   },
 
   onClickPreventDoubleClick: function preventDoubleClickComponentOnClickPreventDoubleClick() {
-    if(applicationStore.getPreventDoubleClick() === false) {
+    if (applicationStore.getPreventDoubleClick() === false) {
       applicationStore.enablePreventDoubleClick();
     } else {
       applicationStore.disablePreventDoubleClick();

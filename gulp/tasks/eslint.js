@@ -3,8 +3,12 @@ var gutil = require('gulp-util');
 var helpers = require('../helpers');
 var gulpConfig = require('../config.js');
 
-gulp.task('jscs', 'Run JSCS on code', function(done) {
-  helpers.childProcess('./node_modules/.bin/jscs', [
+gulp.task('eslint', 'Run ESLint on code', function(done) {
+  helpers.childProcess('node_modules/.bin/eslint', [
+    '--ext',
+    '.js',
+    '--ext',
+    '.jsx',
     gulpConfig.appPath
   ], function(error, stdout, stderr) {
     if(stderr) {
