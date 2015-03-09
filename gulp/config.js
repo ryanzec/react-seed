@@ -46,7 +46,8 @@ var gulpConfig = {
     },
     browserify: {
       transformers: [
-        'reactify'
+        'reactify',
+        'envify'
       ],
       libraries: [{
         name: 'react/addons'

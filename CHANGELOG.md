@@ -1,5 +1,10 @@
 # Change Log
 
+# master
+
+- added ability to use `process.env.NODE_ENV` technique to wrap debug code for application code
+- added `process.env.NODE_ENV` to production build to strip dev code from libraries (like react)
+
 ## 0.8.0
 
 - removed jscs and jshint in favor of just using eslint
