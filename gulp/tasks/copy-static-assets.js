@@ -8,20 +8,23 @@ var _ = require('lodash');
 var path = require('path');
 var mkdirp = require('mkdirp');
 var globArray = require('glob-array');
+var wrench = require('wrench');
 
 gulp.task('copy-static-assets', 'Copy static assets to the build folder', function(done) {
   var buildMetaData = buildMetaDataFactory.create(process.cwd() + '/gulp/build-meta-data/static-assets.json');
   var assets = [];
 
-  config.staticAssetFolders.forEach(function(folder) {
-    config.staticAssetExtensions.forEach(function(extension) {
-      assets.push(folder + '/**/*.' + extension);
+  _.forEach(config.manualDirectories, function(to, from) {
+    var toDirectory = process.cwd() + '/' + to;
+
+    if(!fs.existsSync(toDirectory)) {
+      mkdirp.sync(toDirectory);
+    }
+
+    wrench.copyDirSyncRecursive(process.cwd() + '/' + from, toDirectory, {
+      forceDelete: true
     });
   });
-
-  if(config.manualGlobs.length > 0) {
-    assets = assets.concat(globArray.sync(config.manualGlobs));
-  }
 
   _.forEach(config.manualAssets, function(to, from) {
     var toDirectory = path.dirname(process.cwd() + '/' + to);
@@ -31,6 +34,16 @@ gulp.task('copy-static-assets', 'Copy static assets to the build folder', functi
     }
 
     fs.writeFileSync(process.cwd() + '/' + to, fs.readFileSync(process.cwd() + '/' + from));
+  });
+
+  if(config.manualGlobs.length > 0) {
+    assets = assets.concat(globArray.sync(config.manualGlobs));
+  }
+
+  config.staticAssetFolders.forEach(function(folder) {
+    config.staticAssetExtensions.forEach(function(extension) {
+      assets.push(folder + '/**/*.' + extension);
+    });
   });
 
   var changedFiles = buildMetaData.getChangedFiles(assets);

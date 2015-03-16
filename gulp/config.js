@@ -3,6 +3,7 @@ var gulpConfig = {
   webPath: 'web',
   appPath: 'web/app',
   buildPath: 'web/build',
+  buildDirectoryName: 'build',
   vendorComponentsPath: 'web/components',
   compileFiles: {
     sass: {
@@ -19,12 +20,17 @@ var gulpConfig = {
     'web/app/components/**/*.html'
   ],
   tasks: {
-    staticRewrite: {
+    assetsRewrite: {
       fileTypesToRewrite: ['svg', 'eot', 'ttf', 'woff', 'png', 'gif', 'jpeg', 'jpg', 'js', 'css', 'map', 'html'],
       fileTypesToProcess: ['html', 'css', 'js'],
       assetPaths: ['app', 'components', 'build'],
       prependSlash: true,
+      addStatic: false,
       domains: [],
+      noBuildVersion: [
+        'components/backend/backend.js',
+        'app/mocked-api.js'
+      ],
       assetPatterns: [
         'web/*.html',
         'web/app/**/*.*',
@@ -39,6 +45,7 @@ var gulpConfig = {
         'web/components',
         'web/app/components'
       ],
+      manualDirectories: {},
       manualGlobs: [
         'web/locale/**/*.js'
       ],

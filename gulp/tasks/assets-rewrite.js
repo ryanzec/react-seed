@@ -9,18 +9,21 @@ var gutil = require('gulp-util');
 var through = require('through2');
 var crypto = require('crypto');
 
-var config = require('../config.js').tasks.staticRewrite;
+var config = require('../config.js').tasks.assetsRewrite;
 var currentDomainKey = 0;
 
-gulp.task('static-rewrite', 'Rewrite assets with "/static/[timestamp]/..." to help with browsers caching resources', function(done) {
-  var buildMetaData = buildMetaDataFactory.create(process.cwd() + '/gulp/build-meta-data/static-rewrite.json');
+gulp.task('assets-rewrite', 'Rewrite asset urls', function(done) {
+  var buildMetaData = buildMetaDataFactory.create(process.cwd() + '/gulp/build-meta-data/assets-rewrite.json');
 
   function getRewriteAssetsPath(asset, fullPath) {
     var shasum = crypto.createHash('sha1');
     var filePath = fullPath;
 
-    if(!fs.existsSync(filePath) && config.preprocessors[path.extname(filePath)]) {
+    if(!fs.existsSync(filePath) && config.preprocessors && config.preprocessors[path.extname(filePath)]) {
       filePath = filePath.substr(0, filePath.length - path.extname(filePath).length) + config.preprocessors[path.extname(filePath)];
+    } else if(!fs.existsSync(filePath) && asset.substr(0, 6) === 'build/') {
+      filePath = filePath.replace(asset, asset.substr(6));
+      asset = asset.substr(6);
     }
 
     shasum.update(fs.readFileSync(filePath, {
@@ -30,7 +33,13 @@ gulp.task('static-rewrite', 'Rewrite assets with "/static/[timestamp]/..." to he
     var assetParts = asset.split('/');
     var spliceStart = 0;
 
-    assetParts.splice(spliceStart, 0, 'static', sha);
+    if(config.addStatic === true) {
+      assetParts.splice(spliceStart, 0, 'static', sha);
+    }
+
+    if(assetParts[0] !== gulpConfig.buildDirectoryName && config.noBuildVersion.indexOf(asset) === -1) {
+      assetParts.splice(spliceStart, 0, gulpConfig.buildDirectoryName);
+    }
 
     return assetParts.join('/');
   };
@@ -75,10 +84,10 @@ gulp.task('static-rewrite', 'Rewrite assets with "/static/[timestamp]/..." to he
     })
     .pipe(through.obj(function(file, encoding, cb) {
       if(!file.contents instanceof Buffer) {
-        return cb(new Error('static rewrite can only work on buffers'), file);
+        return cb(new Error('assets rewrite can only work on buffers'), file);
       } else {
         var fileContents = String(file.contents);
-        var regex = new RegExp("[\"']((http[s]?:)?//[a-zA-Z0-9-_.]*\\.[a-zA-Z0-9-_]*\\.[a-zA-Z0-9-_]{2,6})?/?(((static/[0-9a-zA-Z]*/)+)?((" + config.assetPaths.join('|') + ")/[a-zA-Z0-9-_./]+\\.(" + config.fileTypesToRewrite.join('|') + ")))[\"']", 'g');
+        var regex = new RegExp("[\"']((http[s]?:)?//[a-zA-Z0-9-_.]*\\.[a-zA-Z0-9-_]*\\.[a-zA-Z0-9-_]{2,6})?/?(((static/[0-9a-zA-Z]*/)+)?((" + config.assetPaths.join('|') + ")/[a-zA-Z0-9-_./]+\\.(" + config.fileTypesToRewrite.join('|') + ")))(#)?([0-9a-zA-Z-_]*)?[\"']", 'g');
 
         var noMatches = false;
         var match;
@@ -134,7 +143,7 @@ gulp.task('static-rewrite', 'Rewrite assets with "/static/[timestamp]/..." to he
       count -= 1;
 
       if(count == 0) {
-        //add a delay here to make sure the build meta data incorperates the static rewrite when hashing the files
+        //add a delay here to make sure the build meta data incorperates the assets rewrite when hashing the files
         setTimeout(function() {
           buildMetaData.addBuildMetaDataFiles(rewriteAssets);
           buildMetaData.addBuildMetaDataFiles(filesToProcess);
