@@ -8,7 +8,7 @@ var Router = require('react-router');
 var Route = Router.Route;
 var React = require('react/addons');
 var reactTestUtils = React.addons.TestUtils;
-var TestLocation = require('react-router/modules/locations/TestLocation');
+var TestLocation = require('react-router/lib/locations/TestLocation');
 
 //store the original state of all the stores
 _.forEach(storeLocations, function(path, storeName) {
@@ -37,9 +37,9 @@ module.exports = {
         handler:Component
       })
     ];
-    TestLocation.history = ['/test'];
+    var location = new TestLocation(['/test']);
 
-    Router.run(routes, TestLocation, function (Handler) {
+    Router.run(routes, location, function (Handler) {
       var mainComponent = React.render(React.createFactory(Handler)({}), div);
       component = reactTestUtils.findRenderedComponentWithType(mainComponent, Component);
     });
