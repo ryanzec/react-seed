@@ -27,9 +27,20 @@
   };
 
   mockRequest({
-    url: '/api/users/1',
+    url: '/api/v1/users/123',
     response: {
       id: 123,
+      firstName: 'Test',
+      lastName: 'User',
+      username: 'test.user'
+    }
+  });
+
+  mockRequest({
+    url: '/api/v1/users/124',
+    delay: 1000,
+    response: {
+      id: 124,
       firstName: 'Test',
       lastName: 'User',
       username: 'test.user'

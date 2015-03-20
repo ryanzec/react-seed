@@ -16,9 +16,7 @@ var NotFound = React.createClass({
 module.exports = (
   <Route handler={Application}>
     <DefaultRoute handler={Desktop} />
-    <Route path="/desktop" handler={Desktop} />
-    <Route path="/prevent-double-click" handler={PreventDoubleClick} />
-    <Route path="/with-resolves" handler={WithResolves} />
+    {require('../desktop/module.jsx').routes}
     <NotFoundRoute handler={NotFound} />
   </Route>
 );

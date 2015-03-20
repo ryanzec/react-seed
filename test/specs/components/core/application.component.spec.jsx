@@ -3,22 +3,22 @@ var reactTestUtils = React.addons.TestUtils;
 var Application = require('../../../../web/app/components/core/application.component.jsx');
 var testHelper = require('../../../test-helper');
 
-describe('application component', function() {
-  beforeEach(function() {
-    testHelper.resetStores('Menu');
+describe('application component', function(done) {
+  it('should have header', function(done) {
+    testHelper.getRouterComponent(Application, '/desktop', this, function() {
+      var header = reactTestUtils.findRenderedDOMComponentWithTag(this.component, 'header');
 
-    this.component = testHelper.getRouterComponent(Application);
+      expect(header).to.be.defined;
+      done();
+    }.bind(this));
   });
 
-  it('should have header', function() {
-    var header = reactTestUtils.findRenderedDOMComponentWithTag(this.component, 'header');
+  it('should have application element', function(done) {
+    testHelper.getRouterComponent(Application, '/desktop', this, function() {
+      var mainContent = reactTestUtils.findRenderedDOMComponentWithClass(this.component, 'application');
 
-    expect(header).to.be.defined;
-  });
-
-  it('should have application element', function() {
-    var mainContent = reactTestUtils.findRenderedDOMComponentWithClass(this.component, 'application');
-
-    expect(mainContent).to.be.defined;
+      expect(mainContent).to.be.defined;
+      done();
+    }.bind(this));
   });
 });

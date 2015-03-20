@@ -9,6 +9,7 @@ var Route = Router.Route;
 var React = require('react/addons');
 var reactTestUtils = React.addons.TestUtils;
 var TestLocation = require('react-router/lib/locations/TestLocation');
+var fibers = require('fibers');
 
 //store the original state of all the stores
 _.forEach(storeLocations, function(path, storeName) {
@@ -28,23 +29,17 @@ module.exports = {
     });
   },
 
-  getRouterComponent: function(Component) {
+  getRouterComponent: function(Component, path, attachComponentTo, callback) {
     var component;
     var div = document.createElement('div');
-    var routes = [
-      React.createFactory(Route)({
-        name: "test",
-        handler:Component
-      })
-    ];
-    var location = new TestLocation(['/test']);
+    var routes = require('../web/app/components/core/routes.jsx');
+    var location = new TestLocation([path]);
 
     Router.run(routes, location, function (Handler) {
       var mainComponent = React.render(React.createFactory(Handler)({}), div);
-      component = reactTestUtils.findRenderedComponentWithType(mainComponent, Component);
-    });
-
-    return component;
+      attachComponentTo.component = reactTestUtils.findRenderedComponentWithType(mainComponent, Component);
+      callback();
+    }.bind(this));
   },
 
   unmountComponent: function(component) {
@@ -79,6 +74,16 @@ module.exports = {
 
   noop: function() {},
 
+  sleep: function(ms) {
+    var fiber = fibers.current;
+
+    setTimeout(function() {
+      fiber.run();
+    }, ms);
+
+    fibers.yield();
+  },
+
   keyCodes: {
     BACKSPACE: 8,
     TAB: 9,
@@ -98,5 +103,15 @@ module.exports = {
     SHIFT: 16,
     CTRL: 17,
     ALT: 18
-}
+  },
+
+  getSpyForEventHandler: function(component, eventHandlerName) {
+    //using weird syntax here to prevent issue with ReactJS auto binding of events
+    return sinon.spy(component.type.prototype.__reactAutoBindMap, eventHandlerName);
+  },
+
+  restoreEventHandler: function(component, eventHandlerName) {
+    //using weird syntax here to prevent issue with ReactJS auto binding of events
+    component.type.prototype.__reactAutoBindMap[eventHandlerName].restore();
+  }
 };
