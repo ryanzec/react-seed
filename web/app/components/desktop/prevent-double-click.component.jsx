@@ -1,6 +1,6 @@
 var React = require('react/addons');
-var applicationStore = require('../core/application.store');
-var menuStore = require('../menu/menu.store');
+var applicationStore = require('../../stores/application.store');
+var menuStore = require('../../stores/menu.store');
 
 var PreventDoubleClick = React.createClass({
   getInitialState: function preventDoubleClickComponentGetInitialState() {

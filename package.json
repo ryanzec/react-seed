@@ -8,6 +8,7 @@
     "lodash": "2.4.1",
     "object-assign": "2.0.0",
     "react-router": "0.12.4",
+    "schema-inspector": "1.5.1",
     "superagent": "0.21.0"
   },
   "devDependencies": {

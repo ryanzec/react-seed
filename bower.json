@@ -1,9 +1,0 @@
-{
-  "name": "react-seed",
-  "private": true,
-  "version": "0.8.0",
-  "dependencies": {},
-  "devDependencies": {
-    "backend": "0.2.2"
-  }
-}

@@ -3,7 +3,7 @@ var reactTestUtils = React.addons.TestUtils;
 var Desktop = require('../../../../web/app/components/desktop/desktop.component.jsx');
 var testHelper = require('../../../test-helper');
 var fibers = require('fibers');
-var userStore = require('../../../../web/app/components/stores/user.store');
+var userStore = require('../../../../web/app/stores/user.store');
 var bluebird = require('bluebird');
 var sinon = require('sinon');
 
@@ -15,12 +15,7 @@ describe('desktop component', function() {
       var defer = bluebird.defer();
 
       if (userId === 123) {
-        defer.resolve({
-          id: 123,
-          firstName: 'Test',
-          lastName: 'User',
-          username: 'test.user'
-        });
+        defer.resolve(testHelper.mockedData.users['123']);
       }
 
       return defer.promise;
@@ -32,7 +27,7 @@ describe('desktop component', function() {
   });
 
   beforeEach(function() {
-    testHelper.resetStores('Menu');
+    testHelper.resetStoresCachedData('Menu');
   });
 
   it('should have h1', function(done) {

@@ -1,16 +1,16 @@
-var storeGenerator = require('../core/store-generator');
+var storeGenerator = require('./store-generator');
 
 module.exports = storeGenerator({
   getMenu: function menuStoreGetMenu() {
-    return this._internalData.menus[this._internalData.activeMenu];
+    return this._cachedData.menus[this._cachedData.activeMenu];
   },
 
   update: function menuStoreUpdate(options) {
-    this._internalData.activeMenu = options.menuName;
+    this._cachedData.activeMenu = options.menuName;
     this.emit('activeMenuUpdated');
   },
 
-  _internalData: {
+  _cachedData: {
     menus: {
       desktop: [{
         href: '/desktop',

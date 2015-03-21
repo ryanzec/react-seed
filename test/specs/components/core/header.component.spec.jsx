@@ -1,14 +1,18 @@
 var React = require('react/addons');
 var reactTestUtils = React.addons.TestUtils;
 var Header = require('../../../../web/app/components/core/header.component.jsx');
-var menuStore = require('../../../../web/app/components/menu/menu.store');
+var menuStore = require('../../../../web/app/stores/menu.store');
 var testHelper = require('../../../test-helper');
 var _ = require('lodash');
 var Link = require('react-router').Link;
 
 describe('header component', function() {
   beforeEach(function() {
-    testHelper.resetStores('Menu');
+    testHelper.resetStoresCachedData('Menu');
+  });
+
+  afterEach(function() {
+    testHelper.unmountComponent(this.component);
   });
 
   it('should have correct initial state', function(done) {

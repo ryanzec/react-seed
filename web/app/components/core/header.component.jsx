@@ -1,5 +1,5 @@
 var React = require('react/addons');
-var menuStore = require('../menu/menu.store');
+var menuStore = require('../../stores/menu.store');
 var Link = require('react-router').Link;
 
 var Header = React.createClass({

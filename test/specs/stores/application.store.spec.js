@@ -1,14 +1,14 @@
-var store = require('../../../../web/app/components/core/application.store');
-var testHelper = require('../../../test-helper');
+var store = require('../../../web/app/stores/application.store');
+var testHelper = require('../../test-helper');
 
 describe('application store', function() {
   beforeEach(function() {
-    testHelper.resetStores('Application');
+    testHelper.resetStoresCachedData('Application');
   });
 
   it('should have default data set properly', function() {
-    expect(Object.keys(store._internalData).length).to.equal(1);
-    expect(store._internalData.preventDoubleClick).to.be.false;
+    expect(Object.keys(store._cachedData).length).to.equal(1);
+    expect(store._cachedData.preventDoubleClick).to.be.false;
   });
 
   it('should be able to get prevent double click status', function() {

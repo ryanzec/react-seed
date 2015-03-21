@@ -1,14 +1,14 @@
-var store = require('../../../../web/app/components/menu/menu.store');
-var testHelper = require('../../../test-helper');
+var store = require('../../../web/app/stores/menu.store');
+var testHelper = require('../../test-helper');
 
 describe('menu data', function() {
   beforeEach(function() {
-    testHelper.resetStores('Menu');
+    testHelper.resetStoresCachedData('Menu');
   });
 
   it('should have default data set', function() {
-    expect(Object.keys(store._internalData).length).to.equal(2);
-    expect(store._internalData.menus).to.deep.equal({
+    expect(Object.keys(store._cachedData).length).to.equal(2);
+    expect(store._cachedData.menus).to.deep.equal({
       desktop: [{
         href: '/desktop',
         display: 'Desktop'
@@ -27,7 +27,7 @@ describe('menu data', function() {
         display: 'With Resolves'
       }]
     });
-    expect(store._internalData.activeMenu).to.equal('desktop');
+    expect(store._cachedData.activeMenu).to.equal('desktop');
   });
 
   it('should be able to set active menu', function() {
@@ -35,7 +35,7 @@ describe('menu data', function() {
       menuName: 'preventDoubleClick'
     });
 
-    expect(store._internalData.activeMenu).to.equal('preventDoubleClick');
+    expect(store._cachedData.activeMenu).to.equal('preventDoubleClick');
   });
 
   it('should be able to get the active menu set', function() {

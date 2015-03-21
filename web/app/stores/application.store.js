@@ -1,21 +1,21 @@
-var storeGenerator = require('../core/store-generator');
+var storeGenerator = require('./store-generator');
 
 module.exports = storeGenerator({
   getPreventDoubleClick: function applicationStoreGetPreventDoubleClick() {
-    return this._internalData.preventDoubleClick;
+    return this._cachedData.preventDoubleClick;
   },
 
   enablePreventDoubleClick: function applicationStoreEnablePreventDoubleClick() {
-    this._internalData.preventDoubleClick = true;
+    this._cachedData.preventDoubleClick = true;
     this.emit('preventDoubleClickChanged');
   },
 
   disablePreventDoubleClick: function applicationStoreDisablePreventDoubleClick() {
-    this._internalData.preventDoubleClick = false;
+    this._cachedData.preventDoubleClick = false;
     this.emit('preventDoubleClickChanged');
   },
 
-  _internalData: {
+  _cachedData: {
     preventDoubleClick: false
   }
 });

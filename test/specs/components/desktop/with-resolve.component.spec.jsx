@@ -2,24 +2,17 @@ var React = require('react/addons');
 var reactTestUtils = React.addons.TestUtils;
 var WithResolves = require('../../../../web/app/components/desktop/with-resolves.component.jsx');
 var testHelper = require('../../../test-helper');
-var userStore = require('../../../../web/app/components/stores/user.store');
+var userStore = require('../../../../web/app/stores/user.store');
 var sinon = require('sinon');
 var bluebird = require('bluebird');
 
-var getUserStub;
-
 describe('with resolves component', function(done) {
   before(function() {
-    getUserStub = sinon.stub(userStore, 'getUser', function(userId) {
+    sinon.stub(userStore, 'getUser', function(userId) {
       var defer = bluebird.defer();
 
       if (userId === 124) {
-        defer.resolve({
-          id: 124,
-          firstName: 'Test',
-          lastName: 'User',
-          username: 'test.user'
-        });
+        defer.resolve(testHelper.mockedData.users['124']);
       }
 
       return defer.promise;
@@ -31,7 +24,7 @@ describe('with resolves component', function(done) {
   });
 
   beforeEach(function() {
-    testHelper.resetStores('Menu');
+    testHelper.resetStoresCachedData('Menu');
   });
 
   it('should have h1', function(done) {
@@ -52,9 +45,9 @@ describe('with resolves component', function(done) {
       var userLastName = reactTestUtils.findRenderedDOMComponentWithClass(this.component, 'user-last-name');
 
       expect(userId.props.children).to.equal(124);
-      expect(userUsername.props.children).to.equal('test.user');
-      expect(userFirstName.props.children).to.equal('Test');
-      expect(userLastName.props.children).to.equal('User');
+      expect(userUsername.props.children).to.equal('test2.user2');
+      expect(userFirstName.props.children).to.equal('Test2');
+      expect(userLastName.props.children).to.equal('User2');
       done();
     }.bind(this));
   });

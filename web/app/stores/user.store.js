@@ -1,4 +1,4 @@
-var storeGenerator = require('../core/store-generator');
+var storeGenerator = require('./store-generator');
 var bluebird = require('bluebird');
 var request = require('superagent');
 

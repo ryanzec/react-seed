@@ -1,23 +1,25 @@
 var _ = require('lodash');
 var storeLocations = {
-  Application: '../web/app/components/core/application.store',
-  Menu: '../web/app/components/menu/menu.store'
+  Application: '../web/app/stores/application.store',
+  Menu: '../web/app/stores/menu.store',
+  User: '../web/app/stores/user.store'
 };
-var initialStores = {};
+var initialStoresCachedData = {};
 var Router = require('react-router');
 var Route = Router.Route;
 var React = require('react/addons');
 var reactTestUtils = React.addons.TestUtils;
 var TestLocation = require('react-router/lib/locations/TestLocation');
 var fibers = require('fibers');
+var mockedData = require('../web/mocked-api/data/index');
 
 //store the original state of all the stores
 _.forEach(storeLocations, function(path, storeName) {
-  initialStores[storeName] = _.clone(require(path), true);
+  initialStoresCachedData[storeName] = _.clone(require(path)._cachedData, true);
 });
 
 module.exports = {
-  resetStores: function() {
+  resetStoresCachedData: function() {
     var storeNames = Array.prototype.slice.call(arguments);
 
     storeNames.forEach(function(storeName) {
@@ -25,7 +27,7 @@ module.exports = {
       var store = require(storeLocations[storeName]);
 
       //reset all the initial store properties
-      store = _.extend(store, _.clone(initialStores[storeName], true));
+      store._cachedData = _.clone(initialStoresCachedData[storeName], true);
     });
   },
 
@@ -44,6 +46,7 @@ module.exports = {
 
   unmountComponent: function(component) {
     if(component && component.isMounted()) {
+      console.log(component.constructor.displayName);
       React.unmountComponentAtNode(component.getDOMNode().parentNode);
     }
   },
@@ -113,5 +116,7 @@ module.exports = {
   restoreEventHandler: function(component, eventHandlerName) {
     //using weird syntax here to prevent issue with ReactJS auto binding of events
     component.type.prototype.__reactAutoBindMap[eventHandlerName].restore();
-  }
+  },
+
+  mockedData: mockedData
 };

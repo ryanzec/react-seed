@@ -72,6 +72,8 @@ var gulpConfig = {
         name: 'eventemitter3'
       }, {
         name: 'object-assign'
+      }, {
+        name: 'schema-inspector'
       }]
     },
     bowerClean: [

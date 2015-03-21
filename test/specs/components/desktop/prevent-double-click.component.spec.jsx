@@ -6,7 +6,7 @@ var _ = require('lodash');
 
 describe('prevent double click page', function() {
   beforeEach(function() {
-    testHelper.resetStores('Menu', 'Application');
+    testHelper.resetStoresCachedData('Menu', 'Application');
   });
 
   it('should have h1', function(done) {

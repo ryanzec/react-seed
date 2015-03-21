@@ -8,11 +8,20 @@ var runSequence = require('run-sequence');
 var gutil = require('gulp-util');
 
 gulp.task('browserify', function(done) {
-  runSequence(
-    'browserify-libraries',
-    'browserify-application',
-    done
-  );
+  if (process.env.NODE_ENV === 'production') {
+    runSequence(
+      'browserify-libraries',
+      'browserify-application',
+      done
+    );
+  } else {
+    runSequence(
+      'browserify-libraries',
+      'browserify-application',
+      'browserify-mocks',
+      done
+    );
+  }
 });
 
 gulp.task('browserify-libraries', function(done) {
@@ -94,6 +103,40 @@ gulp.task('browserify-application', function(done) {
   .pipe(source('application.js'));
 
   applicationStream.pipe(gulp.dest(gulpConfig.buildPath))
+  .pipe(through.obj(function(file, encoding, cb) {
+    count -= 1;
+
+    if(count == 0) {
+      done();
+    }
+
+    cb(null, file);
+  }));
+});
+
+gulp.task('browserify-mocks', function(done) {
+  var count = 1;
+  var mocked = browserify();
+
+  mocked.add(process.cwd() + '/web/mocked-api/mocked-api.js');
+
+  var mockedStream = mocked.bundle()
+  .on('error', function(err){
+    var message;
+
+    if(err.description)
+      message = 'browserify error: ' + err.description + ' when parsing ' + err.fileName + ' | Line ' + err.lineNumber + ', Column ' + err.column;
+    else {
+      message = err.message;
+    }
+
+    gutil.log(gutil.colors.red(message));
+
+    this.emit('end');
+  })
+  .pipe(source('mocked.js'));
+
+  mockedStream.pipe(gulp.dest(gulpConfig.buildPath))
   .pipe(through.obj(function(file, encoding, cb) {
     count -= 1;
 

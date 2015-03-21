@@ -1,7 +1,7 @@
 var React = require('react/addons');
-var menuStore = require('../menu/menu.store');
+var menuStore = require('../../stores/menu.store');
 var request = require('superagent');
-var userStore = require('../stores/user.store');
+var userStore = require('../../stores/user.store');
 
 var Desktop = React.createClass({
   getInitialState: function desktopComponentGetInitialState() {
