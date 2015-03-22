@@ -1,4 +1,4 @@
-var backend = require('backend');
+var backend = require('ryanzec-mocked-backend');
 var mockedData = require ('./data/index');
 var mockRequest = function mockRequest(options) {
   var extend = function extend(target, source) {

@@ -27,10 +27,7 @@ var gulpConfig = {
       prependSlash: true,
       addStatic: false,
       domains: [],
-      noBuildVersion: [
-        'components/backend/backend.js',
-        'app/mocked-api.js'
-      ],
+      noBuildVersion: [],
       assetPatterns: [
         'web/*.html',
         'web/app/**/*.*',
