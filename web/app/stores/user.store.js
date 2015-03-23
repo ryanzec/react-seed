@@ -3,12 +3,12 @@ var bluebird = require('bluebird');
 var request = require('superagent');
 
 module.exports = storeGenerator({
-  getUser: function(userId) {
+  getUser: function userStoreGetUser(userId) {
     var defer = bluebird.defer();
 
-    request.get('/api/v1/users/' + userId, function(response) {
-        defer.resolve(response.body);
-    }.bind(this));
+    request.get('/api/v1/users/' + userId, function userStoreGetUserSuccess(response) {
+      defer.resolve(response.body);
+    });
 
     return defer.promise;
   }

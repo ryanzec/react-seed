@@ -7,6 +7,10 @@ var userStore = require('../../../../web/app/stores/user.store');
 var bluebird = require('bluebird');
 var sinon = require('sinon');
 
+var getDesktopPageComponent = function(mainElement) {
+  return reactTestUtils.findRenderedComponentWithType(mainElement, Desktop);
+};
+
 var getUserStub;
 
 describe('desktop component', function() {
@@ -30,31 +34,48 @@ describe('desktop component', function() {
     testHelper.resetStoresCachedData('Menu');
   });
 
+  it('should have correct menu', function(done) {
+    testHelper.testPage('/desktop', function(mainElement) {
+      testHelper.testMenu(mainElement, [{
+        href: 'desktop',
+        display: 'Desktop',
+        className: 'header-desktop-link'
+      }, {
+        href: 'prevent-double-click',
+        display: 'Prevent Double Click',
+        className: 'header-prevent-double-click-link'
+      }]);
+      done();
+    });
+  });
+
   it('should have h1', function(done) {
-    testHelper.getRouterComponent(Desktop, '/desktop', this, function() {
-      var h1 = reactTestUtils.findRenderedDOMComponentWithTag(this.component, 'h1');
+    testHelper.testPage('/desktop', function(mainElement) {
+      var desktopPageComponent = getDesktopPageComponent(mainElement);
+      var h1 = reactTestUtils.findRenderedDOMComponentWithTag(desktopPageComponent, 'h1');
 
       expect(h1).to.be.defined;
       expect(h1.props.id).to.equal('test');
       expect(h1.props.className).to.equal('test');
       expect(h1.props.children).to.equal('Desktop');
       done();
-    }.bind(this));
+    });
   });
 
   it('should load user data when clicking button', function(done) {
     fibers(function() {
-      testHelper.getRouterComponent(Desktop, '/desktop', this, function() {
-        var button = reactTestUtils.findRenderedDOMComponentWithClass(this.component, 'load-user-data');
+      testHelper.testPage('/desktop', function(mainElement) {
+        var desktopPageComponent = getDesktopPageComponent(mainElement);
+        var button = reactTestUtils.findRenderedDOMComponentWithClass(desktopPageComponent, 'load-user-data');
 
         reactTestUtils.Simulate.click(button);
 
         testHelper.sleep(5);
 
-        var userId = reactTestUtils.findRenderedDOMComponentWithClass(this.component, 'user-id');
-        var userUsername = reactTestUtils.findRenderedDOMComponentWithClass(this.component, 'user-username');
-        var userFirstName = reactTestUtils.findRenderedDOMComponentWithClass(this.component, 'user-first-name');
-        var userLastName = reactTestUtils.findRenderedDOMComponentWithClass(this.component, 'user-last-name');
+        var userId = reactTestUtils.findRenderedDOMComponentWithClass(desktopPageComponent, 'user-id');
+        var userUsername = reactTestUtils.findRenderedDOMComponentWithClass(desktopPageComponent, 'user-username');
+        var userFirstName = reactTestUtils.findRenderedDOMComponentWithClass(desktopPageComponent, 'user-first-name');
+        var userLastName = reactTestUtils.findRenderedDOMComponentWithClass(desktopPageComponent, 'user-last-name');
 
         expect(userId.props.children).to.equal(123);
         expect(userUsername.props.children).to.equal('test.user');
@@ -62,7 +83,37 @@ describe('desktop component', function() {
         expect(userLastName.props.children).to.equal('User');
 
         done();
-      }.bind(this));
-    }.bind(this)).run();
+      });
+    }).run();
+  });
+
+  it('should have link to desktop page', function(done) {
+    testHelper.testPage('/desktop', function(mainElement) {
+      var link = reactTestUtils.scryRenderedDOMComponentsWithClass(mainElement, 'header-desktop-link');
+
+      expect(link.length).to.equal(1);
+      done();
+    });
+  });
+
+  it('should have link to prevent double click page', function(done) {
+    fibers(function() {
+      var steps = [];
+
+      steps.push(function(mainElement) {
+        var link = reactTestUtils.findRenderedDOMComponentWithClass(mainElement, 'header-prevent-double-click-link');
+
+        testHelper.simulateRouterLinkClick(link);
+      });
+
+      steps.push(function(mainElement) {
+        var page = reactTestUtils.scryRenderedDOMComponentsWithClass(mainElement, 'p-prevent-double-click');
+
+        expect(page.length).to.equal(1);
+        done();
+      });
+
+      testHelper.testPage('/desktop', steps);
+    }).run();
   });
 });

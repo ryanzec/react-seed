@@ -13,21 +13,26 @@ module.exports = storeGenerator({
   _cachedData: {
     menus: {
       desktop: [{
-        href: '/desktop',
-        display: 'Desktop'
+        href: 'desktop',
+        display: 'Desktop',
+        className: 'header-desktop-link'
       }, {
-        href: '/prevent-double-click',
-        display: 'Prevent Double Click'
+        href: 'prevent-double-click',
+        display: 'Prevent Double Click',
+        className: 'header-prevent-double-click-link'
       }],
       preventDoubleClick: [{
-        href: '/desktop',
-        display: 'Desktop'
+        href: 'desktop',
+        display: 'Desktop',
+        className: 'header-desktop-link'
       }, {
-        href: '/prevent-double-click',
-        display: 'Prevent Double Click'
+        href: 'prevent-double-click',
+        display: 'Prevent Double Click',
+        className: 'header-prevent-double-click-link'
       }, {
-        href: '/with-resolves',
-        display: 'With Resolves'
+        href: 'with-resolves',
+        display: 'With Resolves',
+        className: 'header-with-resolves-link'
       }]
     },
     activeMenu: 'desktop'

@@ -5,20 +5,20 @@ var testHelper = require('../../../test-helper');
 
 describe('application component', function(done) {
   it('should have header', function(done) {
-    testHelper.getRouterComponent(Application, '/desktop', this, function() {
-      var header = reactTestUtils.findRenderedDOMComponentWithTag(this.component, 'header');
+    testHelper.testPage('/', function(mainElement) {
+      var header = reactTestUtils.findRenderedDOMComponentWithTag(mainElement, 'header');
 
       expect(header).to.be.defined;
       done();
-    }.bind(this));
+    });
   });
 
   it('should have application element', function(done) {
-    testHelper.getRouterComponent(Application, '/desktop', this, function() {
-      var mainContent = reactTestUtils.findRenderedDOMComponentWithClass(this.component, 'application');
+    testHelper.testPage('/', function(mainElement) {
+      var mainContent = reactTestUtils.findRenderedDOMComponentWithClass(mainElement, 'application');
 
       expect(mainContent).to.be.defined;
       done();
-    }.bind(this));
+    });
   });
 });

@@ -6,6 +6,10 @@ var userStore = require('../../../../web/app/stores/user.store');
 var sinon = require('sinon');
 var bluebird = require('bluebird');
 
+var getWithResolvesPageComponent = function(mainElement) {
+  return reactTestUtils.findRenderedComponentWithType(mainElement, WithResolves);
+};
+
 describe('with resolves component', function(done) {
   before(function() {
     sinon.stub(userStore, 'getUser', function(userId) {
@@ -27,28 +31,73 @@ describe('with resolves component', function(done) {
     testHelper.resetStoresCachedData('Menu');
   });
 
+  it('should have correct menu', function(done) {
+    testHelper.testPage('/with-resolves', function(mainElement) {
+      testHelper.testMenu(mainElement, [{
+        href: 'desktop',
+        display: 'Desktop',
+        className: 'header-desktop-link'
+      }, {
+        href: 'prevent-double-click',
+        display: 'Prevent Double Click',
+        className: 'header-prevent-double-click-link'
+      }]);
+      done();
+    });
+  });
+
   it('should have h1', function(done) {
-    testHelper.getRouterComponent(WithResolves, '/with-resolves', this, function() {
-      var h1 = reactTestUtils.findRenderedDOMComponentWithTag(this.component, 'h1');
+    testHelper.testPage('/with-resolves', function(mainElement) {
+      var withResolvePageComponent = getWithResolvesPageComponent(mainElement);
+      var h1 = reactTestUtils.findRenderedDOMComponentWithTag(withResolvePageComponent, 'h1');
 
       expect(h1).to.be.defined;
       expect(h1.props.children).to.equal('With Resolves');
       done();
-    }.bind(this));
+    });
   });
 
   it('should have user data', function(done) {
-    testHelper.getRouterComponent(WithResolves, '/with-resolves', this, function() {
-      var userId = reactTestUtils.findRenderedDOMComponentWithClass(this.component, 'user-id');
-      var userUsername = reactTestUtils.findRenderedDOMComponentWithClass(this.component, 'user-username');
-      var userFirstName = reactTestUtils.findRenderedDOMComponentWithClass(this.component, 'user-first-name');
-      var userLastName = reactTestUtils.findRenderedDOMComponentWithClass(this.component, 'user-last-name');
+    testHelper.testPage('/with-resolves', function(mainElement) {
+      var withResolvePageComponent = getWithResolvesPageComponent(mainElement);
+      var userId = reactTestUtils.findRenderedDOMComponentWithClass(withResolvePageComponent, 'user-id');
+      var userUsername = reactTestUtils.findRenderedDOMComponentWithClass(withResolvePageComponent, 'user-username');
+      var userFirstName = reactTestUtils.findRenderedDOMComponentWithClass(withResolvePageComponent, 'user-first-name');
+      var userLastName = reactTestUtils.findRenderedDOMComponentWithClass(withResolvePageComponent, 'user-last-name');
 
       expect(userId.props.children).to.equal(124);
       expect(userUsername.props.children).to.equal('test2.user2');
       expect(userFirstName.props.children).to.equal('Test2');
       expect(userLastName.props.children).to.equal('User2');
       done();
-    }.bind(this));
+    });
+  });
+
+  it('should have link to with resolves page', function(done) {
+    testHelper.testPage('/prevent-double-click', function(mainElement) {
+      var link = reactTestUtils.scryRenderedDOMComponentsWithClass(mainElement, 'header-prevent-double-click-link');
+
+      expect(link.length).to.equal(1);
+      done();
+    });
+  });
+
+  it('should have link to desktop page', function(done) {
+    var steps = [];
+
+    steps.push(function(mainElement) {
+      var link = reactTestUtils.findRenderedDOMComponentWithClass(mainElement, 'header-desktop-link');
+
+      testHelper.simulateRouterLinkClick(link);
+    });
+
+    steps.push(function(mainElement) {
+      var page = reactTestUtils.scryRenderedDOMComponentsWithClass(mainElement, 'p-desktop');
+
+      expect(page.length).to.equal(1);
+      done();
+    });
+
+    testHelper.testPage('/prevent-double-click', steps);
   });
 });
