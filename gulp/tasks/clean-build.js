@@ -18,6 +18,10 @@ gulp.task('clean-build', 'Remove all build data and code in order to perform a b
     del('./.sass-cache', cb);
   }
 
+  function removeCoverageReport(cb) {
+    del('./coverage', cb);
+  }
+
   function myDone() {
     if(!fs.existsSync(process.cwd() + '/' + gulpConfig.buildPath)) {
       fs.mkdirSync(process.cwd() + '/' + gulpConfig.buildPath);
@@ -29,7 +33,8 @@ gulp.task('clean-build', 'Remove all build data and code in order to perform a b
   async.series([
     removeBuildMetaData,
     removeBuildCode,
-    removeSassCache
+    removeSassCache,
+    removeCoverageReport
   ], myDone);
 });
 

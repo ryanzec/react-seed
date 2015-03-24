@@ -2,6 +2,7 @@
 
 # master
 
+- updated gulp clean build task to remove coverage generated files
 - better support for testing react router based components
 - assets rewrite add `/build/` to path with configurable option to add `/static/[SHA]/`
 - added support for copying directory in copy static assets task
