@@ -13,6 +13,7 @@ var reactTestUtils = React.addons.TestUtils;
 var TestLocation = require('react-router/lib/locations/TestLocation');
 var fibers = require('fibers');
 var mockedData = require('../web/mocked-api/data/index');
+var mockedRequests = require('../web/mocked-api/requests/index');
 var Header = require('../web/app/components/core/header.component.jsx');
 
 //store the original state of all the stores
@@ -154,5 +155,56 @@ module.exports = {
       expect(linkProps.children).to.equal(expectedMenuData[key].display);
       expect(linkProps.className).to.equal(expectedMenuData[key].className);
     });
+  },
+
+  mockNockRequest: function(scope, resource, verb, key, options) {
+    var mockedRequestMetaData = mockedRequests[resource][verb][key];
+    var body = mockedRequestMetaData.requestPayload ? mockedRequestMetaData.requestPayload : undefined;
+    var mock = scope[verb](mockedRequestMetaData.url, body);
+    var replyHeaders;
+
+    if (mockedRequestMetaData.requestHeaders) {
+      _.forEach(mockedRequestMetaData.requestHeaders, function(value, header) {
+        mock.matchHeader(header, value);
+      });
+    }
+
+    if (options) {
+      if (options.responseHeaders) {
+        replyHeaders = options.responseHeaders;
+      }
+
+      if (options.times) {
+        mock.times(options.times);
+      }
+
+      if (options.delay) {
+        mock.delay = options.delay;
+      }
+    }
+
+    mock.reply(mockedRequestMetaData.httpCode, mockedRequestMetaData.response, replyHeaders);
+  },
+
+  scryRenderedDOMComponentsWithProp: function scryRenderedDOMComponentsWithProp(root, propName, propValue) {
+    return reactTestUtils.findAllInRenderedTree(root, function(inst) {
+      var instancePropValue = inst.props[propName];
+
+      return (
+        reactTestUtils.isDOMComponent(inst)
+        && instancePropValue
+        && (' ' + instancePropValue + ' ').indexOf(' ' + propValue + ' ') !== -1
+      );
+    });
+  },
+
+  findRenderedDOMComponentWithProp: function findRenderedDOMComponentWithProp(root, propName, propValue) {
+    var all = this.scryRenderedDOMComponentsWithProp(root, propName, propValue);
+
+    if (all.length !== 1) {
+      throw new Error('Did not find exactly one match (found: ' + all.length + ') for prop  ' + propName + ' : ' + propValue);
+    }
+
+    return all[0];
   }
 };

@@ -1,33 +1,24 @@
 var React = require('react/addons');
+var fibers = require('fibers');
+var nock = require('nock');
 var reactTestUtils = React.addons.TestUtils;
 var Desktop = require('../../../../web/app/components/desktop/desktop.component.jsx');
 var testHelper = require('../../../test-helper');
-var fibers = require('fibers');
 var userStore = require('../../../../web/app/stores/user.store');
-var bluebird = require('bluebird');
-var sinon = require('sinon');
+
+var scope = nock('http://localhost:80');
 
 var getDesktopPageComponent = function(mainElement) {
   return reactTestUtils.findRenderedComponentWithType(mainElement, Desktop);
 };
 
-var getUserStub;
-
 describe('desktop component', function() {
-  before(function() {
-    getUserStub = sinon.stub(userStore, 'getUser', function(userId) {
-      var defer = bluebird.defer();
-
-      if (userId === 123) {
-        defer.resolve(testHelper.mockedData.users['123']);
-      }
-
-      return defer.promise;
-    });
+  before(function(){
+    testHelper.mockNockRequest(scope, 'users', 'get', '123');
   });
 
   after(function() {
-    userStore.getUser.restore();
+    expect(scope.pendingMocks().length).to.equal(0);
   });
 
   beforeEach(function() {

@@ -1,31 +1,24 @@
 var React = require('react/addons');
+var _ = require('lodash');
+var nock = require('nock');
 var reactTestUtils = React.addons.TestUtils;
 var PreventDoubleClick = require('../../../../web/app/components/desktop/prevent-double-click.component.jsx');
 var testHelper = require('../../../test-helper');
-var _ = require('lodash');
-var sinon = require('sinon');
-var bluebird = require('bluebird');
 var userStore = require('../../../../web/app/stores/user.store');
+
+var scope = nock('http://localhost:80');
 
 var getPreventDoubleClickPageComponent = function(mainElement) {
   return reactTestUtils.findRenderedComponentWithType(mainElement, PreventDoubleClick);
 };
 
 describe('prevent double click page', function() {
-  before(function() {
-    sinon.stub(userStore, 'getUser', function(userId) {
-      var defer = bluebird.defer();
-
-      if (userId === 124) {
-        defer.resolve(testHelper.mockedData.users['124']);
-      }
-
-      return defer.promise;
-    });
+  before(function(){
+    testHelper.mockNockRequest(scope, 'users', 'get', '124');
   });
 
   after(function() {
-    userStore.getUser.restore();
+    expect(scope.pendingMocks().length).to.equal(0);
   });
 
   beforeEach(function() {

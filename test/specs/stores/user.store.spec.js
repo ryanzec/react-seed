@@ -1,21 +1,16 @@
+var nock = require('nock');
 var store = require('../../../web/app/stores/user.store');
 var testHelper = require('../../test-helper');
-var request = require('superagent');
-var sinon = require('sinon');
+
+var scope = nock('http://localhost:80');
 
 describe('user store', function() {
-  before(function() {
-    sinon.stub(request, 'get', function(url, callback) {
-      if (url === '/api/v1/users/123') {
-        callback({
-          body: testHelper.mockedData.users['123']
-        });
-      }
-    });
+  before(function(){
+    testHelper.mockNockRequest(scope, 'users', 'get', '123');
   });
 
   after(function() {
-    request.get.restore();
+    expect(scope.pendingMocks().length).to.equal(0);
   });
 
   it('should be able to get a user', function() {

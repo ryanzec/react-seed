@@ -1,5 +1,7 @@
 var backend = require('ryanzec-mocked-backend');
-var mockedData = require ('./data/index');
+var mockedRequests = require('./requests/index');
+var _ = require('lodash');
+
 var mockRequest = function mockRequest(options) {
   var extend = function extend(target, source) {
     var newObject = Object.create(target);
@@ -27,13 +29,25 @@ var mockRequest = function mockRequest(options) {
   .respond(responseHttpStatus, options.response, responseHeaders);
 };
 
-mockRequest({
-  url: '/api/v1/users/123',
-  response: mockedData.users['123']
+_.forEach(mockedRequests, function(resourceRequests, resourceName) {
+  _.forEach(resourceRequests, function(requests, httpVerb) {
+    _.forEach(requests, function(requestMetaData, requestKey) {
+      var mockRequestObject = {
+        method: httpVerb.toUpperCase(),
+        url: requestMetaData.url,
+        response: requestMetaData.response
+      };
+
+      if (requestMetaData.delay) {
+        mockRequestObject.delay = requestMetaData.delay;
+      }
+
+      if (requestMetaData.requestHeaders) {
+        mockRequestObject.requestHeaders = requestMetaData.requestHeaders;
+      }
+
+      mockRequest(mockRequestObject);
+    });
+  });
 });
 
-mockRequest({
-  url: '/api/v1/users/124',
-  delay: 1000,
-  response: mockedData.users['124']
-});

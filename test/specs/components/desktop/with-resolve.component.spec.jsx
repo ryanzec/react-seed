@@ -1,30 +1,25 @@
 var React = require('react/addons');
+var nock = require('nock');
 var reactTestUtils = React.addons.TestUtils;
 var WithResolves = require('../../../../web/app/components/desktop/with-resolves.component.jsx');
 var testHelper = require('../../../test-helper');
 var userStore = require('../../../../web/app/stores/user.store');
-var sinon = require('sinon');
-var bluebird = require('bluebird');
+
+var scope = nock('http://localhost:80');
 
 var getWithResolvesPageComponent = function(mainElement) {
   return reactTestUtils.findRenderedComponentWithType(mainElement, WithResolves);
 };
 
 describe('with resolves component', function(done) {
-  before(function() {
-    sinon.stub(userStore, 'getUser', function(userId) {
-      var defer = bluebird.defer();
-
-      if (userId === 124) {
-        defer.resolve(testHelper.mockedData.users['124']);
-      }
-
-      return defer.promise;
+  before(function(){
+    testHelper.mockNockRequest(scope, 'users', 'get', '124', {
+      times: 5
     });
   });
 
   after(function() {
-    userStore.getUser.restore();
+    expect(scope.pendingMocks().length).to.equal(0);
   });
 
   beforeEach(function() {
@@ -74,7 +69,7 @@ describe('with resolves component', function(done) {
   });
 
   it('should have link to with resolves page', function(done) {
-    testHelper.testPage('/prevent-double-click', function(mainElement) {
+    testHelper.testPage('/with-resolves', function(mainElement) {
       var link = reactTestUtils.scryRenderedDOMComponentsWithClass(mainElement, 'header-prevent-double-click-link');
 
       expect(link.length).to.equal(1);
@@ -98,6 +93,6 @@ describe('with resolves component', function(done) {
       done();
     });
 
-    testHelper.testPage('/prevent-double-click', steps);
+    testHelper.testPage('/with-resolves', steps);
   });
 });

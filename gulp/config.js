@@ -71,6 +71,8 @@ var gulpConfig = {
         name: 'object-assign'
       }, {
         name: 'schema-inspector'
+      }, {
+        name: 'jsuri'
       }]
     },
     bowerClean: [
