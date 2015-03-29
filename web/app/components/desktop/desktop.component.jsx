@@ -18,7 +18,7 @@ desktop.componentDidMount = function desktopComponentComponentDidMount() {
   });
 };
 
-desktop.onGetUser = function desktopComponentOnGetUser() {
+desktop.onClickGetUser = function desktopComponentOnClickGetUser() {
   userStore.getUser(123).then(function desktopComponentOnGetUserSuccess(user) {
     this.setState({
       user: user

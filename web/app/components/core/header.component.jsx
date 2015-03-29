@@ -12,18 +12,18 @@ header.getInitialState = function headerComponentGetInitialState() {
   };
 };
 
-header.onChange = function headerComponentOnChange() {
-  this.setState({
-    menu: menuStore.getMenu()
-  });
-};
-
 header.componentDidMount = function headerComponentComponentDidMount() {
   menuStore.on('activeMenuUpdated', this.onChange);
 };
 
 header.componentWillUnmount = function headerComponentComponentWillUnmount() {
   menuStore.removeListener('activeMenuUpdated', this.onChange);
+};
+
+header.onChange = function headerComponentOnChange() {
+  this.setState({
+    menu: menuStore.getMenu()
+  });
 };
 
 header.render = function headerComponentRender() {

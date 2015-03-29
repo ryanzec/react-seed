@@ -12,14 +12,6 @@ preventDoubleClick.getInitialState = function preventDoubleClickComponentGetInit
   };
 };
 
-preventDoubleClick.onClickPreventDoubleClick = function preventDoubleClickComponentOnClickPreventDoubleClick() {
-  if (applicationStore.getPreventDoubleClick() === false) {
-    applicationStore.enablePreventDoubleClick();
-  } else {
-    applicationStore.disablePreventDoubleClick();
-  }
-};
-
 preventDoubleClick.componentDidMount = function preventDoubleClickComponentComponentDidMount() {
   menuStore.update({
     menuName: 'preventDoubleClick'
@@ -29,6 +21,14 @@ preventDoubleClick.componentDidMount = function preventDoubleClickComponentCompo
 
 preventDoubleClick.componentWillUnmount = function preventDoubleClickComponentComponentWillUnmount() {
   applicationStore.removeListener('preventDoubleClickChanged', this.onPreventDoubleClickChanged);
+};
+
+preventDoubleClick.onClickPreventDoubleClick = function preventDoubleClickComponentOnClickPreventDoubleClick() {
+  if (applicationStore.getPreventDoubleClick() === false) {
+    applicationStore.enablePreventDoubleClick();
+  } else {
+    applicationStore.disablePreventDoubleClick();
+  }
 };
 
 preventDoubleClick.render = function preventDoubleClickComponentRender() {
