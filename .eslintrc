@@ -12,7 +12,8 @@
     "module": true,
     "setTimeout": true,
     "window": true,
-    "document": true
+    "document": true,
+    "alert": true
   },
   "rules": {
     //react
@@ -78,7 +79,7 @@
     "dot-notation": 2,
     "eqeqeq": 2,
     "guard-for-in": 2,
-    "no-alert": 0,
+    "no-alert": 1,
     "no-caller": 2,
     "no-div-regex": 2,
     "no-else-return": 2,
