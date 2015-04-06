@@ -56,8 +56,6 @@ var gulpConfig = {
       libraries: [{
         name: 'react/addons'
       }, {
-        name: 'react/lib/merge'
-      }, {
         name: 'lodash'
       }, {
         name: 'superagent'

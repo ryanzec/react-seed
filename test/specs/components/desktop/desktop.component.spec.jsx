@@ -35,6 +35,10 @@ describe('desktop component', function() {
         href: 'prevent-double-click',
         display: 'Prevent Double Click',
         className: 'header-prevent-double-click-link'
+      }, {
+        href: 'with-param',
+        display: 'With Param',
+        className: 'with-param-link'
       }]);
       done();
     });

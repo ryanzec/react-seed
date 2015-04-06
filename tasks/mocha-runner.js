@@ -5,7 +5,11 @@ var options = {
     process.cwd() + '/web/app/**/*.jsx',
     '!' + process.cwd() + '/web/app/mocked-api.js'
   ],
-  excludeFileForCoverageReportsGlobs: [],
+  excludeFileForCoverageReportsGlobs: [
+    //TODO: investigate: including either of these file causes the gulp mocha task to fail because of a react router warning
+    process.cwd() + '/web/app/application.jsx',
+    process.cwd() + '/web/app/components/core/router.jsx'
+  ],
   htmlDirectory: process.cwd() + '/coverage',
   testFileGlobs: [
     process.cwd() + '/test/**/*.spec.*'

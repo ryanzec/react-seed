@@ -31,9 +31,20 @@ header.render = function headerComponentRender() {
     <header>
       <ul>
         {this.state.menu.map(function headerComponentMapMenu(menuItem) {
+          var link;
+
+          if (menuItem.params) {
+            link = (
+              <Link className={menuItem.className} to={menuItem.href} params={menuItem.params}>{menuItem.display}</Link>
+            );
+          } else {
+            link = (
+              <Link className={menuItem.className} to={menuItem.href}>{menuItem.display}</Link>
+            );
+          }
           return (
             <li key={menuItem.href}>
-              <Link className={menuItem.className} to={menuItem.href}>{menuItem.display}</Link>
+              {link}
             </li>
           );
         })}

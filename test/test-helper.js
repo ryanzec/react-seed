@@ -45,13 +45,15 @@ module.exports = {
     var routes = require('../web/app/components/core/routes.jsx');
     var location = new TestLocation([initialPath]);
 
-    Router.run(routes, location, function (Handler) {
+    Router.run(routes, location, function (Handler, routerState) {
       var step = steps.shift();
 
       //TODO: research: not sure why or if I need this here (https://github.com/rackt/react-router/issues/991)
       this.unmountComponent(routerMainComponent);
 
-      routerMainComponent = React.render(React.createFactory(Handler)({}), div);
+      routerMainComponent = React.render(React.createFactory(Handler)({
+        routerState: routerState
+      }), div);
       step(routerMainComponent);
     }.bind(this));
   },

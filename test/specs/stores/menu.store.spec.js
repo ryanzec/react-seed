@@ -17,6 +17,13 @@ describe('menu data', function() {
         href: 'prevent-double-click',
         display: 'Prevent Double Click',
         className: 'header-prevent-double-click-link'
+      }, {
+        href: 'with-param',
+        display: 'With Param',
+        className: 'with-param-link',
+        params: {
+          p1: 123
+        }
       }],
       preventDoubleClick: [{
         href: 'desktop',
@@ -52,7 +59,14 @@ describe('menu data', function() {
       href: 'prevent-double-click',
       display: 'Prevent Double Click',
         className: 'header-prevent-double-click-link'
-    }]);
+    }, {
+        href: 'with-param',
+        display: 'With Param',
+        className: 'with-param-link',
+        params: {
+          p1: 123
+        }
+      }]);
   });
 
   it('update method', function() {

@@ -13,7 +13,7 @@ application.render = function applicationRender() {
   return (
     <div className="application">
       <Header />
-      <RouteHandler />
+      <RouteHandler routerState={this.props.routerState} />
     </div>
   );
 };

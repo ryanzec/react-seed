@@ -6,7 +6,7 @@ module.exports = storeGenerator({
   getUser: function userStoreGetUser(userId) {
     var defer = bluebird.defer();
 
-    request.get('/api/v1/users/' + userId, function userStoreGetUserSuccess(response) {
+    request.get('/api/v1/users/' + userId, function userStoreGetUserSuccess(err, response) {
       defer.resolve(response.body.data.users[0]);
     });
 
