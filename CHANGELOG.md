@@ -2,6 +2,7 @@
 
 # master
 
+- added mocked requests object to test helper
 - removed use of type type for spy test helper methods (#7)
 - updated react libraries
 

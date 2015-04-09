@@ -134,6 +134,8 @@ module.exports = {
 
   mockedData: mockedData,
 
+  mockedRequests: mockedRequests,
+
   simulateRouterLinkClick: function(linkComponent) {
     reactTestUtils.Simulate.click(linkComponent, {button: 0});
   },
