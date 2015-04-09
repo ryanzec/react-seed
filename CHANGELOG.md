@@ -1,5 +1,10 @@
 # Change Log
 
+# master
+
+- removed use of type type for spy test helper methods (#7)
+- updated react libraries
+
 # 0.9.0
 
 - refactored mocking solution on front-end to be a little more flexible

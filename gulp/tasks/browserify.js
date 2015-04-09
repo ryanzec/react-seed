@@ -8,20 +8,12 @@ var runSequence = require('run-sequence');
 var gutil = require('gulp-util');
 
 gulp.task('browserify', function(done) {
-  if (process.env.NODE_ENV === 'production') {
-    runSequence(
-      'browserify-libraries',
-      'browserify-application',
-      done
-    );
-  } else {
-    runSequence(
-      'browserify-libraries',
-      'browserify-application',
-      'browserify-mocks',
-      done
-    );
-  }
+  runSequence(
+    'browserify-libraries',
+    'browserify-application',
+    'browserify-mocks',
+    done
+  );
 });
 
 gulp.task('browserify-libraries', function(done) {

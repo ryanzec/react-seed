@@ -48,7 +48,7 @@ desktop.render = function desktopComponentRender() {
     <div className="p-desktop">
       <h1 id="test" className="test">{window.i18n['desktop/desktop'].header()}</h1>
       <div>
-        <button className="load-user-data" onClick={this.onGetUser}>Get User Data</button>
+        <button className="load-user-data" onClick={this.onClickGetUser}>Get User Data</button>
         {this.renderUserData()}
       </div>
     </div>

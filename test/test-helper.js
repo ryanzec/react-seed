@@ -124,12 +124,12 @@ module.exports = {
 
   getSpyForEventHandler: function(component, eventHandlerName) {
     //using weird syntax here to prevent issue with ReactJS auto binding of events
-    return sinon.spy(component.type.prototype.__reactAutoBindMap, eventHandlerName);
+    return sinon.spy(component.prototype.__reactAutoBindMap, eventHandlerName);
   },
 
   restoreEventHandler: function(component, eventHandlerName) {
     //using weird syntax here to prevent issue with ReactJS auto binding of events
-    component.type.prototype.__reactAutoBindMap[eventHandlerName].restore();
+    component.prototype.__reactAutoBindMap[eventHandlerName].restore();
   },
 
   mockedData: mockedData,
