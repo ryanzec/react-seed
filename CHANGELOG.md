@@ -1,6 +1,6 @@
 # Change Log
 
-# master
+# 0.10.0
 
 - a bit of overall refactoring
 - set eslint no-process-env to 0 (#12)
