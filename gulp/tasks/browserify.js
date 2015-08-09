@@ -11,7 +11,8 @@ gulp.task('browserify', function(done) {
   runSequence(
     'browserify-libraries',
     'browserify-application',
-    'browserify-mocks',
+    'browserify-mocked-api',
+    'browserify-mocked-local-storage',
     done
   );
 });
@@ -106,11 +107,54 @@ gulp.task('browserify-application', function(done) {
   }));
 });
 
-gulp.task('browserify-mocks', function(done) {
+gulp.task('browserify-mocked-local-storage', function(done) {
+  var count = 1;
+
+  var mockedLocalStorage = browserify();
+
+  gulpConfig.tasks.browserify.transformers.forEach(function(transform) {
+    mockedLocalStorage.transform(transform);
+  });
+
+  gulpConfig.tasks.browserify.libraries.forEach(function(metaData) {
+    mockedLocalStorage.external(metaData.name);
+  });
+
+  mockedLocalStorage.add(process.cwd() + '/web/app/mock/local-storage.js');
+
+  var mockedLocalStorageStream = mockedLocalStorage.bundle()
+  .on('error', function(err){
+    var message;
+
+    if(err.description)
+      message = 'browserify error: ' + err.description + ' when parsing ' + err.fileName + ' | Line ' + err.lineNumber + ', Column ' + err.column;
+    else {
+      message = err.message;
+    }
+
+    gutil.log(gutil.colors.red(message));
+
+    this.emit('end');
+  })
+  .pipe(source('mocked-local-storage.js'));
+
+  mockedLocalStorageStream.pipe(gulp.dest(gulpConfig.buildPath))
+  .pipe(through.obj(function(file, encoding, cb) {
+    count -= 1;
+
+    if(count == 0) {
+      done();
+    }
+
+    cb(null, file);
+  }));
+})
+
+gulp.task('browserify-mocked-api', function(done) {
   var count = 1;
   var mocked = browserify();
 
-  mocked.add(process.cwd() + '/web/mocked-api/mocked-api.js');
+  mocked.add(process.cwd() + '/web/app/mock/api.js');
 
   var mockedStream = mocked.bundle()
   .on('error', function(err){
@@ -126,7 +170,7 @@ gulp.task('browserify-mocks', function(done) {
 
     this.emit('end');
   })
-  .pipe(source('mocked.js'));
+  .pipe(source('mocked-api.js'));
 
   mockedStream.pipe(gulp.dest(gulpConfig.buildPath))
   .pipe(through.obj(function(file, encoding, cb) {

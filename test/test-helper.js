@@ -12,9 +12,10 @@ var React = require('react/addons');
 var reactTestUtils = React.addons.TestUtils;
 var TestLocation = require('react-router/lib/locations/TestLocation');
 var fibers = require('fibers');
-var mockedData = require('../web/mocked-api/data/index');
-var mockedRequests = require('../web/mocked-api/requests/index');
-var Header = require('../web/app/components/core/header.component.jsx');
+var mockedData = require('../web/app/mock/data/index');
+var mockedRequests = require('../web/app/mock/requests/index');
+var applicationReact = require('../web/app/react/index');
+var Header = applicationReact.components.Header;
 
 //store the original state of all the stores
 _.forEach(storeLocations, function(path, storeName) {
@@ -32,37 +33,6 @@ module.exports = {
       //reset all the initial store properties
       store._cachedData = _.clone(initialStoresCachedData[storeName], true);
     });
-  },
-
-  testPage: function(initialPath, steps) {
-    if (!_.isArray(steps)) {
-      steps = [steps];
-    };
-
-    var component;
-    var routerMainComponent;
-    var div = document.createElement('div');
-    var routes = require('../web/app/components/core/routes.jsx');
-    var location = new TestLocation([initialPath]);
-
-    Router.run(routes, location, function (Handler, routerState) {
-      var step = steps.shift();
-
-      //TODO: research: not sure why or if I need this here (https://github.com/rackt/react-router/issues/991)
-      this.unmountComponent(routerMainComponent);
-
-      routerMainComponent = React.render(React.createFactory(Handler)({
-        routerState: routerState
-      }), div);
-      step(routerMainComponent);
-    }.bind(this));
-  },
-
-  unmountComponent: function(component) {
-    if(component && component.isMounted()) {
-      //console.log('unmounted: ' + component.constructor.displayName);
-      React.unmountComponentAtNode(component.getDOMNode().parentNode);
-    }
   },
 
   createNativeClickEvent: function() {
@@ -136,31 +106,6 @@ module.exports = {
 
   mockedRequests: mockedRequests,
 
-  simulateRouterLinkClick: function(linkComponent) {
-    reactTestUtils.Simulate.click(linkComponent, {button: 0});
-  },
-
-  //TODO: remove: this is specific to the menu setup that is in place so either remove this method (if you are using a different menu system) or remove this
-  //TODO: remove: comment if you are using the provided menu system
-  testMenu: function(mainElement, expectedMenuData) {
-    var headerComponent = reactTestUtils.findRenderedComponentWithType(mainElement, Header);
-    var ulElement = reactTestUtils.findRenderedDOMComponentWithTag(headerComponent, 'ul');
-
-    expect(ulElement).to.be.defined;
-
-    liElements = reactTestUtils.scryRenderedDOMComponentsWithTag(ulElement, 'li');
-
-    expect(liElements.length).to.equal(expectedMenuData.length);
-
-    _.forEach(liElements, function(liElement, key) {
-      var linkProps = reactTestUtils.findRenderedComponentWithType(liElement, Link).props;
-
-      expect(linkProps.to).to.equal(expectedMenuData[key].href);
-      expect(linkProps.children).to.equal(expectedMenuData[key].display);
-      expect(linkProps.className).to.equal(expectedMenuData[key].className);
-    });
-  },
-
   mockNockRequest: function(scope, resource, verb, key, options) {
     var mockedRequestMetaData = mockedRequests[resource][verb][key];
     var body = mockedRequestMetaData.requestPayload ? mockedRequestMetaData.requestPayload : undefined;
@@ -188,27 +133,5 @@ module.exports = {
     }
 
     mock.reply(mockedRequestMetaData.httpCode, mockedRequestMetaData.response, replyHeaders);
-  },
-
-  scryRenderedDOMComponentsWithProp: function scryRenderedDOMComponentsWithProp(root, propName, propValue) {
-    return reactTestUtils.findAllInRenderedTree(root, function(inst) {
-      var instancePropValue = inst.props[propName];
-
-      return (
-        reactTestUtils.isDOMComponent(inst)
-        && instancePropValue
-        && (' ' + instancePropValue + ' ').indexOf(' ' + propValue + ' ') !== -1
-      );
-    });
-  },
-
-  findRenderedDOMComponentWithProp: function findRenderedDOMComponentWithProp(root, propName, propValue) {
-    var all = this.scryRenderedDOMComponentsWithProp(root, propName, propValue);
-
-    if (all.length !== 1) {
-      throw new Error('Did not find exactly one match (found: ' + all.length + ') for prop  ' + propName + ' : ' + propValue);
-    }
-
-    return all[0];
   }
 };

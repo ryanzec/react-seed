@@ -46,6 +46,14 @@ gulp.task('build-clean', "Perform a clean build", function(done) {
   );
 });
 
+gulp.task('build-clean-full', "Perform a clean build", function(done) {
+  runSequence(
+    'clean-build',
+    'build-full',
+    done
+  );
+});
+
 gulp.task('build-clean-quick', "Perform a clean build", function(done) {
   runSequence(
     'clean-build',

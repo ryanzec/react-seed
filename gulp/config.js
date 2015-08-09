@@ -23,8 +23,7 @@ var gulpConfig = {
     assetsRewrite: {
       fileTypesToRewrite: ['svg', 'eot', 'ttf', 'woff', 'png', 'gif', 'jpeg', 'jpg', 'js', 'css', 'map', 'html'],
       fileTypesToProcess: ['html', 'css', 'js'],
-      assetPaths: ['app', 'components', 'build'],
-      prependSlash: true,
+      assetPaths: ['app', 'components', 'build', 'svg'],
       addStatic: false,
       domains: [],
       noBuildVersion: [],
@@ -46,7 +45,9 @@ var gulpConfig = {
       manualGlobs: [
         'web/locale/**/*.js'
       ],
-      manualAssets: {}
+      manualAssets: {
+        'web/app/misc/ua-parser.js': 'web/build/app/misc/ua-parser.js'
+      }
     },
     browserify: {
       transformers: [
@@ -71,6 +72,8 @@ var gulpConfig = {
         name: 'schema-inspector'
       }, {
         name: 'jsuri'
+      }, {
+        name: 'store-cacheable'
       }]
     },
     bowerClean: [

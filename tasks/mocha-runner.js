@@ -1,14 +1,18 @@
 //NOTE: Coverage reports for .jsx files will work on the compiled version of the code
 var options = {
   filesForCoverageReportsGlobs: [
-    process.cwd() + '/web/app/**/*.js',
-    process.cwd() + '/web/app/**/*.jsx',
-    '!' + process.cwd() + '/web/app/mocked-api.js'
+    process.cwd() + '/web/app/stores/**/*.js',
+    process.cwd() + '/web/app/stores/**/*.jsx',
+    process.cwd() + '/web/app/misc/**/*.js',
+    process.cwd() + '/web/app/misc/**/*.jsx',
+    process.cwd() + '/web/app/schemas/**/*.js',
+    '!' + process.cwd() + '/web/app/mock/**/*.js',
+    '!' + process.cwd() + '/web/app/misc/ua-parser.js'
   ],
   excludeFileForCoverageReportsGlobs: [
     //TODO: investigate: including either of these file causes the gulp mocha task to fail because of a react router warning
     process.cwd() + '/web/app/application.jsx',
-    process.cwd() + '/web/app/components/core/router.jsx'
+    process.cwd() + '/web/app/router.jsx'
   ],
   htmlDirectory: process.cwd() + '/coverage',
   testFileGlobs: [

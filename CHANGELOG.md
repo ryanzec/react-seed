@@ -2,15 +2,13 @@
 
 # master
 
-- added mocked requests object to test helper
-- removed use of type type for spy test helper methods (#7)
-- updated react libraries
-
-# master
-
+- a bit of overall refactoring
 - set eslint no-process-env to 0 (#12)
 - added class list shim for tests (#9)
 - added ua parser (#5)
+- added mocked requests object to test helper
+- removed use of type type for spy test helper methods (#7)
+- updated react libraries
 
 # 0.9.0
 

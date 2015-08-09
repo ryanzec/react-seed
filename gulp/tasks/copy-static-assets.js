@@ -11,7 +11,7 @@ var globArray = require('glob-array');
 var wrench = require('wrench');
 
 gulp.task('copy-static-assets', 'Copy static assets to the build folder', function(done) {
-  var buildMetaData = buildMetaDataFactory.create(process.cwd() + '/gulp/build-meta-data/static-assets.json');
+  var buildMetaData = buildMetaDataFactory.create(process.cwd() + '/gulp/build-meta-data/copy-static-assets.json');
   var assets = [];
 
   _.forEach(config.manualDirectories, function(to, from) {

@@ -2,8 +2,8 @@ var React = require('react/addons');
 var Header = require('./header.component.jsx');
 var RouteHandler = require('react-router').RouteHandler;
 
-//TODO: remove: for testing assets rewrit eprocess
-var removeMe = '/app/components/core/remove-me.svg#icon-small';
+//TODO: remove: for testing assets rewrite process
+var removeMe = '/app/svg/remove-me.svg#icon-small';
 
 var application = {};
 

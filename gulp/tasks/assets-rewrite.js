@@ -31,14 +31,15 @@ gulp.task('assets-rewrite', 'Rewrite asset urls', function(done) {
     }));
     var sha = shasum.digest('hex');
     var assetParts = asset.split('/');
-    var spliceStart = 0;
 
     if(config.addStatic === true) {
-      assetParts.splice(spliceStart, 0, 'static', sha);
+      assetParts.splice(0, 0, 'static', sha);
     }
 
-    if(assetParts[0] !== gulpConfig.buildDirectoryName && config.noBuildVersion.indexOf(asset) === -1) {
-      assetParts.splice(spliceStart, 0, gulpConfig.buildDirectoryName);
+    var buildIndex = (config.addStatic === true ? 2 : 0);
+
+    if(assetParts[buildIndex] !== gulpConfig.buildDirectoryName && config.noBuildVersion.indexOf(asset) === -1) {
+      assetParts.splice(buildIndex, 0, gulpConfig.buildDirectoryName);
     }
 
     return assetParts.join('/');
@@ -88,7 +89,6 @@ gulp.task('assets-rewrite', 'Rewrite asset urls', function(done) {
       } else {
         var fileContents = String(file.contents);
         var regex = new RegExp("[\"']((http[s]?:)?//[a-zA-Z0-9-_.]*\\.[a-zA-Z0-9-_]*\\.[a-zA-Z0-9-_]{2,6})?/?(((static/[0-9a-zA-Z]*/)+)?((" + config.assetPaths.join('|') + ")/[a-zA-Z0-9-_./]+\\.(" + config.fileTypesToRewrite.join('|') + ")))(#)?([0-9a-zA-Z-_]*)?[\"']", 'g');
-
         var noMatches = false;
         var match;
         var assetMatches = [];
@@ -100,7 +100,7 @@ gulp.task('assets-rewrite', 'Rewrite asset urls', function(done) {
             noMatches = true;
           } else {
             var matchObject = {};
-            matchObject[match[0]] = match[6];
+            matchObject[match[6]] = match[6];
             assetMatches.push(matchObject);
           }
         } while(noMatches === false);
@@ -120,11 +120,7 @@ gulp.task('assets-rewrite', 'Rewrite asset urls', function(done) {
               } else {
                 currentDomainKey += 1;
               }
-            } else if(config.prependSlash === true) {
-              rewrittenPath = '/' + rewrittenPath;
             }
-
-            rewrittenPath = '"' + rewrittenPath + '"';
 
             gutil.log(gutil.colors.cyan(toReplace + ' => ' + rewrittenPath));
 
