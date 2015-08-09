@@ -1,5 +1,9 @@
 # Change Log
 
+# master
+
+- added different mounting point for react
+
 # 0.10.0
 
 - a bit of overall refactoring
