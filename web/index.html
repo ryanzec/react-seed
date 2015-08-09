@@ -9,7 +9,16 @@
     <link type="text/css" rel="stylesheet" href="/build/main.css">
   </head>
   <body>
+
     <!-- comment this script out to remove mocked backend | when building production code -->
+    <script type="text/javascript" src="/app/misc/ua-parser.js"></script>
+    <script type="text/javascript">
+      window.userAgentDetails = new UAParser();
+
+      if(window.userAgentDetails.getOS().name === 'iOS') {
+        document.querySelector('body').style.cursor = 'pointer';
+      }
+    </script>
     <script type="text/javascript" src="/build/mocked.js"></script>
     <script type="text/javascript" src="/locale/en/i18n.js"></script>
     <script type="text/javascript" src="/build/libraries.js"></script>

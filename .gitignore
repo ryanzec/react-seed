@@ -9,3 +9,4 @@
 /gulp/build-meta-data/*
 /web/build/*
 npm-debug.log
+/web/local-server

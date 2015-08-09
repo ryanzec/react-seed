@@ -7,6 +7,8 @@ global.navigator = {
  userAgent: 'node.js'
 };
 
+require('./class-list-shim.js');
+
 //setup testing tools
 global.chai = require('chai');
 global.expect = chai.expect;
@@ -19,4 +21,3 @@ chai.config.includeStack = true;
 
 //need the i18n object when testing
 global.window.i18n = require('./i18n-node.js');
-
