@@ -5,17 +5,8 @@ var storeLocations = {
   User: '../web/app/stores/user.store'
 };
 var initialStoresCachedData = {};
-var Router = require('react-router');
-var Link = Router.Link;
-var Route = Router.Route;
-var React = require('react/addons');
-var reactTestUtils = React.addons.TestUtils;
-var TestLocation = require('react-router/lib/locations/TestLocation');
-var fibers = require('fibers');
 var mockedData = require('../web/app/mock/data/index');
 var mockedRequests = require('../web/app/mock/requests/index');
-var applicationReact = require('../web/app/react/index');
-var Header = applicationReact.components.Header;
 
 //store the original state of all the stores
 _.forEach(storeLocations, function(path, storeName) {
@@ -61,16 +52,6 @@ module.exports = {
 
   noop: function() {},
 
-  sleep: function(ms) {
-    var fiber = fibers.current;
-
-    setTimeout(function() {
-      fiber.run();
-    }, ms);
-
-    fibers.yield();
-  },
-
   keyCodes: {
     BACKSPACE: 8,
     TAB: 9,
@@ -90,16 +71,6 @@ module.exports = {
     SHIFT: 16,
     CTRL: 17,
     ALT: 18
-  },
-
-  getSpyForEventHandler: function(component, eventHandlerName) {
-    //using weird syntax here to prevent issue with ReactJS auto binding of events
-    return sinon.spy(component.prototype.__reactAutoBindMap, eventHandlerName);
-  },
-
-  restoreEventHandler: function(component, eventHandlerName) {
-    //using weird syntax here to prevent issue with ReactJS auto binding of events
-    component.prototype.__reactAutoBindMap[eventHandlerName].restore();
   },
 
   mockedData: mockedData,

@@ -1,44 +1,31 @@
-var React = require('react/addons');
-var menuStore = require('../../stores/menu.store');
-var userStore = require('../../stores/user.store');
+var React = require('react');
+var reactRedux = require('react-redux');
+var actions = require('../../store/actions');
 
 var preLoadedData = {};
 var withResolves = {};
 
 withResolves.displayName = 'WithResolves';
 
-withResolves.statics = {
-  willTransitionTo: function withResolvesComponentWillTransitionTo(transition, params, query, callback) {
-    userStore.getUser(124).then(function withResolvesComponentWillTransitionToSuccess(user) {
-      preLoadedData.user = user;
-      callback();
-    });
-  }
-};
-
-withResolves.getInitialState = function desktopComponentGetInitialState() {
-  return {
-    user: preLoadedData.user
-  };
+withResolves.contextTypes = {
+  store: React.PropTypes.object
 };
 
 withResolves.componentDidMount = function withResolvesComponentComponentDidMount() {
-  menuStore.update({
-    menuName: 'desktop'
-  });
+  this.context.store.dispatch(actions.menu.setActive('desktop'));
 };
 
 withResolves.renderUserData = function desktopComponentRenderUserData() {
   var userData = null;
 
   /*istanbul ignore else*/
-  if (this.state.user) {
+  if (this.props.user) {
     userData = (
       <ul>
-        <li className="user-id">{this.state.user.id}</li>
-        <li className="user-username">{this.state.user.username}</li>
-        <li className="user-first-name">{this.state.user.firstName}</li>
-        <li className="user-last-name">{this.state.user.lastName}</li>
+        <li className="user-id">{this.props.user.id}</li>
+        <li className="user-username">{this.props.user.username}</li>
+        <li className="user-first-name">{this.props.user.firstName}</li>
+        <li className="user-last-name">{this.props.user.lastName}</li>
       </ul>
     );
   }
@@ -55,4 +42,10 @@ withResolves.render = function withResolvesComponentRender() {
   );
 };
 
-module.exports = React.createClass(withResolves);
+var mapStateToProps = function(state) {
+  return {
+    user: state.users.getIn(['activeUser']) ? state.users.getIn(['activeUser']).toJS() : null
+  };
+};
+
+module.exports = reactRedux.connect(mapStateToProps)(React.createClass(withResolves));

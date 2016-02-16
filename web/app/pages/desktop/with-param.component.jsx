@@ -1,24 +1,33 @@
-var React = require('react/addons');
-var menuStore = require('../../stores/menu.store');
+var React = require('react');
+var reactRedux = require('react-redux');
+var actions = require('../../store/actions');
 
 var withParam = {};
 
 withParam.displayName = 'RouteParam';
 
+withParam.contextTypes = {
+  store: React.PropTypes.object
+};
+
 withParam.componentDidMount = function withParamComponentComponentDidMount() {
-  menuStore.update({
-    menuName: 'desktop'
-  });
+  this.context.store.dispatch(actions.menu.setActive('desktop'));
 };
 
 withParam.render = function withParamComponentRender() {
   return (
     <div className="p-with-param">
       <div>
-        Param: <span className="param-value">{this.props.routerState.params.p1}</span>
+        Param: <span className="param-value">{this.props.p1}</span>
       </div>
     </div>
   );
 };
 
-module.exports = React.createClass(withParam);
+var mapStateToProps = function(state, ownProps) {
+  return {
+    p1: ownProps.params.p1
+  };
+};
+
+module.exports = reactRedux.connect(mapStateToProps)(React.createClass(withParam));

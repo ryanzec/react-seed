@@ -1,0 +1,40 @@
+#!/usr/bin/env node
+var helpers = require('./helpers');
+var fs = require('fs');
+var mkdirp = require('mkdirp');
+
+var nodeLanguage = 'en';
+var languages = [
+  'en'
+];
+
+if(!fs.existsSync('./web/build/locale')) {
+  mkdirp.sync('./web/build/locale');
+}
+
+helpers.childProcess('./node_modules/.bin/messageformat', [
+  '--locale',
+  nodeLanguage,
+  '--module',
+  'web/locale/' + nodeLanguage,
+  '--output',
+  'test/i18n-node.js'
+], function(error, stdout, stderr) {
+  if(stderr) {
+    console.log(stderr);
+  }
+});
+
+languages.forEach(function(language) {
+  helpers.childProcess('./node_modules/.bin/messageformat', [
+    '--locale',
+    language,
+    'web/locale/' + language,
+    '--output',
+    'web/build/locale/' + language + '-i18n.js'
+  ], function(error, stdout, stderr) {
+    if(stderr) {
+      console.log(stderr);
+    }
+  });
+});

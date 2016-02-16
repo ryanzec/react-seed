@@ -7,11 +7,12 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <link type="text/css" rel="stylesheet" href="/build/main.css">
+    <base href="/" />
   </head>
   <body>
     <div class="react-bootstrap-element"></div>
     <div>SOME RANDOM CONTENT</div>
-    <script type="text/javascript" src="/app/misc/ua-parser.js"></script>
+    <script type="text/javascript" src="/build/misc/ua-parser.js"></script>
     <script type="text/javascript">
       window.userAgentDetails = new UAParser();
 
@@ -19,9 +20,10 @@
         document.querySelector('body').style.cursor = 'pointer';
       }
     </script>
+    <script type="text/javascript" src="/build/locale/en-i18n.js"></script>
+    <script type="text/javascript" src="/build/libraries-core.js"></script>
     <script type="text/javascript" src="/build/mocked-api.js"></script>
-    <script type="text/javascript" src="/locale/en/i18n.js"></script>
-    <script type="text/javascript" src="/build/libraries.js"></script>
+    <script type="text/javascript" src="/build/libraries-react.js"></script>
     <script type="text/javascript" src="/build/mocked-local-storage.js"></script>
     <script type="text/javascript" src="/build/application.js"></script>
   </body>

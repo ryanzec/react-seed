@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 var options = {
   fileGlobs: [
     process.cwd() + '/web/app/**/*.js',

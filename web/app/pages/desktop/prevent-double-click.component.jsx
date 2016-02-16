@@ -1,33 +1,24 @@
-var React = require('react/addons');
-var applicationStore = require('../../stores/application.store');
-var menuStore = require('../../stores/menu.store');
+var React = require('react');
+var reactRedux = require('react-redux');
+var actions = require('../../store/actions');
 
 var preventDoubleClick = {};
 
 preventDoubleClick.displayName = 'PreventDoubleClick';
 
-preventDoubleClick.getInitialState = function preventDoubleClickComponentGetInitialState() {
-  return {
-    preventDoubleClick: applicationStore.getPreventDoubleClick()
-  };
+preventDoubleClick.contextTypes = {
+  store: React.PropTypes.object
 };
 
 preventDoubleClick.componentDidMount = function preventDoubleClickComponentComponentDidMount() {
-  menuStore.update({
-    menuName: 'preventDoubleClick'
-  });
-  applicationStore.on('preventDoubleClickChanged', this.onPreventDoubleClickChanged);
-};
-
-preventDoubleClick.componentWillUnmount = function preventDoubleClickComponentComponentWillUnmount() {
-  applicationStore.removeListener('preventDoubleClickChanged', this.onPreventDoubleClickChanged);
+  this.context.store.dispatch(actions.menu.setActive('preventDoubleClick'));
 };
 
 preventDoubleClick.onClickPreventDoubleClick = function preventDoubleClickComponentOnClickPreventDoubleClick() {
-  if (applicationStore.getPreventDoubleClick() === false) {
-    applicationStore.enablePreventDoubleClick();
+  if (this.props.preventDoubleClick === false) {
+    this.context.store.dispatch(actions.preventDoubleClick.enable());
   } else {
-    applicationStore.disablePreventDoubleClick();
+    this.context.store.dispatch(actions.preventDoubleClick.disable());
   }
 };
 
@@ -36,17 +27,17 @@ preventDoubleClick.render = function preventDoubleClickComponentRender() {
     <div className="p-prevent-double-click">
       <h1 id="test" className="test">{window.i18n['desktop/prevent-double-click'].header()}</h1>
       <div>
-        <button disabled={this.state.preventDoubleClick}>{window.i18n['desktop/prevent-double-click'].button1()}</button>
+        <button disabled={this.props.preventDoubleClick}>{window.i18n['desktop/prevent-double-click'].button1()}</button>
         <button onClick={this.onClickPreventDoubleClick}>{window.i18n['desktop/prevent-double-click'].button2()}</button>
       </div>
     </div>
   );
 };
 
-preventDoubleClick.onPreventDoubleClickChanged = function preventDoubleClickComponentOnPreventDoubleClickChanged() {
-  this.setState({
-    preventDoubleClick: applicationStore.getPreventDoubleClick()
-  });
+var mapStateToProps = function(state) {
+  return {
+    preventDoubleClick: state.preventDoubleClick
+  };
 };
 
-module.exports = React.createClass(preventDoubleClick);
+module.exports = reactRedux.connect(mapStateToProps)(React.createClass(preventDoubleClick));

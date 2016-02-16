@@ -1,36 +1,16 @@
-var React = require('react/addons');
-var menuStore = require('../../stores/menu.store');
+var React = require('react');
+var reactRedux = require('react-redux');
 var Link = require('react-router').Link;
 
 var header = {};
 
 header.displayName = 'Header';
 
-header.getInitialState = function headerComponentGetInitialState() {
-  return {
-    menu: menuStore.getMenu()
-  };
-};
-
-header.componentDidMount = function headerComponentComponentDidMount() {
-  menuStore.on('activeMenuUpdated', this.onChange);
-};
-
-header.componentWillUnmount = function headerComponentComponentWillUnmount() {
-  menuStore.removeListener('activeMenuUpdated', this.onChange);
-};
-
-header.onChange = function headerComponentOnChange() {
-  this.setState({
-    menu: menuStore.getMenu()
-  });
-};
-
 header.render = function headerComponentRender() {
   return (
     <header>
       <ul>
-        {this.state.menu.map(function headerComponentMapMenu(menuItem) {
+        {this.props.menu.map(function headerComponentMapMenu(menuItem) {
           var link;
 
           if (menuItem.params) {
@@ -53,4 +33,10 @@ header.render = function headerComponentRender() {
   );
 };
 
-module.exports = React.createClass(header);
+var mapStateToProps = function(state) {
+  return {
+    menu: state.menu
+  };
+};
+
+module.exports = reactRedux.connect(mapStateToProps)(React.createClass(header));
