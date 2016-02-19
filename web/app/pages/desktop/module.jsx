@@ -1,14 +1,15 @@
-var React = require('react');
-var Router = require('react-router');
-var Route = Router.Route;
+import * as React from 'react';
+import {Route} from 'react-router';
 
-var Desktop = require('./desktop.component.jsx');
-var PreventDoubleClick = require('./prevent-double-click.component.jsx');
-var WithResolves = require('./with-resolves.component.jsx');
-var WithParam = require('./with-param.component.jsx');
+import Desktop from './desktop.component.jsx';
+import PreventDoubleClick from './prevent-double-click.component.jsx';
+import WithResolves from './with-resolves.component.jsx';
+import WithParam from './with-param.component.jsx';
 
-var withResolvesHooks = require('./with-resolves.hooks');
-var desktopHooks = require('./desktop.hooks');
+import {
+  desktop as desktopHooks,
+  withResolves as withResolvesHooks
+} from './router.hooks';
 
 module.exports = {
   routes: [

@@ -1,25 +1,25 @@
-var backend = require('ryanzec-mocked-backend');
-var mockedRequests = require('./requests/index');
-var _ = require('lodash');
+import * as backend from 'ryanzec-mocked-backend';
+import * as mockedRequests from './requests/index';
+import * as _ from 'lodash';
 
-var mockRequest = function mockRequest(options) {
-  var extend = function extend(target, source) {
-    var newObject = Object.create(target);
+let mockRequest = (options) => {
+  let extend = (target, source) => {
+    let newObject = Object.create(target);
 
-    Object.keys(source).map(function (prop) {
+    Object.keys(source).map((prop) => {
       prop in newObject && (newObject[prop] = source[prop]);
     });
 
     return newObject;
   };
 
-  var method = options.method || 'GET';
-  var url = options.url;
-  var delay = options.delay || 0;
-  var responseHeaders = extend({
+  let method = options.method || 'GET';
+  let url = options.url;
+  let delay = options.delay || 0;
+  let responseHeaders = extend({
     'content-type': 'application/json'
   }, options.responseHeaders || {});
-  var responseHttpStatus = options.responseHttpStatus || 200;
+  let responseHttpStatus = options.responseHttpStatus || 200;
 
   backend
   .when(method, options.url, options.requestPayload, options.requestHeaders)
@@ -29,10 +29,10 @@ var mockRequest = function mockRequest(options) {
   .respond(responseHttpStatus, options.response, responseHeaders);
 };
 
-_.forEach(mockedRequests, function(resourceRequests, resourceName) {
-  _.forEach(resourceRequests, function(requests, httpVerb) {
-    _.forEach(requests, function(requestMetaData, requestKey) {
-      var mockRequestObject = {
+_.forEach(mockedRequests, (resourceRequests, resourceName) => {
+  _.forEach(resourceRequests, (requests, httpVerb) => {
+    _.forEach(requests, (requestMetaData, requestKey) => {
+      let mockRequestObject = {
         method: httpVerb.toUpperCase(),
         url: requestMetaData.url,
         response: requestMetaData.response

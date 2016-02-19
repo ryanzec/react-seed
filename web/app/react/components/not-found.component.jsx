@@ -1,11 +1,15 @@
-var React = require('react');
+import * as React from 'react';
 
-var notFound = {};
+class NotFound extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-notFound.displayName = 'NotFound';
+  render() {
+    return <h1>Not Found</h1>;
+  }
+}
 
-notFound.render = function notFoundComponentRender() {
-  return <h1>Not Found</h1>;
-};
+NotFound.displayName = 'NotFound';
 
-module.exports = React.createClass(notFound);
+module.exports = NotFound;

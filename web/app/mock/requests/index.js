@@ -1,3 +1,5 @@
+import * as users from './users';
+
 module.exports = {
-  users: require('./users')
+  users
 };

@@ -1,2 +1,4 @@
-web/app/mocked-api.js
+web/app/mock/*
+
+#third party libraries
 web/app/misc/ua-parser.js

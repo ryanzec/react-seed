@@ -1,26 +1,28 @@
-var React = require('react');
-var reactRouter = require('react-router');
-var applicationReact = require('./react/index');
-var reactRedux = require('react-redux');
-var reactRouterRedux = require('react-router-redux');
-var store = require('./store/store');
+import * as React from 'react';
+import {
+  browserHistory,
+  IndexRoute,
+  Route,
+  Router
+} from 'react-router';
+import {Provider} from 'react-redux';
+import {syncHistoryWithStore} from 'react-router-redux';
+import * as store from './store/store';
+import {
+  Application,
+  NotFound
+} from './react/components';
+import Desktop from './pages/desktop/desktop.component.jsx';
+import {routes as desktopRoutes} from './pages/desktop/module.jsx';
 
-var history = reactRouterRedux.syncHistoryWithStore(reactRouter.browserHistory, store);
-
-var Application = applicationReact.components.Application;
-var Desktop = require('./pages/desktop/desktop.component.jsx');
-var IndexRoute = reactRouter.IndexRoute;
-var NotFound = applicationReact.components.NotFound;
-var Provider = reactRedux.Provider;
-var Route = reactRouter.Route;
-var Router = reactRouter.Router;
+let history = syncHistoryWithStore(browserHistory, store);
 
 module.exports = (
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={Application}>
         <IndexRoute component={Desktop} />
-        {require('./pages/desktop/module.jsx').routes}
+        {desktopRoutes}
         <Route path="*" component={NotFound} />
       </Route>
     </Router>

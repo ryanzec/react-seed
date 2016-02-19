@@ -1,4 +1,5 @@
 {
+  "parser": "babel-eslint",
   "plugins": [
     "react"
   ],
@@ -14,9 +15,12 @@
     "window": true,
     "document": true,
     "console": true,
-    "confirm": true
+    "confirm": true,
+    "_": true
   },
   "rules": {
+    //babel
+    //"strict": 0,
     //react
     "react/display-name": 2,
     //TODO: enforcing the double quotes for some reason is not working
@@ -31,7 +35,12 @@
     "react/no-did-mount-set-state": 0,
     "react/no-did-update-set-state": 0,
     "react/no-multi-comp":2,
-    "react/prop-types": 2,
+    "react/prop-types": [
+      2,
+      {
+        ignore: ['children']
+      }
+    ],
     "react/react-in-jsx-scope": 0,
     "react/self-closing-comp": 2,
     "react/wrap-multilines": 2,
@@ -52,7 +61,7 @@
     "no-dupe-args": 2,
     "no-dupe-keys": 2,
     "no-empty": 2,
-    "no-empty-class": 2,
+    "no-empty-character-class": 2,
     "no-ex-assign": 2,
     "no-extra-boolean-cast": 0,
     "no-extra-parens": 0,
@@ -64,7 +73,6 @@
     "no-negated-in-lhs": 2,
     "no-obj-calls": 2,
     "no-regex-spaces": 2,
-    "no-reserved-keys": 2,
     "no-sparse-arrays": 2,
     "no-unreachable": 2,
     "use-isnan": 2,
@@ -84,7 +92,6 @@
     "no-caller": 2,
     "no-div-regex": 2,
     "no-else-return": 2,
-    "no-empty-label": 2,
     "no-eq-null": 2,
     "no-eval": 2,
     "no-extend-native": 0,
@@ -142,19 +149,23 @@
     //stylistic
     "indent": [
       2,
-      2
+      2,
+      {
+        "SwitchCase": 1
+      }
     ],
     "brace-style": [
       2,
       "1tbs"
     ],
     "camelcase": 2,
-    "comma-spacing": {
+    "comma-spacing": [
+      2, {
       "before": false,
       "after": true
-    },
+    }],
     "comma-style": [
-      2
+      2,
       "last"
     ],
     "consistent-this": [
@@ -162,7 +173,6 @@
       "self"
     ],
     "eol-last": 2,
-    "func-names": 2,
     "func-style": [
       2,
       "expression"
@@ -222,19 +232,30 @@
       }
     ],
     "sort-vars": 0,
-    "space-after-keywords": [
+    "keyword-spacing": [
       2,
-      "always"
+      {
+        "before": true,
+        "after": true
+      }
     ],
     "space-before-blocks": [
       2,
       "always"
     ],
-    "space-before-function-parentheses": [
+    "space-before-function-paren": [
       2,
       "never"
     ],
-    "space-in-brackets": [
+    "object-curly-spacing": [
+      2,
+      "never"
+    ],
+    "array-bracket-spacing": [
+      2,
+      "never"
+    ],
+    "computed-property-spacing": [
       2,
       "never"
     ],
@@ -244,9 +265,10 @@
     ],
     "space-infix-ops":  [
       2,
-      "always"
+      {
+        "int32Hint": false
+      }
     ],
-    "space-return-throw-case": 2,
     "space-unary-ops": [
       2,
       {
@@ -254,7 +276,7 @@
         "nonwords": false
       }
     ],
-    "spaced-line-comment": [
+    "spaced-comment": [
       2,
       "never"
     ],

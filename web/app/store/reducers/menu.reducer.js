@@ -1,4 +1,4 @@
-var menus = {
+let menus = {
   desktop: [{
     href: 'desktop',
     display: 'Desktop',
@@ -35,12 +35,16 @@ module.exports = function(state, action) {
     return menus.desktop;
   }
 
-  switch(action.type) {
+  let newState;
+
+  switch (action.type) {
     case 'Menu::setActive':
-      return menus[action.menuName];
+      newState = menus[action.menuName];
       break;
 
     default:
-      return state;
+      newState = state;
   }
+
+  return newState;
 };

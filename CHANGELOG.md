@@ -2,12 +2,13 @@
 
 # master
 
-- added different mounting point for react
-- upgraded react to 0.14.X
-- upgraded react-router to 2.0.0
-- added redux
-- added immutable
+- upgraded code to ES6
 - gulp / browserify => webpack / babel
+- added immutable
+- added redux
+- upgraded react-router to 2.0.0
+- upgraded react to 0.14.X
+- added different mounting point for react
 
 # 0.10.0
 

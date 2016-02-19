@@ -1,4 +1,5 @@
-var mockTypes = require("./mock-types");
-var mockedData = require('./data/index');
-var cacheableLocalStorage = require('store-cacheable');
+import * as mockTypes from './mock-types';
+import * as mockedData from './data/index';
+import * as cacheableLocalStorage from 'store-cacheable';
+
 cacheableLocalStorage.clear();

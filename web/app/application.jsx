@@ -1,7 +1,7 @@
 //static resources
-require('./../index.html');
-require('./misc/ua-parser.js');
+import './../index.html';
+import './misc/ua-parser';
+import './styles/main.scss';
 
-require('./styles/main.scss');
-
-require('./router.jsx');
+//application bootstrap
+import './router.jsx';

@@ -1,5 +1,5 @@
-var mockedData = require('../data/index');
-var baseUrl = '/api/v1/users';
+import * as mockedData from '../data/index';
+let baseUrl = '/api/v1/users';
 
 module.exports = {
   get: {

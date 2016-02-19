@@ -1,33 +1,41 @@
-var React = require('react');
-var reactRedux = require('react-redux');
-var actions = require('../../store/actions');
+import * as React from 'react';
+import {connect} from 'react-redux';
+import {menu as menuActions} from '../../store/actions';
 
-var withParam = {};
+class WithParam extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-withParam.displayName = 'RouteParam';
+  componentDidMount() {
+    this.context.store.dispatch(menuActions.setActive('desktop'));
+  }
 
-withParam.contextTypes = {
+  render() {
+    return (
+      <div className="p-with-param">
+        <div>
+          Param: <span className="param-value">{this.props.p1}</span>
+        </div>
+      </div>
+    );
+  }
+}
+
+WithParam.displayName = 'RouteParam';
+
+WithParam.propTypes = {
+  p1: React.PropTypes.any
+};
+
+WithParam.contextTypes = {
   store: React.PropTypes.object
 };
 
-withParam.componentDidMount = function withParamComponentComponentDidMount() {
-  this.context.store.dispatch(actions.menu.setActive('desktop'));
-};
-
-withParam.render = function withParamComponentRender() {
-  return (
-    <div className="p-with-param">
-      <div>
-        Param: <span className="param-value">{this.props.p1}</span>
-      </div>
-    </div>
-  );
-};
-
-var mapStateToProps = function(state, ownProps) {
+let mapStateToProps = function(state, ownProps) {
   return {
     p1: ownProps.params.p1
   };
 };
 
-module.exports = reactRedux.connect(mapStateToProps)(React.createClass(withParam));
+module.exports = connect(mapStateToProps)(WithParam);

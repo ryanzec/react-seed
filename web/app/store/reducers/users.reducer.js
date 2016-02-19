@@ -1,24 +1,28 @@
-var request = require('superagent');
-var immutable = require('immutable');
+import {fromJS} from 'immutable';
 
-var initialState = {
+let initialState = {
   activeUser: null
 };
 
 module.exports = function(state, action) {
   if (typeof state === 'undefined') {
-    return immutable.fromJS(initialState);
+    return fromJS(initialState);
   }
 
-  switch(action.type) {
+  let newState;
+
+  switch (action.type) {
     case 'Users::setActive':
-      return state.setIn(['activeUser'], immutable.fromJS(action.user));
+      newState = state.setIn(['activeUser'], fromJS(action.user));
+      break;
 
     case 'Users::clear':
-      return state.setIn(['activeUser'], null);
+      newState = state.setIn(['activeUser'], null);
       break;
 
     default:
-      return state;
+      newState = state;
   }
+
+  return newState;
 };

@@ -2,8 +2,8 @@
 //NOTE: Coverage reports for .jsx files will work on the compiled version of the code
 var options = {
   filesForCoverageReportsGlobs: [
-    process.cwd() + '/web/app/stores/**/*.js',
-    process.cwd() + '/web/app/stores/**/*.jsx',
+    process.cwd() + '/web/app/store/**/*.js',
+    process.cwd() + '/web/app/store/**/*.jsx',
     process.cwd() + '/web/app/misc/**/*.js',
     process.cwd() + '/web/app/misc/**/*.jsx',
     process.cwd() + '/web/app/schemas/**/*.js',

@@ -1,21 +1,21 @@
-var React = require('react');
+import * as React from 'react';
+import Header from './header.component.jsx';
 
-var Header = require('./header.component.jsx');
+class Application extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-//TODO: remove: for testing assets rewrite process
-var removeMe = '/app/svg/remove-me.svg#icon-small';
+  render() {
+    return (
+      <div className="application">
+        <Header />
+        {this.props.children}
+      </div>
+    );
+  }
+}
 
-var application = {};
+Application.displayName = 'Application';
 
-application.displayName = 'Application';
-
-application.render = function applicationRender() {
-  return (
-    <div className="application">
-      <Header />
-      {this.props.children}
-    </div>
-  );
-};
-
-module.exports = React.createClass(application);
+module.exports = Application;

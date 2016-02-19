@@ -1,20 +1,24 @@
-var preventDoubleClick = false;
+let preventDoubleClick = false;
 
 module.exports = function(state, action) {
   if (typeof state === 'undefined') {
     return preventDoubleClick;
   }
 
-  switch(action.type) {
+  let newState;
+
+  switch (action.type) {
     case 'PreventDoubleClick::enable':
-      return true
+      newState = true;
       break;
 
     case 'PreventDoubleClick::disable':
-      return false;
+      newState = false;
       break;
 
     default:
-      return state;
+      newState = state;
   }
+
+  return newState;
 };

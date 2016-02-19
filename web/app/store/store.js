@@ -1,13 +1,22 @@
-var redux = require('redux');
-var reactRouterRedux = require('react-router-redux');
-var lodash = require('lodash');
+import {
+  createStore,
+  combineReducers
+} from 'redux';
+import {routerReducer} from 'react-router-redux';
 
-var reducers = _.extend({
-  menu: require('./reducers/menu.reducer'),
-  preventDoubleClick: require('./reducers/prevent-double-click.reducer'),
-  users: require('./reducers/users.reducer')
-}, {
-  routing: reactRouterRedux.routerReducer
+import menu from './reducers/menu.reducer';
+import preventDoubleClick from './reducers/prevent-double-click.reducer';
+import users from './reducers/users.reducer';
+
+let myReducers = {
+  menu,
+  preventDoubleClick,
+  users
+};
+
+let reducers = {};
+Object.assign(reducers, myReducers, {
+  routing: routerReducer
 });
 
-module.exports = redux.createStore(redux.combineReducers(reducers));
+module.exports = createStore(combineReducers(reducers));
