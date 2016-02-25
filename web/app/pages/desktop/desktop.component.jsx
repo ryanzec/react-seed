@@ -23,7 +23,7 @@ class Desktop extends React.Component {
 
     if (this.props.user) {
       userData = (
-        <ul>
+        <ul className="user-data">
           <li className="user-id">{this.props.user.id}</li>
           <li className="user-username">{this.props.user.username}</li>
           <li className="user-first-name">{this.props.user.firstName}</li>

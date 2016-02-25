@@ -9,7 +9,7 @@ class Header extends React.Component {
 
   render() {
     return (
-      <header>
+      <header className="header">
         <ul>
           {this.props.menu.map(function(menuItem) {
             let link;
@@ -38,7 +38,7 @@ class Header extends React.Component {
 Header.displayName = 'Header';
 
 Header.propTypes = {
-  menu: React.propTypes.array
+  menu: React.PropTypes.array
 };
 
 let mapStateToProps = function(state) {

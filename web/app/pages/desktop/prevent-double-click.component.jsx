@@ -29,8 +29,8 @@ class PreventDoubleClick extends React.Component {
       <div className="p-prevent-double-click">
         <h1 id="test" className="test">{window.i18n['desktop/prevent-double-click'].header()}</h1>
         <div>
-          <button disabled={this.props.preventDoubleClick}>{window.i18n['desktop/prevent-double-click'].button1()}</button>
-          <button onClick={this.onClickPreventDoubleClick}>{window.i18n['desktop/prevent-double-click'].button2()}</button>
+          <button className="test" disabled={this.props.preventDoubleClick}>{window.i18n['desktop/prevent-double-click'].button1()}</button>
+          <button className="toggle" onClick={this.onClickPreventDoubleClick}>{window.i18n['desktop/prevent-double-click'].button2()}</button>
         </div>
       </div>
     );

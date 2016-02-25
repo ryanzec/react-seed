@@ -1,0 +1,8 @@
+{
+  retainLines: true,
+  compact: false,
+  presets: [
+    'es2015',
+    'react'
+  ]
+}

@@ -1,6 +1,6 @@
 import * as backend from 'ryanzec-mocked-backend';
 import * as mockedRequests from './requests/index';
-import * as _ from 'lodash';
+import forEach from 'lodash.foreach';
 
 let mockRequest = (options) => {
   let extend = (target, source) => {
@@ -29,9 +29,9 @@ let mockRequest = (options) => {
   .respond(responseHttpStatus, options.response, responseHeaders);
 };
 
-_.forEach(mockedRequests, (resourceRequests, resourceName) => {
-  _.forEach(resourceRequests, (requests, httpVerb) => {
-    _.forEach(requests, (requestMetaData, requestKey) => {
+forEach(mockedRequests, (resourceRequests, resourceName) => {
+  forEach(resourceRequests, (requests, httpVerb) => {
+    forEach(requests, (requestMetaData, requestKey) => {
       let mockRequestObject = {
         method: httpVerb.toUpperCase(),
         url: requestMetaData.url,

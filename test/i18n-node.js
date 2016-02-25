@@ -1,19 +1,46 @@
-var i18n={lc:{"en":function(n){return n===1?"one":"other"}},
-c:function(d,k){if(!d)throw new Error("MessageFormat: Data required for '"+k+"'.")},
-n:function(d,k,o){if(isNaN(d[k]))throw new Error("MessageFormat: '"+k+"' isn't a number.");return d[k]-(o||0)},
-v:function(d,k){i18n.c(d,k);return d[k]},
-p:function(d,k,o,l,p){i18n.c(d,k);return d[k] in p?p[d[k]]:(k=i18n.lc[l](d[k]-o),k in p?p[k]:p.other)},
-s:function(d,k,p){i18n.c(d,k);return d[k] in p?p[d[k]]:p.other}};
-i18n["desktop/desktop"]={
-"header":function(d){return "Desktop"}}
-i18n["desktop/prevent-double-click"]={
-"header":function(d){return "Prevent Double Click"},
-"button1":function(d){return "test"},
-"button2":function(d){return "Prevent Double Click Other Buttons"}}
-i18n["desktop/with-resolves"]={
-"header":function(d){return "With Resolves"}}
-i18n["menu/menu"]={
-"desktop":function(d){return "Desktop"},
-"preventDoubleClick":function(d){return "Prevent Double Click"},
-"withResolves":function(d){return "With Resolves"}}
-module.exports = i18n;
+var number = function (value, offset) {
+  if (isNaN(value)) throw new Error("'" + value + "' isn't a number.");
+  return value - (offset || 0);
+};
+var plural = function (value, offset, lcfunc, data, isOrdinal) {
+  if ({}.hasOwnProperty.call(data, value)) return data[value]();
+  if (offset) value -= offset;
+  var key = lcfunc(value, isOrdinal);
+  if (key in data) return data[key]();
+  return data.other();
+};
+var select = function (value, data) {
+  if ({}.hasOwnProperty.call(data, value)) return data[value]();
+  return data.other()
+};
+var pluralFuncs = {
+  en: function (n, ord) {
+    var s = String(n).split('.'), v0 = !s[1], t0 = Number(s[0]) == n,
+        n10 = t0 && s[0].slice(-1), n100 = t0 && s[0].slice(-2);
+    if (ord) return (n10 == 1 && n100 != 11) ? 'one'
+        : (n10 == 2 && n100 != 12) ? 'two'
+        : (n10 == 3 && n100 != 13) ? 'few'
+        : 'other';
+    return (n == 1 && v0) ? 'one' : 'other';
+  }
+};
+var fmt = {};
+
+module.exports = {
+  "desktop/desktop": {
+    header: function(d) { return "Desktop"; }
+  },
+  "desktop/prevent-double-click": {
+    header: function(d) { return "Prevent Double Click"; },
+    button1: function(d) { return "test"; },
+    button2: function(d) { return "Prevent Double Click Other Buttons"; }
+  },
+  "desktop/with-resolves": {
+    header: function(d) { return "With Resolves"; }
+  },
+  "menu/menu": {
+    desktop: function(d) { return "Desktop"; },
+    preventDoubleClick: function(d) { return "Prevent Double Click"; },
+    withResolves: function(d) { return "With Resolves"; }
+  }
+}

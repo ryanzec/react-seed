@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-./node_modules/.bin/webpack --config webpack.config.compressed.js
+./node_modules/.bin/webpack --progress --config webpack.config.compressed.js

@@ -2,6 +2,7 @@
 
 # master
 
+- added structure for testing code
 - upgraded code to ES6
 - gulp / browserify => webpack / babel
 - added immutable

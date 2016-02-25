@@ -1,29 +1,15 @@
-var _ = require('lodash');
-var storeLocations = {
-  Application: '../web/app/stores/application.store',
-  Menu: '../web/app/stores/menu.store',
-  User: '../web/app/stores/user.store'
-};
-var initialStoresCachedData = {};
-var mockedData = require('../web/app/mock/data/index');
-var mockedRequests = require('../web/app/mock/requests/index');
-
-//store the original state of all the stores
-_.forEach(storeLocations, function(path, storeName) {
-  initialStoresCachedData[storeName] = _.clone(require(path)._cachedData, true);
-});
+import * as _ from 'lodash';
+import * as mockedData from '../web/app/mock/data/index';
+import * as mockedRequests from '../web/app/mock/requests/index';
+import {defer} from 'bluebird';
 
 module.exports = {
-  resetStoresCachedData: function() {
-    var storeNames = Array.prototype.slice.call(arguments);
+  sleep: function(time) {
+    var myDefer = defer();
 
-    storeNames.forEach(function(storeName) {
-      //get the store
-      var store = require(storeLocations[storeName]);
+    setTimeout(function() {myDefer.resolve();}, time);
 
-      //reset all the initial store properties
-      store._cachedData = _.clone(initialStoresCachedData[storeName], true);
-    });
+    return myDefer.promise;
   },
 
   createNativeClickEvent: function() {
