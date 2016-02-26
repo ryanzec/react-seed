@@ -1,13 +1,13 @@
-var utilities = require('../../../utilities');
-var desktopPage = require('../../../objects/pages/desktop/desktop');
+import * as utilities from '../../../utilities';
+import DesktopPage from '../../../objects/pages/desktop/desktop';
 
 describe('desktop page', function() {
   it('should render desktop', function*() {
-    var page = desktopPage.create();
+    let page = new DesktopPage();
 
     yield utilities.url('/desktop');
 
-    var header = page.getHeader();
+    let header = page.getHeader();
 
     yield header.menuItemsAreRendered([{
       textContent: 'Desktop',
@@ -22,7 +22,7 @@ describe('desktop page', function() {
   });
 
   it('should get able to load user data', function*() {
-    var page = desktopPage.create();
+    let page = new DesktopPage();
 
     yield utilities.url('/desktop');
 

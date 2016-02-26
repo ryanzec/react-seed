@@ -16,7 +16,7 @@ describe('user reducer', function() {
 
   it('should load user data', function(done) {
     usersRepository.getUser(123).then(function() {
-      expect(store.getState().users.getIn(['activeUser']).toJS()).to.deep.equal(testHelper.mockedData.users[123]);
+      expect(store.getState().users.getIn(['activeUser']).toJS()).to.deep.equal(testHelper.mockedData.users.oneTwoThree);
       done();
     });
   });

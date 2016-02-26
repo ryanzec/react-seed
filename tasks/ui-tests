@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+./node_modules/.bin/wdio ./ui-tests/configurations/wdio.config.js

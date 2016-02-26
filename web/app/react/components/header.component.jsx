@@ -47,4 +47,4 @@ let mapStateToProps = function(state) {
   };
 };
 
-module.exports = connect(mapStateToProps)(Header);
+export default connect(mapStateToProps)(Header);

@@ -1,33 +1,31 @@
-var coreComponent = {};
-var assign = require('lodash.assign');
+import assign from 'lodash.assign';
 
-coreComponent.baseSelector = '';
-
-coreComponent.selectors = {};
-
-//utilities
-coreComponent.addSelectors = function(selectors) {
-  this.selectors = assign(this.selectors, selectors);
-};
-
-coreComponent.getSelector = function(selectorName, prependBaseSelector) {
-  if (!this.selectors[selectorName]) {
-    return '';
+class CoreComponent {
+  constructor(baseSelector) {
+    this.baseSelector = baseSelector;
+    this.selectors = {};
   }
 
-  var selector = '';
-
-  if (prependBaseSelector !== false) {
-    selector += this.baseSelector + ' ';
+  addSelectors(selectors) {
+    //TODO: use Object.assign
+    this.selectors = assign(this.selectors, selectors);
   }
 
-  selector += this.selectors[selectorName];
+  getSelector(selectorName, prependBaseSelector) {
+    if (!this.selectors[selectorName]) {
+      return '';
+    }
 
-  return selector.trim();
-};
+    let selector = '';
 
-module.exports = {
-  create: function(baseSelector) {
-    return Object.create(coreComponent);
+    if (prependBaseSelector !== false) {
+      selector += this.baseSelector + ' ';
+    }
+
+    selector += this.selectors[selectorName];
+
+    return selector.trim();
   }
-};
+}
+
+export default CoreComponent;

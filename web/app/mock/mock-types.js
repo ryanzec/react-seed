@@ -9,8 +9,10 @@ if (mockTypes) {
   mockTypes = [];
 }
 
-module.exports = {
-  contains: function(type) {
-    return (mockTypes.indexOf(type) !== -1);
-  }
+let contains = (type) => {
+  return (mockTypes.indexOf(type) !== -1);
+};
+
+export {
+  contains
 };

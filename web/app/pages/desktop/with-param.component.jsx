@@ -38,4 +38,4 @@ let mapStateToProps = function(state, ownProps) {
   };
 };
 
-module.exports = connect(mapStateToProps)(WithParam);
+export default connect(mapStateToProps)(WithParam);

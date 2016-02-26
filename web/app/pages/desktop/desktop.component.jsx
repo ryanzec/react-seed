@@ -65,4 +65,4 @@ let mapStateToProps = (state) => {
   };
 };
 
-module.exports = connect(mapStateToProps)(Desktop);
+export default connect(mapStateToProps)(Desktop);

@@ -7,7 +7,7 @@ import {
 } from 'react-router';
 import {Provider} from 'react-redux';
 import {syncHistoryWithStore} from 'react-router-redux';
-import * as store from './store/store';
+import store from './store/store';
 import {
   Application,
   NotFound
@@ -17,7 +17,7 @@ import {routes as desktopRoutes} from './pages/desktop/module.jsx';
 
 let history = syncHistoryWithStore(browserHistory, store);
 
-module.exports = (
+export default (
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={Application}>

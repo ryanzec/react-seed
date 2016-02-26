@@ -15,8 +15,9 @@ let myReducers = {
 };
 
 let reducers = {};
+
 Object.assign(reducers, myReducers, {
   routing: routerReducer
 });
 
-module.exports = createStore(combineReducers(reducers));
+export default createStore(combineReducers(reducers));

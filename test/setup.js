@@ -22,9 +22,10 @@ global.navigator = {
   userAgent: 'node.js'
 };
 
+//NOTE: need to include the i18n testing file
 global.window.i18n = require('./i18n-node.js');
 
-//NOTE: include all files that should have coverage numbers on them incase there are files the specs don't trigger
+//NOTE: include all files that should have coverage numbers on them in-case there are files the specs don't trigger inclusion
 import globArray from 'glob-array';
 
 var filesForCoverage = [

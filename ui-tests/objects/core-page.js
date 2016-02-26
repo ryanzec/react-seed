@@ -1,24 +1,18 @@
-var headerComponent = require('./react/components/header');
-var coreComponent = require('./core-component');
-var corePage = coreComponent.create();
+import HeaderComponent from './react/components/header';
+import CoreComponent from './core-component';
 
-corePage.addSelectors({
-  header: 'header.header'
-});
+class CorePage extends CoreComponent {
+  constructor(baseSelector) {
+    super(baseSelector);
 
-//utilities
-corePage.getHeader = function() {
-  return headerComponent.create(this.getSelector('header', false));
-};
-
-module.exports = {
-  create: function(baseSelector) {
-    var newObject = Object.create(corePage);
-
-    if (baseSelector) {
-      newObject.baseSelector = baseSelector;
-    }
-
-    return newObject;
+    this.addSelectors({
+      header: 'header.header'
+    });
   }
-};
+
+  getHeader() {
+    return new HeaderComponent(this.getSelector('header', false));
+  }
+}
+
+export default CorePage;

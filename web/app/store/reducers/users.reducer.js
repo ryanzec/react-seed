@@ -4,7 +4,7 @@ let initialState = {
   activeUser: null
 };
 
-module.exports = function(state, action) {
+export default function(state, action) {
   if (typeof state === 'undefined') {
     return fromJS(initialState);
   }

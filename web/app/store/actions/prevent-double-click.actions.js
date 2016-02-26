@@ -1,13 +1,16 @@
-module.exports = {
-  enable: function() {
-    return {
-      type: 'PreventDoubleClick::enable'
-    };
-  },
+let enable = () => {
+  return {
+    type: 'PreventDoubleClick::enable'
+  };
+};
 
-  disable: function() {
-    return {
-      type: 'PreventDoubleClick::disable'
-    };
-  }
+let disable = () => {
+  return {
+    type: 'PreventDoubleClick::disable'
+  };
+};
+
+export {
+  enable,
+  disable
 };

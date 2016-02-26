@@ -18,4 +18,4 @@ class Application extends React.Component {
 
 Application.displayName = 'Application';
 
-module.exports = Application;
+export default Application;

@@ -53,4 +53,4 @@ let mapStateToProps = function(state) {
   };
 };
 
-module.exports = connect(mapStateToProps)(PreventDoubleClick);
+export default connect(mapStateToProps)(PreventDoubleClick);

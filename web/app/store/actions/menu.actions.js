@@ -1,8 +1,10 @@
-module.exports = {
-  setActive: function(menuName) {
-    return {
-      type: 'Menu::setActive',
-      menuName: menuName
-    };
-  }
+let setActive = (menuName) => {
+  return {
+    type: 'Menu::setActive',
+    menuName: menuName
+  };
+};
+
+export {
+  setActive
 };
