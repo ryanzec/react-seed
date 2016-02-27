@@ -2,7 +2,7 @@ import * as mockedData from '../data/index';
 let baseUrl = '/api/v1/users';
 
 let get = {
-  '123': {
+  oneTwoThree: {
     url: baseUrl + '/123',
     httpCode: 200,
     response: {
@@ -15,7 +15,7 @@ let get = {
       errors: []
     }
   },
-  '124': {
+  oneTwoFour: {
     url: baseUrl + '/124',
     httpCode: 200,
     response: {

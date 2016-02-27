@@ -1,6 +1,6 @@
 # Change Log
 
-# master
+# 0.11.0
 
 - added structure for testing code
 - upgraded code to ES6

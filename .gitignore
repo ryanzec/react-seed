@@ -1,12 +1,7 @@
 .DS_Store
 .idea
-/bower_components/*
-/web/components/*
-.sass-cache/*
-/web/.sass-cache/*
 /coverage/*
 /node_modules/*
-/gulp/build-meta-data/*
 /web/build/*
 npm-debug.log
 /web/local-server

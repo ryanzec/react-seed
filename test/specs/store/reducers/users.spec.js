@@ -7,7 +7,7 @@ let scope = nock('http://localhost:80');
 
 describe('user reducer', function() {
   before(function() {
-    testHelper.mockNockRequest(scope, 'users', 'get', '123');
+    testHelper.mockNockRequest(scope, 'users', 'get', 'oneTwoThree');
   });
 
   after(function() {

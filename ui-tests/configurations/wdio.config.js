@@ -127,15 +127,12 @@ exports.config = {
   // variables like `browser`. It is the perfect place to define custom commands.
   before: function() {
     var chai = require('chai');
-    //var chaiAsPromised = require('chai-as-promised');
-    //chai.use(chaiAsPromised);
 
     expect = chai.expect;
 
     browser.setViewportSize({
       width: 1024, height: 768
     });
-    // browser.timeoutsImplicitWait(3000);
 
     addCustomCommands(browser);
   },

@@ -1,5 +1,3 @@
-import assign from 'lodash.assign';
-
 class CoreComponent {
   constructor(baseSelector) {
     this.baseSelector = baseSelector;
@@ -8,7 +6,7 @@ class CoreComponent {
 
   addSelectors(selectors) {
     //TODO: use Object.assign
-    this.selectors = assign(this.selectors, selectors);
+    this.selectors = Object.assign(this.selectors, selectors);
   }
 
   getSelector(selectorName, prependBaseSelector) {
