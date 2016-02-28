@@ -1,5 +1,5 @@
 import store from '../../../../web/app/store/store';
-import {users as usersRepository} from '../../../../web/app/repositories/index';
+import usersRepository from '../../../../web/app/repositories/users.repository';
 import * as testHelper from'../../../test-helper';
 import nock from 'nock';
 
@@ -15,8 +15,8 @@ describe('user reducer', function() {
   });
 
   it('should load user data', function(done) {
-    usersRepository.getUser(123).then(function() {
-      expect(store.getState().users.getIn(['activeUser']).toJS()).to.deep.equal(testHelper.mockedData.users.oneTwoThree);
+    usersRepository.getUser(123).then(function(user) {
+      expect(user).to.deep.equal(testHelper.mockedData.users.oneTwoThree);
       done();
     });
   });

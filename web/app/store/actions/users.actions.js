@@ -12,7 +12,7 @@ let clearActive = () => {
 };
 
 
-export {
+export default {
   setActive,
   clearActive
 };

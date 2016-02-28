@@ -13,7 +13,8 @@ let get = {
         ]
       },
       errors: []
-    }
+    },
+    delay: 2000
   },
   oneTwoFour: {
     url: baseUrl + '/124',

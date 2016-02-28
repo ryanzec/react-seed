@@ -5,6 +5,6 @@ let setActive = (menuName) => {
   };
 };
 
-export {
+export default {
   setActive
 };

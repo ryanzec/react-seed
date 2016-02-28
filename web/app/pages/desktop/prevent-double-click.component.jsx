@@ -1,9 +1,7 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {
-  menu as menuActions,
-  preventDoubleClick as preventDoubleClickActions
-} from '../../store/actions';
+import menuActions from '../../store/actions/menu.actions';
+import preventDoubleClickActions from '../../store/actions/prevent-double-click.actions';
 
 class PreventDoubleClick extends React.Component {
   constructor(props) {

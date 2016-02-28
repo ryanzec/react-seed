@@ -10,7 +10,7 @@ let disable = () => {
   };
 };
 
-export {
+export default {
   enable,
   disable
 };

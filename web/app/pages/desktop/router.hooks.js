@@ -1,17 +1,18 @@
 import store from '../../store/store';
-import {users as userActions} from '../../store/actions';
-import {users as usersRepository} from '../../repositories/index';
+import usersActions from '../../store/actions/users.actions';
+import usersRepository from '../../repositories/users.repository';
 
 let desktop = {
   onEnter: function(nextState, replace, callback) {
-    store.dispatch(userActions.clearActive());
+    store.dispatch(usersActions.clearActive());
     callback();
   }
 };
 
 let withResolves = {
   onEnter: function(nextState, replace, callback) {
-    usersRepository.getUser(124).then(function() {
+    usersRepository.getUser(124).then(function(user) {
+      store.dispatch(usersActions.setActive(user));
       callback();
       }, function() {
       replace({

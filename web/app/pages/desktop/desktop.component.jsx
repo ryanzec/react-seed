@@ -1,13 +1,16 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {menu as menuActions} from '../../store/actions';
-import {users as usersRepository} from '../../repositories/index';
+import menuActions from '../../store/actions/menu.actions';
+import usersActions from '../../store/actions/users.actions';
+import usersRepository from '../../repositories/users.repository';
 
 import userImage from '../../images/user.png';
 
 class Desktop extends React.Component {
   constructor(props) {
     super(props);
+
+    this.onClickGetUser = this.onClickGetUser.bind(this);
   }
 
   componentDidMount() {
@@ -15,7 +18,9 @@ class Desktop extends React.Component {
   }
 
   onClickGetUser() {
-    setTimeout(() => usersRepository.getUser(123), 2000);
+    usersRepository.getUser(123).then(function(user) {
+      this.context.store.dispatch(usersActions.setActive(user));
+    }.bind(this));
   }
 
   renderUserData() {

@@ -1,5 +1,9 @@
 # Change Log
 
+# master
+
+- minor code refactoring
+
 # 0.11.0
 
 - added structure for testing code
