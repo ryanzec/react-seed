@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import menuActions from '../../store/actions/menu.actions';
 import usersActions from '../../store/actions/users.actions';
@@ -18,9 +18,9 @@ class Desktop extends React.Component {
   }
 
   onClickGetUser() {
-    usersRepository.getUser(123).then(function(user) {
+    usersRepository.getUser(123).then((user) => {
       this.context.store.dispatch(usersActions.setActive(user));
-    }.bind(this));
+    });
   }
 
   renderUserData() {

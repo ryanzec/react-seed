@@ -10,7 +10,7 @@ class DesktopPage extends CorePage {
       userId: '.user-id',
       userUsername: '.user-username',
       userFirstName: '.user-first-name',
-      userLastName: '.user-last-name',
+      userLastName: '.user-last-name'
     });
   }
 

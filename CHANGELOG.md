@@ -2,6 +2,7 @@
 
 # master
 
+- added reselect example to the header component
 - minor code refactoring
 
 # 0.11.0
