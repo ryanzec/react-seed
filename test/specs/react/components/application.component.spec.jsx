@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import {Application, Header} from '../../../../web/app/react/components';
+import Application from '../../../../web/app/react/components/application.component.jsx';
+import Header from '../../../../web/app/react/components/header.component.jsx';
 import store from '../../../../web/app/store/store';
 
 describe('application component', () => {

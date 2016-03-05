@@ -27,8 +27,8 @@ class HeaderComponent extends CoreComponent {
 
     for (let x = 0; x < count; x += 1) {
       expect(yield browser.waitIsVisible(this.getSelector('menuLink').format([x + 1]))).to.be.true;
-      expect(yield browser.waitGetText(this.getSelector('menuLink').format([x + 1]))).to.equal(linksData[x].textContent);
-      expect(yield browser.waitGetAttribute(this.getSelector('menuLink').format([x + 1]), 'href')).to.equal(linksData[x].href);
+      expect(yield browser.waitGetText(this.getSelector('menuLink').format([x + 1]))).to.contain(linksData[x].textContent);
+      expect(yield browser.waitGetAttribute(this.getSelector('menuLink').format([x + 1]), 'href')).to.contain(linksData[x].href);
     }
   }
 }

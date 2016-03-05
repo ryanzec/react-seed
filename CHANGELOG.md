@@ -2,6 +2,9 @@
 
 # master
 
+- removed react/components.js file as not needed
+- change page components to use .page.jsx instead of .component.jsx
+- updated ui-tests task to accept base url parameter
 - source maps were not loading properly with just the -d flag so modified webpack configuration file
 - added reselect example to the header component
 - minor code refactoring

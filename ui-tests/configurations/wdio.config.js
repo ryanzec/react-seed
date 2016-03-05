@@ -1,12 +1,5 @@
 var addCustomCommands = require('../custom-commands');
 
-//TODO: would be nice if able to pull this info from the commandline option and made globally available like this when needed for certain tests
-var baseUrl = 'http://localhost:3000';
-
-global.testParameters = {
-  baseUrl: baseUrl
-};
-
 exports.config = {
   //
   // ==================
@@ -57,7 +50,7 @@ exports.config = {
   //
   // Set a base URL in order to shorten url command calls. If your url parameter starts
   // with "/", the base url gets prepended.
-  baseUrl: baseUrl,
+  baseUrl: "http://localhost:3000",
   //
   // Default timeout for all waitForXXX commands.
   waitforTimeout: 3000,

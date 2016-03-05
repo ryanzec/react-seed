@@ -11,13 +11,13 @@ describe('desktop page', function() {
 
     yield header.menuItemsAreRendered([{
       textContent: 'Desktop',
-      href: testParameters.baseUrl + '/desktop'
+      href: '/desktop'
     }, {
       textContent: 'Prevent Double Click',
-      href: testParameters.baseUrl + '/prevent-double-click'
+      href: '/prevent-double-click'
     }, {
       textContent: 'With Param',
-      href: testParameters.baseUrl + '/with-param'
+      href: '/with-param'
     }]);
     yield utilities.saveScreenshot('fu');
   });

@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-./node_modules/.bin/wdio ./ui-tests/configurations/wdio.config.js
+./node_modules/.bin/wdio --baseUrl "$1" ./ui-tests/configurations/wdio.config.js
