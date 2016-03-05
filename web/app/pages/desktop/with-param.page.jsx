@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import menuActions from '../../store/actions/menu.actions';
 
-class WithParam extends React.Component {
+class WithParamPage extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -22,13 +22,13 @@ class WithParam extends React.Component {
   }
 }
 
-WithParam.displayName = 'RouteParam';
+WithParamPage.displayName = 'WithParamPage';
 
-WithParam.propTypes = {
+WithParamPage.propTypes = {
   p1: React.PropTypes.any
 };
 
-WithParam.contextTypes = {
+WithParamPage.contextTypes = {
   store: React.PropTypes.object
 };
 
@@ -38,4 +38,4 @@ let mapStateToProps = function(state, ownProps) {
   };
 };
 
-export default connect(mapStateToProps)(WithParam);
+export default connect(mapStateToProps)(WithParamPage);

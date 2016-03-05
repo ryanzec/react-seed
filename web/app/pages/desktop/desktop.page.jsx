@@ -6,7 +6,7 @@ import usersRepository from '../../repositories/users.repository';
 
 import userImage from '../../images/user.png';
 
-class Desktop extends React.Component {
+class DesktopPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -54,13 +54,13 @@ class Desktop extends React.Component {
   }
 }
 
-Desktop.displayName = 'Desktop';
+DesktopPage.displayName = 'DesktopPage';
 
-Desktop.propTypes = {
+DesktopPage.propTypes = {
   user: React.PropTypes.object
 };
 
-Desktop.contextTypes = {
+DesktopPage.contextTypes = {
   store: React.PropTypes.object
 };
 
@@ -70,4 +70,4 @@ let mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Desktop);
+export default connect(mapStateToProps)(DesktopPage);

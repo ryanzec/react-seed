@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import menuActions from '../../store/actions/menu.actions';
 
-class WithResolves extends React.Component {
+class WithResolvesPage extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -39,13 +39,13 @@ class WithResolves extends React.Component {
   }
 }
 
-WithResolves.displayName = 'WithResolves';
+WithResolvesPage.displayName = 'WithResolvesPage';
 
-WithResolves.propTypes = {
+WithResolvesPage.propTypes = {
   user: React.PropTypes.object
 };
 
-WithResolves.contextTypes = {
+WithResolvesPage.contextTypes = {
   store: React.PropTypes.object
 };
 
@@ -55,4 +55,4 @@ let mapStateToProps = function(state) {
   };
 };
 
-export default connect(mapStateToProps)(WithResolves);
+export default connect(mapStateToProps)(WithResolvesPage);

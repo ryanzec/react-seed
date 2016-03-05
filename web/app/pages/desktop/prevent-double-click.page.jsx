@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import menuActions from '../../store/actions/menu.actions';
 import preventDoubleClickActions from '../../store/actions/prevent-double-click.actions';
 
-class PreventDoubleClick extends React.Component {
+class PreventDoubleClickPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -35,13 +35,13 @@ class PreventDoubleClick extends React.Component {
   }
 }
 
-PreventDoubleClick.displayName = 'PreventDoubleClick';
+PreventDoubleClickPage.displayName = 'PreventDoubleClickPage';
 
 PreventDoubleClick.propTypes = {
   preventDoubleClick: React.PropTypes.bool
 };
 
-PreventDoubleClick.contextTypes = {
+PreventDoubleClickPage.contextTypes = {
   store: React.PropTypes.object
 };
 
@@ -52,4 +52,4 @@ let mapStateToProps = function(state) {
   };
 };
 
-export default connect(mapStateToProps)(PreventDoubleClick);
+export default connect(mapStateToProps)(PreventDoubleClickPage);
