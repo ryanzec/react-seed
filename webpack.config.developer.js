@@ -23,7 +23,7 @@ module.exports = {
       }
     }, {
       test: /\.scss$/,
-      loader: extractSass.extract(['css', 'sass'])
+      loader: extractSass.extract(['css?sourceMap', 'sass?sourceMap'])
     }, {
       test: /\.html$/,
       loader: 'file?name=[name].[ext]'
@@ -66,6 +66,7 @@ module.exports = {
     'mocked-api': './web/app/mock/api.js',
     'mocked-local-storage': './web/app/mock/local-storage.js'
   },
+  devtool: 'source-map',
   output: {
     path: './web/build',
     publicPath: '/build',
