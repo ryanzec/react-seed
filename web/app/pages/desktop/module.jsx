@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import {Route} from 'react-router';
 
 import Desktop from './desktop.component.jsx';

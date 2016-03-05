@@ -1,6 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
+import {createSelector} from 'reselect';
 
 class Header extends React.Component {
   constructor(props) {
@@ -41,10 +42,19 @@ Header.propTypes = {
   menu: React.PropTypes.array
 };
 
-let mapStateToProps = function(state) {
-  return {
-    menu: state.menu
-  };
-};
+// NOTE: this is a trivial example that does not need a selector as no calculations are being performed on the state's data however this is just an ecample to
+// NOTE: show the use of reselect to create a memoized selected that will not be recalculated if its data does not change
+const menuSelector = (state) => state.menu;
 
-export default connect(mapStateToProps)(Header);
+const testSelector = createSelector(
+  menuSelector,
+  (menu) => {
+    //NOTE: expensive calculations would be done here
+    console.log('header map state to props');
+    return {
+      menu: menu
+    };
+  }
+);
+
+export default connect(testSelector)(Header);

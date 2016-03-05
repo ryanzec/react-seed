@@ -15,6 +15,7 @@
     "react-router": "2.0.0",
     "react-router-redux": "4.0.0-beta.1",
     "redux": "3.3.1",
+    "reselect": "2.0.3",
     "store-cacheable": "0.1.0",
     "superagent": "1.7.2"
   },
@@ -22,7 +23,7 @@
     "babel-cli": "6.5.1",
     "babel-core": "6.5.2",
     "babel-eslint": "5.0.0",
-    "babel-istanbul": "0.6.0",
+    "babel-istanbul": "0.6.1",
     "babel-loader": "6.2.3",
     "babel-plugin-transform-react-jsx": "6.5.2",
     "babel-polyfill": "6.5.0",

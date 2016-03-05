@@ -5,7 +5,6 @@ class CoreComponent {
   }
 
   addSelectors(selectors) {
-    //TODO: use Object.assign
     this.selectors = Object.assign(this.selectors, selectors);
   }
 

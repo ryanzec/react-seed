@@ -19,6 +19,7 @@ describe('desktop page', function() {
       textContent: 'With Param',
       href: testParameters.baseUrl + '/with-param'
     }]);
+    yield utilities.saveScreenshot('fu');
   });
 
   it('should get able to load user data', function*() {

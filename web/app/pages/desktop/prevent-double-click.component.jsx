@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import menuActions from '../../store/actions/menu.actions';
 import preventDoubleClickActions from '../../store/actions/prevent-double-click.actions';
@@ -46,6 +46,7 @@ PreventDoubleClick.contextTypes = {
 };
 
 let mapStateToProps = function(state) {
+  console.log('prevent double click map state to props');
   return {
     preventDoubleClick: state.preventDoubleClick
   };

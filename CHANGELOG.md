@@ -3,6 +3,7 @@
 # master
 
 - source maps were not loading properly with just the -d flag so modified webpack configuration file
+- added reselect example to the header component
 - minor code refactoring
 
 # 0.11.0
