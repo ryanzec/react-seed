@@ -28,6 +28,7 @@ global.window.i18n = require('./i18n-node.js');
 //NOTE: include all files that should have coverage numbers on them in-case there are files the specs don't trigger inclusion
 import globArray from 'glob-array';
 
+//NOTE: if you want to exclude a files that is include by the tests itself, you need to define that exclude in a .istanbul.yml file
 var filesForCoverage = [
   process.cwd() + '/web/app/**/*.js',
   process.cwd() + '/web/app/**/*.jsx',

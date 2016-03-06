@@ -2,6 +2,7 @@
 
 # master
 
+- added documentation for excluding files from coverage even if they are included by test code
 - fixed entry points for the library bundle files
 - changed the structure for the redux (web/app/store) code
 - added default behavior for error within promises
