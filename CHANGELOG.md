@@ -2,6 +2,10 @@
 
 # master
 
+- fixed entry points for the library bundle files
+- changed the structure for the redux (web/app/store) code
+- added default behavior for error within promises
+- update mocking solution to allow for set request payload
 - removed react/components.js file as not needed
 - change page components to use .page.jsx instead of .component.jsx
 - updated ui-tests task to accept base url parameter

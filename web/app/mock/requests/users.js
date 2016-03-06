@@ -1,7 +1,7 @@
 import * as mockedData from '../data/index';
 let baseUrl = '/api/v1/users';
 
-let get = {
+export const get = {
   oneTwoThree: {
     url: baseUrl + '/123',
     httpCode: 200,
@@ -30,8 +30,4 @@ let get = {
     },
     delay: 1000
   }
-};
-
-export {
-  get
 };

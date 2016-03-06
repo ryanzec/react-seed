@@ -1,6 +1,8 @@
+import * as constants from './menu.constants';
+
 let setActive = (menuName) => {
   return {
-    type: 'Menu::setActive',
+    type: constants.SET_ACTIVE,
     menuName: menuName
   };
 };

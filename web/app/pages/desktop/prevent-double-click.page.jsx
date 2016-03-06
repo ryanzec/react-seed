@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import menuActions from '../../store/actions/menu.actions';
-import preventDoubleClickActions from '../../store/actions/prevent-double-click.actions';
+import menuActions from '../../store/menu/menu.actions';
+import preventDoubleClickActions from '../../store/prevent-double-click/prevent-double-click.actions';
 
 class PreventDoubleClickPage extends React.Component {
   constructor(props) {
@@ -37,7 +37,7 @@ class PreventDoubleClickPage extends React.Component {
 
 PreventDoubleClickPage.displayName = 'PreventDoubleClickPage';
 
-PreventDoubleClick.propTypes = {
+PreventDoubleClickPage.propTypes = {
   preventDoubleClick: React.PropTypes.bool
 };
 

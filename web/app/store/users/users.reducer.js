@@ -1,4 +1,5 @@
 import {fromJS} from 'immutable';
+import * as constants from './users.constants';
 
 let initialState = {
   activeUser: null
@@ -12,11 +13,11 @@ export default function(state, action) {
   let newState;
 
   switch (action.type) {
-    case 'Users::setActive':
+    case constants.SET_ACTIVE:
       newState = state.setIn(['activeUser'], fromJS(action.user));
       break;
 
-    case 'Users::clear':
+    case constants.CLEAR:
       newState = state.setIn(['activeUser'], null);
       break;
 

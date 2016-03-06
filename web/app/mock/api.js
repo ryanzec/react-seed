@@ -46,6 +46,10 @@ forEach(mockedRequests, (resourceRequests, resourceName) => {
         mockRequestObject.requestHeaders = requestMetaData.requestHeaders;
       }
 
+      if (requestMetaData.requestPayload) {
+        mockRequestObject.requestPayload = requestMetaData.requestPayload;
+      }
+
       mockRequest(mockRequestObject);
     });
   });

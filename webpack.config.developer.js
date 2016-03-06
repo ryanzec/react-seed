@@ -45,18 +45,23 @@ module.exports = {
   entry: {
     //3rd party libraries
     'libraries-core': [
-      'lodash',
-      'superagent',
       'bluebird',
+      'immutable',
       'jsuri',
+      'lodash.foreach',
+      'moment',
+      'redux',
+      'reselect',
       'store-cacheable',
-      'immutable'
+      'superagent'
     ],
 
     'libraries-react': [
       'react',
       'react-dom',
-      'react-router'
+      'react-router',
+      'react-redux',
+      'react-router-redux'
     ],
 
     //application code

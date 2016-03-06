@@ -1,3 +1,5 @@
+import * as constants from './menu.constants';
+
 let menus = {
   desktop: [{
     href: 'desktop',
@@ -38,7 +40,7 @@ export default function(state, action) {
   let newState;
 
   switch (action.type) {
-    case 'Menu::setActive':
+    case constants.SET_ACTIVE:
       newState = menus[action.menuName];
       break;
 

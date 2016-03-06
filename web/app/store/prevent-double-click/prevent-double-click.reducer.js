@@ -1,3 +1,5 @@
+import * as constants from './prevent-double-click.constants';
+
 let preventDoubleClick = false;
 
 export default function(state, action) {
@@ -8,11 +10,11 @@ export default function(state, action) {
   let newState;
 
   switch (action.type) {
-    case 'PreventDoubleClick::enable':
+    case constants.ENABLE:
       newState = true;
       break;
 
-    case 'PreventDoubleClick::disable':
+    case constants.DISABLE:
       newState = false;
       break;
 

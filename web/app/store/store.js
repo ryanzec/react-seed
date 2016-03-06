@@ -4,9 +4,9 @@ import {
 } from 'redux';
 import {routerReducer} from 'react-router-redux';
 
-import menu from './reducers/menu.reducer';
-import preventDoubleClick from './reducers/prevent-double-click.reducer';
-import users from './reducers/users.reducer';
+import menu from './menu/menu.reducer';
+import preventDoubleClick from './prevent-double-click/prevent-double-click.reducer';
+import users from './users/users.reducer';
 
 let myReducers = {
   menu,

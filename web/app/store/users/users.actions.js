@@ -1,13 +1,15 @@
+import * as constants from './users.constants';
+
 let setActive = (user) => {
   return {
-    type: 'Users::setActive',
+    type: constants.SET_ACTIVE,
     user: user
   };
 };
 
 let clearActive = () => {
   return {
-    type: 'Users::clear'
+    type: constants.CLEAR
   };
 };
 

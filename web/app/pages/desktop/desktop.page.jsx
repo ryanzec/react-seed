@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import menuActions from '../../store/actions/menu.actions';
-import usersActions from '../../store/actions/users.actions';
+import menuActions from '../../store/menu/menu.actions';
+import usersActions from '../../store/users/users.actions';
 import usersRepository from '../../repositories/users.repository';
 
 import userImage from '../../images/user.png';

@@ -9,10 +9,6 @@ if (mockTypes) {
   mockTypes = [];
 }
 
-let contains = (type) => {
+export const contains = (type) => {
   return (mockTypes.indexOf(type) !== -1);
-};
-
-export {
-  contains
 };

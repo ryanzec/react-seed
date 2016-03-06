@@ -11,7 +11,7 @@ import {
   withResolves as withResolvesHooks
 } from './router.hooks';
 
-const routes = [
+export const routes = [
   <Route
     key="1"
     name="desktop"
@@ -39,5 +39,3 @@ const routes = [
     component={WithParamPage}
   />
 ];
-
-export {routes};

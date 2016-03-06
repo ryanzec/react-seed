@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import menuActions from '../../store/actions/menu.actions';
+import menuActions from '../../store/menu/menu.actions';
 
 class WithResolvesPage extends React.Component {
   constructor(props) {
