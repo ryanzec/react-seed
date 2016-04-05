@@ -2,6 +2,7 @@
 
 # master
 
+- switched from babel-istanbul to using the alpha version of 1.0 of standard istanbul which seems to work with babel-node
 - added documentation for excluding files from coverage even if they are included by test code
 - fixed entry points for the library bundle files
 - changed the structure for the redux (web/app/store) code
