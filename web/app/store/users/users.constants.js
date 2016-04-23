@@ -1,2 +1,2 @@
-export const SET_ACTIVE = 'Users::setActive';
-export const CLEAR = 'Users::clear';
+export const SET_ACTIVE = 'USERS::SET_ACTIVE';
+export const CLEAR = 'USERS::CLEAR';

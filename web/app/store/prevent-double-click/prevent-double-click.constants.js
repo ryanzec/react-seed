@@ -1,2 +1,2 @@
-export const ENABLE = 'PreventDoubleClick::enable';
-export const DISABLE = 'PreventDoubleClick::disable';
+export const ENABLE = 'PREVENT_DOUBLE_CLICK::ENABLE';
+export const DISABLE = 'PREVENT_DOUBLE_CLICK::DISABLE';

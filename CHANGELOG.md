@@ -2,6 +2,7 @@
 
 # master
 
+- refactored store constants to use new format
 - added autoprefixer to build process
 - added jsx to istanbul yml example
 - switched from babel-istanbul to using the alpha version of 1.0 of standard istanbul which seems to work with babel-node

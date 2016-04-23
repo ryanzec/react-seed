@@ -1,1 +1,1 @@
-export const SET_ACTIVE = 'Menu::setActive';
+export const SET_ACTIVE = 'MENU::SET_ACTIVE';
