@@ -1,5 +1,6 @@
 instrumentation:
-    excludes: [
-      'web/app/framework/assets/utilities/dom/dom-dimensions.js',
-      'web/app/framework/assets/utilities/dom/dom-event-manager.js'
-    ]
+  extensions: ['.js', '.jsx']
+  excludes: [
+    'web/app/framework/assets/utilities/dom/dom-dimensions.js',
+    'web/app/framework/assets/utilities/dom/dom-event-manager.js'
+  ]
