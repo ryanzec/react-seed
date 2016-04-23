@@ -1,6 +1,8 @@
 var path = require('path');
-var webpack = require("webpack");
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var autoprefixer = require('autoprefixer');
+var precss = require('precss');
 
 var extractSass = new ExtractTextPlugin('main.css');
 
@@ -23,7 +25,7 @@ module.exports = {
       }
     }, {
       test: /\.scss$/,
-      loader: extractSass.extract(['css?sourceMap', 'sass?sourceMap'])
+      loader: extractSass.extract('style-loader', 'css-loader?sourceMap!postcss-loader?sourceMaps!sass-loader?outputStyle=expanded&sourceMap=true&sourceMapContents=true')
     }, {
       test: /\.html$/,
       loader: 'file?name=[name].[ext]'
@@ -34,6 +36,9 @@ module.exports = {
       test: /\.(png|jpg|jpeg|)$/,
       loader: 'file?name=/images/[hash].[ext]'
     }]
+  },
+  postcss: function () {
+    return [autoprefixer, precss];
   },
   plugins: [
     extractSass,
