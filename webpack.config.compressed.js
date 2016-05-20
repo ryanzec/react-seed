@@ -66,6 +66,7 @@ module.exports = {
       'jsuri',
       'lodash.foreach',
       'moment',
+      'moment-timezone',
       'redux',
       'reselect',
       'store-cacheable',

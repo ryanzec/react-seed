@@ -1,5 +1,9 @@
 # Change Log
 
+#master
+
+- fixed webpack configs to include moment-timezone
+
 # 0.12.0
 
 - added react-router-scroll #15
