@@ -35,6 +35,9 @@ module.exports = {
     }, {
       test: /\.(png|jpg|jpeg|)$/,
       loader: 'file?name=/images/[hash].[ext]'
+    }, {
+      test: /\.json$/,
+      loader: 'json-loader'
     }]
   },
   postcss: function () {

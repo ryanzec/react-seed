@@ -8,6 +8,7 @@ import './router.jsx';
 
 //NOTE: lets re-throw error by default
 import {Promise} from 'bluebird';
+import moment from 'moment-timezone';
 
 Promise.onPossiblyUnhandledRejection(function(error){
   throw error;
