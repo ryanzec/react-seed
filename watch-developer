@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+echo "Starting developer's code build..."
+echo "Cleaning out build directory..."
+rm -rf ./web/build
+echo "Build i18n files..."
+./tasks/i18n
+echo "Building code..."
+./tasks/webpack-developer-watch
