@@ -1,7 +1,10 @@
 # Change Log
 
-# master
+# 0.12.0
 
+- added react-router-scroll #15
+- add moment-timezone / json-loader #17
+- added watch related tasks #16
 - refactored store constants to use new format
 - added autoprefixer to build process
 - added jsx to istanbul yml example
