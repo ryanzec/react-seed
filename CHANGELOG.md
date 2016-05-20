@@ -2,6 +2,7 @@
 
 #master
 
+- fixed webpack config to include react-router-scroll
 - fixed webpack configs to include moment-timezone
 
 # 0.12.0

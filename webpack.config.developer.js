@@ -70,7 +70,8 @@ module.exports = {
       'react-dom',
       'react-router',
       'react-redux',
-      'react-router-redux'
+      'react-router-redux',
+      'react-router-scroll'
     ],
 
     //application code
