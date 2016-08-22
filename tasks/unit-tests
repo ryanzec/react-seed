@@ -1,2 +1,8 @@
 #!/usr/bin/env bash
-./node_modules/.bin/babel-node ./node_modules/istanbul/lib/cli.js cover ./node_modules/.bin/_mocha
+
+if [[ "$1" == "--coverage" ]]
+then
+  node ./node_modules/istanbul/lib/cli.js cover ./node_modules/.bin/_mocha
+else
+  node ./node_modules/.bin/_mocha
+fi
