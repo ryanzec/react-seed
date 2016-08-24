@@ -13,9 +13,7 @@ let menus = {
     href: 'with-param',
     display: 'With Param',
     className: 'with-param-link',
-    params: {
-      p1: 123
-    }
+    params: [123]
   }],
   preventDoubleClick: [{
     href: 'desktop',

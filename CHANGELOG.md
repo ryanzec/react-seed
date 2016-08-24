@@ -2,6 +2,7 @@
 
 #master
 
+- updated all libraries
 - updated the unit-tests task to allow to toggle coverage reports
 - fixed webpack config to include react-router-scroll
 - fixed webpack configs to include moment-timezone

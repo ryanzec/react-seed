@@ -12,7 +12,7 @@ module.exports = {
       test: /\.jsx$/,
       loader: 'babel',
       query: {
-        presets: ['react', 'es2015']
+        presets: ['react', 'es2015-without-strict-loose']
       }
     }, {
       test: /\.js$/,
@@ -21,7 +21,7 @@ module.exports = {
         path.resolve(__dirname, "node_modules")
       ],
       query: {
-        presets: ['es2015']
+        presets: ['es2015-without-strict-loose']
       }
     }, {
       test: /\.scss$/,
@@ -56,7 +56,6 @@ module.exports = {
       'bluebird',
       'immutable',
       'jsuri',
-      'lodash.foreach',
       'moment',
       'moment-timezone',
       'redux',

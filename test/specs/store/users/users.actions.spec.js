@@ -1,23 +1,20 @@
 import store from '../../../../web/app/store/store';
+import usersActions from '../../../../web/app/store/users/users.actions';
 import usersRepository from '../../../../web/app/repositories/users.repository';
 import * as testHelper from'../../../test-helper';
-import nock from 'nock';
-
-let scope = nock('http://localhost:80');
 
 describe('user reducer', function() {
-  before(function() {
-    testHelper.mockNockRequest(scope, 'users', 'get', 'oneTwoThree');
-  });
+  it('should be able to set active user', function() {
+    const user = {
+      id: 123,
+      firstName: 'Test',
+      lastName: 'User',
+      username: 'test.user'
+    };
+    store.dispatch(usersActions.setActive(user));
 
-  after(function() {
-    expect(scope.pendingMocks().length).to.equal(0);
-  });
+    const state = store.getState();
 
-  it('should load user data', function(done) {
-    usersRepository.getUser(123).then(function(user) {
-      expect(user).to.deep.equal(testHelper.mockedData.users.oneTwoThree);
-      done();
-    });
+    expect(state.users.get('activeUser').toJS()).to.deep.equal(user);
   });
 });

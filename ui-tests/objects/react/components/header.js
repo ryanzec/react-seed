@@ -8,27 +8,32 @@ class HeaderComponent extends CoreComponent {
 
     this.addSelectors({
       menuLinks: 'a',
-      menuLink: 'li:nth-child({0}) a'
+      menuLink: 'li:nth-child({0}) a',
+      preventDoubleClickLink: 'a.header-prevent-double-click-link'
     });
   }
 
   //actions
-  *clickMenuItem(index) {
-    yield browser.waitClick(this.getSelector('menuLink').format(index + 1));
+  clickMenuItem(index) {
+    browser.waitClick(this.getSelector('menuLink').format([index + 1]));
+  }
+
+  clickPreventDoubleClickLink(index) {
+    browser.waitClick(this.getSelector('preventDoubleClickLink'));
   }
 
   //assertions
-  *menuItemsAreRendered(linksData) {
-    let items = yield browser.waitElements(this.getSelector('menuLinks'));
+  menuItemsAreRendered(linksData) {
+    let items = browser.waitElements(this.getSelector('menuLinks'));
 
     expect(items.value.length).to.equal(linksData.length);
 
     let count = linksData.length;
 
     for (let x = 0; x < count; x += 1) {
-      expect(yield browser.waitIsVisible(this.getSelector('menuLink').format([x + 1]))).to.be.true;
-      expect(yield browser.waitGetText(this.getSelector('menuLink').format([x + 1]))).to.contain(linksData[x].textContent);
-      expect(yield browser.waitGetAttribute(this.getSelector('menuLink').format([x + 1]), 'href')).to.contain(linksData[x].href);
+      expect(browser.waitIsVisible(this.getSelector('menuLink').format([x + 1]))).to.be.true;
+      expect(browser.waitGetText(this.getSelector('menuLink').format([x + 1]))).to.contain(linksData[x].textContent);
+      expect(browser.waitGetAttribute(this.getSelector('menuLink').format([x + 1]), 'href')).to.contain(linksData[x].href);
     }
   }
 }

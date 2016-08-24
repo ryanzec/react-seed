@@ -3,6 +3,20 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import {createSelector} from 'reselect';
 
+const generateLinkWithParams = (path, params) => {
+  if (!params) {
+    return path;
+  }
+
+  paramPath = path;
+
+  params.forEach((param) => {
+    paramPath += `/${param}`;
+  });
+
+  return paramPath;
+}
+
 class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -13,20 +27,9 @@ class Header extends React.Component {
       <header className="header">
         <ul>
           {this.props.menu.map(function(menuItem) {
-            let link;
-
-            if (menuItem.params) {
-              link = (
-                <Link className={menuItem.className} to={menuItem.href} params={menuItem.params}>{menuItem.display}</Link>
-              );
-            } else {
-              link = (
-                <Link className={menuItem.className} to={menuItem.href}>{menuItem.display}</Link>
-              );
-            }
             return (
               <li key={menuItem.href}>
-                {link}
+                <Link className={menuItem.className} to={generateLinkWithParams(menuItem.href, menuItem.params)}>{menuItem.display}</Link>
               </li>
             );
           })}

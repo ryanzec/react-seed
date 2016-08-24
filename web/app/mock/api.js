@@ -1,6 +1,6 @@
 import * as backend from 'ryanzec-mocked-backend';
 import * as mockedRequests from './requests/index';
-import forEach from 'lodash.foreach';
+import forEach from 'lodash/forEach';
 
 let mockRequest = (options) => {
   let extend = (target, source) => {

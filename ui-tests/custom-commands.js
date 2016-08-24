@@ -1,49 +1,31 @@
 module.exports = function(browser) {
   browser.addCommand('waitIsVisible', function(selector) {
-    return this.waitForExist(selector).then(function() {
-      return this.isVisible(selector).then(function(isVisible) {
-        return isVisible;
-      });
-    })
+    this.waitForExist(selector);
+    return this.isVisible(selector);
   });
 
   browser.addCommand('waitClick', function(selector) {
-    return this.waitForExist(selector).then(function() {
-      return this.click(selector).then(function() {
-        return;
-      });
-    })
+    this.waitForExist(selector);
+    this.click(selector);
   });
 
   browser.addCommand('waitElements', function(selector) {
-    return this.waitForExist(selector).then(function() {
-      return this.elements(selector).then(function(elements) {
-        return elements;
-      });
-    })
+    this.waitForExist(selector);
+    return this.elements(selector);
   });
 
   browser.addCommand('waitGetAttribute', function(selector, attribute) {
-    return this.waitForExist(selector).then(function() {
-      return this.getAttribute(selector, attribute).then(function(attribute) {
-        return attribute;
-      });
-    })
+    this.waitForExist(selector);
+    return this.getAttribute(selector, attribute);
   });
 
   browser.addCommand('waitSetValue', function(selector, value) {
-    return this.waitForExist(selector).then(function() {
-      return this.setValue(selector, value).then(function() {
-        return;
-      });
-    })
+    this.waitForExist(selector);
+    this.setValue(selector, value);
   });
 
   browser.addCommand('waitGetText', function(selector) {
-    return this.waitForExist(selector).then(function() {
-      return this.getText(selector).then(function(text) {
-        return text;
-      });
-    })
+    this.waitForExist(selector);
+    return this.getText(selector);
   });
 };

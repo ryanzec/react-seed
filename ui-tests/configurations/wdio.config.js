@@ -41,12 +41,13 @@ exports.config = {
   //
   // Level of logging verbosity.
   logLevel: 'silent',
+  sync: true,
   //
   // Enables colors for log output.
   coloredLogs: true,
   //
   // Saves a screenshot to a given path if a command fails.
-  screenshotPath: './ui-tests/screenshots',
+  screenshotPath: './ui-tests/screenshots/',
   //
   // Set a base URL in order to shorten url command calls. If your url parameter starts
   // with "/", the base url gets prepended.
@@ -54,6 +55,13 @@ exports.config = {
   //
   // Default timeout for all waitForXXX commands.
   waitforTimeout: 3000,
+  //
+  // Default timeout in milliseconds for request
+  // if Selenium Grid doesn't send response
+  connectionRetryTimeout: 90000,
+  //
+  // Default request retries count
+  connectionRetryCount: 3,
   //
   // Initialize the browser instance with a WebdriverIO plugin. The object should have the
   // plugin name as key and the desired plugin options as property. Make sure you have
@@ -87,7 +95,7 @@ exports.config = {
   // Test reporter for stdout.
   // The following are supported: dot (default), spec and xunit
   // see also: http://webdriver.io/guide/testrunner/reporters.html
-  reporter: 'spec',
+  reporters: ['spec'],
 
   //
   // Options to be passed to Mocha.
@@ -95,11 +103,7 @@ exports.config = {
   mochaOpts: {
     ui: 'bdd',
     compilers: [
-      'js:babel-core/register'
-    ],
-    require: [
-      './test/mocha-generator.js',
-      'babel-polyfill'
+     'js:babel-register'
     ]
   },
 

@@ -15,23 +15,23 @@ class DesktopPage extends CorePage {
   }
 
   //actions
-  *clickGetUser() {
-    yield browser.waitClick(this.getSelector('getUserButton'));
+  clickGetUser() {
+    browser.waitClick(this.getSelector('getUserButton'));
   }
 
   //assertions
-  *userDataNotRendered() {
-    yield browser.pause(100);
+  userDataNotRendered() {
+    browser.pause(100);
 
-    expect(yield browser.isVisible(this.getSelector('userDataContainer'))).to.be.false;
+    expect(browser.isVisible(this.getSelector('userDataContainer'))).to.be.false;
   }
 
-  *userDataIsRendered(userData) {
-    expect(yield browser.waitIsVisible(this.getSelector('userDataContainer'))).to.be.true;
-    expect(yield browser.waitGetText(this.getSelector('userId'))).to.equal(userData.id + '');
-    expect(yield browser.waitGetText(this.getSelector('userUsername'))).to.equal(userData.username);
-    expect(yield browser.waitGetText(this.getSelector('userFirstName'))).to.equal(userData.firstName);
-    expect(yield browser.waitGetText(this.getSelector('userLastName'))).to.equal(userData.lastName);
+  userDataIsRendered(userData) {
+    expect(browser.waitIsVisible(this.getSelector('userDataContainer'))).to.be.true;
+    expect(browser.waitGetText(this.getSelector('userId'))).to.equal(userData.id + '');
+    expect(browser.waitGetText(this.getSelector('userUsername'))).to.equal(userData.username);
+    expect(browser.waitGetText(this.getSelector('userFirstName'))).to.equal(userData.firstName);
+    expect(browser.waitGetText(this.getSelector('userLastName'))).to.equal(userData.lastName);
   }
 }
 
