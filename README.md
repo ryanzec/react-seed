@@ -10,7 +10,7 @@ An opinionated seed project for ReactJS based application.  This project tries t
 
 ## Core Components ##
 
-Ovbiously ReactJS is at the core of this seed project however there are a number of other projects / libraries that are also wrapped together in here.
+Obviously ReactJS is at the core of this seed project however there are a number of other projects / libraries that are also wrapped together in here.
 
 ### WebPack ###
 
